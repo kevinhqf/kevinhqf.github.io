@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,6 +68,100 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-DesignPatterns_02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/09/DesignPatterns_02/" class="article-date">
+  <time datetime="2016-06-09T06:37:16.720Z" itemprop="datePublished">2016-06-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/09/DesignPatterns_02/">浅谈Java设计模式系列0x02---简单工厂模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://kevinhqf.github.io/2016/06/05/DesignPatterns_00/">浅谈Java设计模式系列0x00</a><br><a href="http://kevinhqf.github.io/2016/06/06/DesignPatterns_01/">浅谈Java设计模式系列0x01—单例模式</a></p>
+<p>###</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://kevinhqf.github.io/2016/06/09/DesignPatterns_02/" data-id="cip804uvv00027486hueaw9vm" class="article-share-link">分享到</a>
+      
+
+      
+        <a href="http://kevinhqf.github.io/2016/06/09/DesignPatterns_02/#disqus_thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-DesignPatterns_00" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/09/DesignPatterns_00/" class="article-date">
+  <time datetime="2016-06-09T06:26:07.052Z" itemprop="datePublished">2016-06-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/09/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;<br>首先我们先对设计模式做一些基本的了解;<br><strong>学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思</strong></p>
+<h4 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h4><blockquote>
+<p><strong>Wikipedia</strong>:<br>In software engineering, a software design pattern is a <code>general</code> <code>reusable</code> solution to a commonly occurring problem within a given context in software design.  </p>
+</blockquote>
+<p>上面是维基百科对设计模式的定义,其中我认为<code>general</code>和<code>reusable</code>非常明确的表明了设计模式的任务;<br>它是对软件设计中经常出现的问题的一种 <strong>通用</strong>,<strong>可重用</strong> 的解决方案;<br>说白了就是软件工程师为了偷懒而想出来的一种方法,它可以帮工程师们解决一些重复和麻烦的工作;</p>
+<h4 id="六大设计原则"><a href="#六大设计原则" class="headerlink" title="六大设计原则"></a>六大设计原则</h4><p>说到设计模式就不得不说设计模式的六大设计原则;  </p>
+<h5 id="1-单一职责原则-SRP-Single-responsibility-principle"><a href="#1-单一职责原则-SRP-Single-responsibility-principle" class="headerlink" title="1. 单一职责原则 (SRP :Single responsibility principle)"></a>1. 单一职责原则 (SRP :Single responsibility principle)</h5><h5 id="2-里氏替换原则-LSP-Liskov-Substitution-Principle"><a href="#2-里氏替换原则-LSP-Liskov-Substitution-Principle" class="headerlink" title="2. 里氏替换原则 (LSP :Liskov Substitution Principle)"></a>2. 里氏替换原则 (LSP :Liskov Substitution Principle)</h5><h5 id="3-依赖倒置原则-DIP-Dependency-inversion-principle"><a href="#3-依赖倒置原则-DIP-Dependency-inversion-principle" class="headerlink" title="3. 依赖倒置原则 (DIP :Dependency inversion principle)"></a>3. 依赖倒置原则 (DIP :Dependency inversion principle)</h5><h5 id="4-接口隔离原则-ISP-interface-segregation-principles"><a href="#4-接口隔离原则-ISP-interface-segregation-principles" class="headerlink" title="4. 接口隔离原则 (ISP :interface-segregation principles)"></a>4. 接口隔离原则 (ISP :interface-segregation principles)</h5><h5 id="5-迪米特法则-LKP-Least-Knowledge-Principle"><a href="#5-迪米特法则-LKP-Least-Knowledge-Principle" class="headerlink" title="5. 迪米特法则　 (LKP :Least Knowledge Principle)"></a>5. 迪米特法则　 (LKP :Least Knowledge Principle)</h5><h5 id="6-开放-封闭原则-OCP-Open-Closed-Principle"><a href="#6-开放-封闭原则-OCP-Open-Closed-Principle" class="headerlink" title="6. 开放-封闭原则(OCP :Open Closed Principle)"></a>6. 开放-封闭原则(OCP :Open Closed Principle)</h5><p>现在解释这些原则比较费劲,所有我们就先了解一下六大设计原则有哪些;<br>后面的设计模式中我们用到这些原则的时候再进行解析,这样理解起来会更比较好;  </p>
+<h4 id="关于设计模式的一些学习资源"><a href="#关于设计模式的一些学习资源" class="headerlink" title="关于设计模式的一些学习资源"></a>关于设计模式的一些学习资源</h4><p><a href="http://design-patterns.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">图说设计模式</a><br><a href="https://book.douban.com/subject/2334288/" target="_blank" rel="external">大话设计模式</a><br><a href="http://www.importnew.com/6374.html" target="_blank" rel="external">设计模式书籍推荐</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://kevinhqf.github.io/2016/06/09/DesignPatterns_00/" data-id="cip804uw1000374860w3ahg8e" class="article-share-link">分享到</a>
+      
+
+      
+        <a href="http://kevinhqf.github.io/2016/06/09/DesignPatterns_00/#disqus_thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-DesignPatterns_01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/08/DesignPatterns_01/" class="article-date">
@@ -120,61 +213,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://kevinhqf.github.io/2016/06/08/DesignPatterns_01/" data-id="cip6ykmc90001di86ghqp7rnk" class="article-share-link">Share</a>
+        <a data-url="http://kevinhqf.github.io/2016/06/08/DesignPatterns_01/" data-id="cip804uv50000748692y1btmm" class="article-share-link">分享到</a>
       
 
       
-        <a href="http://kevinhqf.github.io/2016/06/08/DesignPatterns_01/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-DesignPatterns_00" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/05/DesignPatterns_00/" class="article-date">
-  <time datetime="2016-06-05T10:34:02.207Z" itemprop="datePublished">2016-06-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/05/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;<br>首先我们先对设计模式做一些基本的了解;</p>
-<h4 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h4><blockquote>
-<p><strong>Wikipedia</strong>:<br>In software engineering, a software design pattern is a <code>general</code> <code>reusable</code> solution to a commonly occurring problem within a given context in software design.  </p>
-</blockquote>
-<p>上面是维基百科对设计模式的定义,其中我认为<code>general</code>和<code>reusable</code>非常明确的表明了设计模式的任务;<br>它是对软件设计中经常出现的问题的一种 <strong>通用</strong>,<strong>可重用</strong> 的解决方案;<br>说白了就是软件工程师为了偷懒而想出来的一种方法,它可以帮工程师们解决一些重复和麻烦的工作;</p>
-<h4 id="六大设计原则"><a href="#六大设计原则" class="headerlink" title="六大设计原则"></a>六大设计原则</h4><p>说到设计模式就不得不说设计模式的六大设计原则;  </p>
-<h5 id="1-单一职责原则-SRP-Single-responsibility-principle"><a href="#1-单一职责原则-SRP-Single-responsibility-principle" class="headerlink" title="1. 单一职责原则 (SRP :Single responsibility principle)"></a>1. 单一职责原则 (SRP :Single responsibility principle)</h5><h5 id="2-里氏替换原则-LSP-Liskov-Substitution-Principle"><a href="#2-里氏替换原则-LSP-Liskov-Substitution-Principle" class="headerlink" title="2. 里氏替换原则 (LSP :Liskov Substitution Principle)"></a>2. 里氏替换原则 (LSP :Liskov Substitution Principle)</h5><h5 id="3-依赖倒置原则-DIP-Dependency-inversion-principle"><a href="#3-依赖倒置原则-DIP-Dependency-inversion-principle" class="headerlink" title="3. 依赖倒置原则 (DIP :Dependency inversion principle)"></a>3. 依赖倒置原则 (DIP :Dependency inversion principle)</h5><h5 id="4-接口隔离原则-ISP-interface-segregation-principles"><a href="#4-接口隔离原则-ISP-interface-segregation-principles" class="headerlink" title="4. 接口隔离原则 (ISP :interface-segregation principles)"></a>4. 接口隔离原则 (ISP :interface-segregation principles)</h5><h5 id="5-迪米特法则-LKP-Least-Knowledge-Principle"><a href="#5-迪米特法则-LKP-Least-Knowledge-Principle" class="headerlink" title="5. 迪米特法则　 (LKP :Least Knowledge Principle)"></a>5. 迪米特法则　 (LKP :Least Knowledge Principle)</h5><h5 id="6-开放-封闭原则-OCP-Open-Closed-Principle"><a href="#6-开放-封闭原则-OCP-Open-Closed-Principle" class="headerlink" title="6. 开放-封闭原则(OCP :Open Closed Principle)"></a>6. 开放-封闭原则(OCP :Open Closed Principle)</h5><p>现在解释这些原则比较费劲,所有我们就先了解一下六大设计原则有哪些;<br>后面的设计模式中我们用到这些原则的时候再进行解析,这样理解起来会更比较好;  </p>
-<h4 id="关于设计模式的一些学习资源"><a href="#关于设计模式的一些学习资源" class="headerlink" title="关于设计模式的一些学习资源"></a>关于设计模式的一些学习资源</h4><p><a href="http://design-patterns.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">图说设计模式</a><br><a href="https://book.douban.com/subject/2334288/" target="_blank" rel="external">大话设计模式</a><br><a href="http://www.importnew.com/6374.html" target="_blank" rel="external">设计模式书籍推荐</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://kevinhqf.github.io/2016/06/05/DesignPatterns_00/" data-id="cip6ykmbp0000di8644t8hj84" class="article-share-link">Share</a>
-      
-
-      
-        <a href="http://kevinhqf.github.io/2016/06/05/DesignPatterns_00/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/06/08/DesignPatterns_01/#disqus_thread" class="article-comment-link">评论</a>
       
 
       
@@ -242,11 +285,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://kevinhqf.github.io/2016/05/28/MarkDown-basic/" data-id="cip6ykmch0002di86jh1tx4tk" class="article-share-link">Share</a>
+        <a data-url="http://kevinhqf.github.io/2016/05/28/MarkDown-basic/" data-id="cip804uvo00017486e1wo3uou" class="article-share-link">分享到</a>
       
 
       
-        <a href="http://kevinhqf.github.io/2016/05/28/MarkDown-basic/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/05/28/MarkDown-basic/#disqus_thread" class="article-comment-link">评论</a>
       
 
       
@@ -270,25 +313,29 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">2016-06</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">2016-05</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/06/08/DesignPatterns_01/">浅谈Java设计模式系列0x01---单例模式</a>
+            <a href="/2016/06/09/DesignPatterns_02/">浅谈Java设计模式系列0x02---简单工厂模式</a>
           </li>
         
           <li>
-            <a href="/2016/06/05/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
+            <a href="/2016/06/09/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/08/DesignPatterns_01/">浅谈Java设计模式系列0x01---单例模式</a>
           </li>
         
           <li>
@@ -302,7 +349,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Links</h3>
+    <h3 class="widget-title">友情链接</h3>
     <div class="widget">
       <ul>
         
@@ -315,15 +362,23 @@
       
     </div>
     <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 Kevin HO<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-      .
-      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 Kevin HO<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            .
+            Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+            <span id="busuanzi_container_site_pv">
+                总访问量
+                <a href="http://service.ibruce.info/" target="_blank">
+                    <span id="busuanzi_value_site_pv"></span>
+                </a>
+                次
+            </span>
+
+        </div>
     </div>
-  </div>
 </footer>
   </div>
   <nav id="mobile-nav">
@@ -335,7 +390,7 @@
 </nav>
   <!-- totop start -->
 <div id="totop">
-<a title="totop"><img src="/img/scrollup.png"/></a>
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
 </div>
 
 <!-- totop end -->
