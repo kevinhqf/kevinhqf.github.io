@@ -1768,7 +1768,7 @@ pre .javascript .function {
 }
 .author {
   width: 6.875em;
-  height: 6.875em;
+  height: auto;
   margin: 0 auto;
 }
 @media tablet {
