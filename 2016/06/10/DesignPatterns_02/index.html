@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈Java设计模式系列0x02---简单工厂模式 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浅谈Java设计模式系列0x00浅谈Java设计模式系列0x01—单例模式
+什么是工厂模式工厂就是用来生产产品的地方,而在设计模式中,工厂就是一个创建各种对象的地方(类);工厂通常包含一个或多个方法,用来创建该工厂所能创建的各种类型的对象;它和上次的单例模式一样也是创建型模式;
+什么是简单工厂模式我认为可以用一句话来概括简单工厂模式的关键:
+
+just say what you want,don’">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Java设计模式系列0x02---简单工厂模式">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/06/10/DesignPatterns_02/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="浅谈Java设计模式系列0x00浅谈Java设计模式系列0x01—单例模式
+什么是工厂模式工厂就是用来生产产品的地方,而在设计模式中,工厂就是一个创建各种对象的地方(类);工厂通常包含一个或多个方法,用来创建该工厂所能创建的各种类型的对象;它和上次的单例模式一样也是创建型模式;
+什么是简单工厂模式我认为可以用一句话来概括简单工厂模式的关键:
+
+just say what you want,don’">
+<meta property="og:updated_time" content="2016-06-10T07:20:55.784Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Java设计模式系列0x02---简单工厂模式">
+<meta name="twitter:description" content="浅谈Java设计模式系列0x00浅谈Java设计模式系列0x01—单例模式
+什么是工厂模式工厂就是用来生产产品的地方,而在设计模式中,工厂就是一个创建各种对象的地方(类);工厂通常包含一个或多个方法,用来创建该工厂所能创建的各种类型的对象;它和上次的单例模式一样也是创建型模式;
+什么是简单工厂模式我认为可以用一句话来概括简单工厂模式的关键:
+
+just say what you want,don’">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-DesignPatterns_02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/10/DesignPatterns_02/" class="article-date">
+  <time datetime="2016-06-10T07:20:55.784Z" itemprop="datePublished">2016-06-10</time>
+</a>
+
+
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈Java设计模式系列0x02---简单工厂模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p><a href="http://kevinhqf.github.io/2016/06/05/DesignPatterns_00/">浅谈Java设计模式系列0x00</a><br><a href="http://kevinhqf.github.io/2016/06/06/DesignPatterns_01/">浅谈Java设计模式系列0x01—单例模式</a></p>
+<h4 id="什么是工厂模式"><a href="#什么是工厂模式" class="headerlink" title="什么是工厂模式"></a>什么是工厂模式</h4><p>工厂就是用来生产产品的地方,而在设计模式中,工厂就是一个创建各种对象的地方(类);<br>工厂通常包含一个或多个方法,用来创建该工厂所能创建的各种类型的对象;<br>它和上次的单例模式一样也是创建型模式;</p>
+<h4 id="什么是简单工厂模式"><a href="#什么是简单工厂模式" class="headerlink" title="什么是简单工厂模式"></a>什么是简单工厂模式</h4><p>我认为可以用一句话来概括简单工厂模式的关键:</p>
+<blockquote>
+<p><strong><em>just say what you want,don’t worry the detail</em></strong>;  </p>
+</blockquote>
+<p>当然这句话只是我对这简单工厂模式的理解,你只要说你需要什么,不必关心它是怎样创建的;<br>因为简单工厂模式可以根据传进来的参数创建特定的对象,而且创建的对象都具有共同的父类;<br>在简单工厂模式中用来创建对象实例的方法都是静态方法,所以简单工厂模式又叫做静态工厂方法（Static Factory Method）模式;<br><a id="more"></a></p>
+<h4 id="什么时候可以使用简单工厂模式"><a href="#什么时候可以使用简单工厂模式" class="headerlink" title="什么时候可以使用简单工厂模式"></a>什么时候可以使用简单工厂模式</h4><ul>
+<li>当工厂类负责创建的对象比较少的时候,此时的业务逻辑会比较简单</li>
+<li>使用者只知道传入工厂类的参数,其他的并不关心</li>
+</ul>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><p>简单工厂模式主要包含的角色有:</p>
+<ol>
+<li>Factory : <strong>工厂角色</strong><br>工厂角色负责实现创建所有实例的内部逻辑</li>
+<li>Product : <strong>抽象产品角色</strong><br>抽象产品角色是创建的所有对象的父类,负责描述所有实例的共有接口</li>
+<li>Concrete Product : <strong>具体产品角色</strong><br>具体产品角色是创建的目标,这就是使用者最后得到的对象</li>
+</ol>
+<h4 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h4><p><a href="https://github.com/kevinhqf/DesignPattern/tree/master/src/factory/simplefactory" target="_blank" rel="external">代码参考</a><br>我们来个简单的例子,以手机工厂为例;<br>抽象产品接口:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">    <span class="comment">//共有的接口方法</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>具体的产品类 Apple Phone:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplePhone</span> <span class="keyword">implements</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This is Apple Phone calling......"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一个具体的产品类 Android Phone:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AndroidPhone</span> <span class="keyword">implements</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This is Android Phone calling....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>手机工厂类:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 根据参数返回不同的实例对象</span><br><span class="line">     * <span class="doctag">@param</span> type 手机类型</span><br><span class="line">     * <span class="doctag">@return</span> 具体的手机对象</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Phone <span class="title">createPhone</span><span class="params">(String type)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"android"</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> AndroidPhone();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"apple"</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> ApplePhone();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试类:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Phone android = (AndroidPhone) PhoneFactory.createPhone(<span class="string">"android"</span>);</span><br><span class="line">        Phone apple = (ApplePhone) PhoneFactory.createPhone(<span class="string">"apple"</span>);</span><br><span class="line">        android.call();</span><br><span class="line">        apple.call();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This is Android Phone calling.....</span><br><span class="line">This is Apple Phone calling......</span><br></pre></td></tr></table></figure></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>简单工厂模式最大的优点在于实现对象的创建和对象的使用分离，将对象的创建交给专门的工厂类负责;<br>但是其最大的缺点在于工厂类不够灵活，增加新的具体产品需要修改工厂类的判断逻辑代码，而且产品较多时，工厂方法代码将会非常复杂。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/simple_factory.html#id12" target="_blank" rel="external">图说设计模式</a><br><a href="http://wiki.jikexueyuan.com/project/design-pattern-creation/simple-two.html" target="_blank" rel="external">工厂三兄弟之简单工厂模式</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/10/DesignPatterns_02/" data-id="cip9eqcd800024n860zgyambd" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/10/DesignPatterns_02/#disqus_thread" class="article-comment-link">Comentarios</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-10T07:20:55.784Z" itemprop="dateModified">2016-06-10</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/10/DesignPatterns_01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Viejo</strong>
+      <div class="article-nav-title">浅谈Java设计模式系列0x01---单例模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是工厂模式"><span class="toc-number">1.</span> <span class="toc-text">什么是工厂模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是简单工厂模式"><span class="toc-number">2.</span> <span class="toc-text">什么是简单工厂模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么时候可以使用简单工厂模式"><span class="toc-number">3.</span> <span class="toc-text">什么时候可以使用简单工厂模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式结构"><span class="toc-number">4.</span> <span class="toc-text">模式结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#举个例子"><span class="toc-number">5.</span> <span class="toc-text">举个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/github.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archivos</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Posts recientes</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/10/DesignPatterns_02/">浅谈Java设计模式系列0x02---简单工厂模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/10/DesignPatterns_01/">浅谈Java设计模式系列0x01---单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/09/MarkDown-basic/">MarkDown基本语法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/09/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/06/10/DesignPatterns_02/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
