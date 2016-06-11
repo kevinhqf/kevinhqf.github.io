@@ -5,16 +5,22 @@
   
   <title>浅谈Java设计模式系列0x00 | Kevin&#39;s GHB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;首先我们先对设计模式做一些基本的了解;学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思">
+  <meta name="description" content="本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;首先我们先对设计模式做一些基本的了解;学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思
+什么是设计模式
+Wikipedia:In software engineering, a software design pattern is a general reusable">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈Java设计模式系列0x00">
-<meta property="og:url" content="http://kevinhqf.github.io/2016/06/09/DesignPatterns_00/index.html">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/index.html">
 <meta property="og:site_name" content="Kevin's GHB">
-<meta property="og:description" content="本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;首先我们先对设计模式做一些基本的了解;学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思">
-<meta property="og:updated_time" content="2016-06-09T08:23:56.176Z">
+<meta property="og:description" content="本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;首先我们先对设计模式做一些基本的了解;学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思
+什么是设计模式
+Wikipedia:In software engineering, a software design pattern is a general reusable">
+<meta property="og:updated_time" content="2016-06-11T10:16:18.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈Java设计模式系列0x00">
-<meta name="twitter:description" content="本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;首先我们先对设计模式做一些基本的了解;学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思">
+<meta name="twitter:description" content="本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;首先我们先对设计模式做一些基本的了解;学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思
+什么是设计模式
+Wikipedia:In software engineering, a software design pattern is a general reusable">
   
     <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
   
@@ -76,8 +82,8 @@
         <section id="main"><article id="post-DesignPatterns_00" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/06/09/DesignPatterns_00/" class="article-date">
-  <time datetime="2016-06-09T08:23:56.176Z" itemprop="datePublished">2016-06-09</time>
+<a href="/2016/06/11/DesignPatterns_00/" class="article-date">
+  <time datetime="2016-06-11T10:16:18.840Z" itemprop="datePublished">2016-06-11</time>
 </a>
 
 
@@ -99,29 +105,22 @@
     <div class="article-entry" itemprop="articleBody">
       
 		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>Contents</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是设计模式"><span class="toc-number">1.</span> <span class="toc-text">什么是设计模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六大设计原则"><span class="toc-number">2.</span> <span class="toc-text">六大设计原则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-单一职责原则-SRP-Single-responsibility-principle"><span class="toc-number">2.1.</span> <span class="toc-text">1. 单一职责原则 (SRP :Single responsibility principle)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-里氏替换原则-LSP-Liskov-Substitution-Principle"><span class="toc-number">2.2.</span> <span class="toc-text">2. 里氏替换原则 (LSP :Liskov Substitution Principle)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-依赖倒置原则-DIP-Dependency-inversion-principle"><span class="toc-number">2.3.</span> <span class="toc-text">3. 依赖倒置原则 (DIP :Dependency inversion principle)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-接口隔离原则-ISP-interface-segregation-principles"><span class="toc-number">2.4.</span> <span class="toc-text">4. 接口隔离原则 (ISP :interface-segregation principles)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-迪米特法则-LKP-Least-Knowledge-Principle"><span class="toc-number">2.5.</span> <span class="toc-text">5. 迪米特法则　 (LKP :Least Knowledge Principle)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-开放-封闭原则-OCP-Open-Closed-Principle"><span class="toc-number">2.6.</span> <span class="toc-text">6. 开放-封闭原则(OCP :Open Closed Principle)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于设计模式的一些学习资源"><span class="toc-number">3.</span> <span class="toc-text">关于设计模式的一些学习资源</span></a></li></ol>
-		
-		</div>
-		
-        <p>本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;<br>首先我们先对设计模式做一些基本的了解;<br><strong>学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思</strong><br><a id="more"></a></p>
+        <p>本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;<br>首先我们先对设计模式做一些基本的了解;<br><strong>学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思</strong></p>
 <h4 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h4><blockquote>
 <p><strong>Wikipedia</strong>:<br>In software engineering, a software design pattern is a <code>general</code> <code>reusable</code> solution to a commonly occurring problem within a given context in software design.  </p>
 </blockquote>
-<p>上面是维基百科对设计模式的定义,其中我认为<code>general</code>和<code>reusable</code>非常明确的表明了设计模式的任务;<br>它是对软件设计中经常出现的问题的一种 <strong>通用</strong>,<strong>可重用</strong> 的解决方案;<br>说白了就是软件工程师为了偷懒而想出来的一种方法,它可以帮工程师们解决一些重复和麻烦的工作;</p>
+<p>上面是维基百科对设计模式的定义,其中我认为<code>general</code>和<code>reusable</code>非常明确的表明了设计模式的任务;<br>它是对软件设计中经常出现的问题的一种 <strong>通用</strong>,<strong>可重用</strong> 的解决方案;<br>说白了就是软件工程师为了偷懒而想出来的一种方法,它可以帮工程师们解决一些重复和麻烦的工作;<br><a id="more"></a></p>
 <h4 id="六大设计原则"><a href="#六大设计原则" class="headerlink" title="六大设计原则"></a>六大设计原则</h4><p>说到设计模式就不得不说设计模式的六大设计原则;  </p>
-<h5 id="1-单一职责原则-SRP-Single-responsibility-principle"><a href="#1-单一职责原则-SRP-Single-responsibility-principle" class="headerlink" title="1. 单一职责原则 (SRP :Single responsibility principle)"></a>1. 单一职责原则 (SRP :Single responsibility principle)</h5><h5 id="2-里氏替换原则-LSP-Liskov-Substitution-Principle"><a href="#2-里氏替换原则-LSP-Liskov-Substitution-Principle" class="headerlink" title="2. 里氏替换原则 (LSP :Liskov Substitution Principle)"></a>2. 里氏替换原则 (LSP :Liskov Substitution Principle)</h5><h5 id="3-依赖倒置原则-DIP-Dependency-inversion-principle"><a href="#3-依赖倒置原则-DIP-Dependency-inversion-principle" class="headerlink" title="3. 依赖倒置原则 (DIP :Dependency inversion principle)"></a>3. 依赖倒置原则 (DIP :Dependency inversion principle)</h5><h5 id="4-接口隔离原则-ISP-interface-segregation-principles"><a href="#4-接口隔离原则-ISP-interface-segregation-principles" class="headerlink" title="4. 接口隔离原则 (ISP :interface-segregation principles)"></a>4. 接口隔离原则 (ISP :interface-segregation principles)</h5><h5 id="5-迪米特法则-LKP-Least-Knowledge-Principle"><a href="#5-迪米特法则-LKP-Least-Knowledge-Principle" class="headerlink" title="5. 迪米特法则　 (LKP :Least Knowledge Principle)"></a>5. 迪米特法则　 (LKP :Least Knowledge Principle)</h5><h5 id="6-开放-封闭原则-OCP-Open-Closed-Principle"><a href="#6-开放-封闭原则-OCP-Open-Closed-Principle" class="headerlink" title="6. 开放-封闭原则(OCP :Open Closed Principle)"></a>6. 开放-封闭原则(OCP :Open Closed Principle)</h5><p>现在解释这些原则比较费劲,所有我们就先了解一下六大设计原则有哪些;<br>后面的设计模式中我们用到这些原则的时候再进行解析,这样理解起来会更比较好;  </p>
+<h5 id="1-单一职责原则-SRP-Single-responsibility-principle"><a href="#1-单一职责原则-SRP-Single-responsibility-principle" class="headerlink" title="1. 单一职责原则 (SRP :Single responsibility principle)"></a>1. 单一职责原则 (SRP :Single responsibility principle)</h5><h5 id="2-里氏替换原则-LSP-Liskov-Substitution-Principle"><a href="#2-里氏替换原则-LSP-Liskov-Substitution-Principle" class="headerlink" title="2. 里氏替换原则 (LSP :Liskov Substitution Principle)"></a>2. 里氏替换原则 (LSP :Liskov Substitution Principle)</h5><h5 id="3-依赖倒置原则-DIP-Dependency-inversion-principle"><a href="#3-依赖倒置原则-DIP-Dependency-inversion-principle" class="headerlink" title="3. 依赖倒置原则 (DIP :Dependency inversion principle)"></a>3. 依赖倒置原则 (DIP :Dependency inversion principle)</h5><h5 id="4-接口隔离原则-ISP-interface-segregation-principles"><a href="#4-接口隔离原则-ISP-interface-segregation-principles" class="headerlink" title="4. 接口隔离原则 (ISP :interface-segregation principles)"></a>4. 接口隔离原则 (ISP :interface-segregation principles)</h5><h5 id="5-迪米特法则-LKP-Least-Knowledge-Principle"><a href="#5-迪米特法则-LKP-Least-Knowledge-Principle" class="headerlink" title="5. 迪米特法则　 (LKP :Least Knowledge Principle)"></a>5. 迪米特法则　 (LKP :Least Knowledge Principle)</h5><h5 id="6-开放-封闭原则-OCP-Open-Closed-Principle"><a href="#6-开放-封闭原则-OCP-Open-Closed-Principle" class="headerlink" title="6. 开放-封闭原则(OCP :Open Closed Principle)"></a>6. 开放-封闭原则(OCP :Open Closed Principle)</h5><p>关于设计模式原则的文章有很多,我在这直接给大家推荐一个学习资料,以后有时间再对这六大设计原则做一个总结;<br><a href="http://wiki.jikexueyuan.com/project/java-design-pattern-principle/" target="_blank" rel="external">六大设计原则</a></p>
 <h4 id="关于设计模式的一些学习资源"><a href="#关于设计模式的一些学习资源" class="headerlink" title="关于设计模式的一些学习资源"></a>关于设计模式的一些学习资源</h4><p><a href="http://design-patterns.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">图说设计模式</a><br><a href="https://book.douban.com/subject/2334288/" target="_blank" rel="external">大话设计模式</a><br><a href="http://www.importnew.com/6374.html" target="_blank" rel="external">设计模式书籍推荐</a></p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/09/DesignPatterns_00/" data-id="cip9rrjmc0000p486ffresv3m" data_title="浅谈Java设计模式系列0x00" data_summary="本系列是我对于各种设计模式的一些理解,我会以最简单,最..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/" data-id="cipb0d0ue00000u86fbcuglm8" data_title="浅谈Java设计模式系列0x00" data_summary="本系列是我对于各种设计模式的一些理解,我会以最简单,最..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/09/DesignPatterns_00/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -129,7 +128,7 @@
       
 	  
 <span>
-Updated:<time datetime="2016-06-09T08:23:56.176Z" itemprop="dateModified">2016-06-09</time>
+Updated:<time datetime="2016-06-11T10:16:18.840Z" itemprop="dateModified">2016-06-11</time>
 </span>
 
 
@@ -139,15 +138,20 @@ Updated:<time datetime="2016-06-09T08:23:56.176Z" itemprop="dateModified">2016-0
     
 <nav id="article-nav">
   
-    <a href="/2016/06/09/MarkDown-basic/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/06/11/DesignPatterns_01/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          MarkDown基本语法
+          浅谈Java设计模式系列0x01---单例模式
         
       </div>
     </a>
   
+  
+    <a href="/2016/06/11/DesignPatterns_03/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">浅谈Java设计模式系列0x03---工厂方法模式</div>
+    </a>
   
 </nav>
 
@@ -181,7 +185,7 @@ Updated:<time datetime="2016-06-09T08:23:56.176Z" itemprop="dateModified">2016-0
   <h3 class="widget-title">ABOUT ME</h3>
   <ul class="widget about-me">
     
-    <li><img class="author" title="About me" src="/images/ava.jpg" /></li>
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
     
     
     <li>Hi,I'm Kevin.</li>
@@ -201,7 +205,7 @@ Updated:<time datetime="2016-06-09T08:23:56.176Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -214,19 +218,23 @@ Updated:<time datetime="2016-06-09T08:23:56.176Z" itemprop="dateModified">2016-0
       <ul>
         
           <li>
-            <a href="/2016/06/10/DesignPatterns_02/">浅谈Java设计模式系列0x02---简单工厂模式</a>
+            <a href="/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02---简单工厂模式</a>
           </li>
         
           <li>
-            <a href="/2016/06/10/DesignPatterns_01/">浅谈Java设计模式系列0x01---单例模式</a>
+            <a href="/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01---单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/11/DesignPatterns_03/">浅谈Java设计模式系列0x03---工厂方法模式</a>
           </li>
         
           <li>
             <a href="/2016/06/09/MarkDown-basic/">MarkDown基本语法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/09/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
           </li>
         
       </ul>
@@ -266,7 +274,7 @@ Updated:<time datetime="2016-06-09T08:23:56.176Z" itemprop="dateModified">2016-0
 <script>
   var disqus_shortname = 'kevinhqf';
   
-  var disqus_url = 'http://kevinhqf.github.io/2016/06/09/DesignPatterns_00/';
+  var disqus_url = 'http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/';
   
   (function(){
     var dsq = document.createElement('script');
