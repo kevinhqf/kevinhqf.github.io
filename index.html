@@ -78,7 +78,7 @@
   <div class="article-meta">
     
 <a href="/2016/06/14/DesignPatterns_05/" class="article-date">
-  <time datetime="2016-06-14T12:49:34.005Z" itemprop="datePublished">2016-06-14</time>
+  <time datetime="2016-06-14T12:51:46.629Z" itemprop="datePublished">2016-06-14</time>
 </a>
 
 
@@ -103,7 +103,6 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
         <p><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01—单例模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02—简单工厂模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_03/">浅谈Java设计模式系列0x03—工厂方法模式</a><br><a href="https://kevinhqf.github.io/2016/06/13/DesignPatterns_04/">浅谈Java设计模式系列0x04—抽象工厂模式</a></p>
 <p>我们前面讲的设计模式都是创建型的模式,这次要讲的也是一种创建型的模式—–建造者模式;  </p>
 <h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><p>建造者模式是将一个复杂对象的构建与它的表示分离,使得同样的构建过程可以创建不同的表示;<br>建造者模式是一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户不需要知道内部的具体构建细节;  </p>
@@ -124,25 +123,17 @@
 <p><strong>产品角色(Product)</strong>:</p>
 <ul>
 <li>表示被构造的复杂对象,ConcreteBuilder创建该产品的内部表示并定义它的装配过程;  </li>
-<li>包含定义组成部件的类,包括将这些部件装配成最终产品的接口</li>
-</ul>
-<h4 id="模式特征"><a href="#模式特征" class="headerlink" title="模式特征"></a>模式特征</h4><p>建造者模式有以下的一些基本的特点：</p>
-<ol>
-<li>需要生成的产品对象有复杂的内部结构,这些产品对象通常包含多个成员属性;</li>
-<li>需要生成的产品对象的属性相互依赖,需要指定其生成顺序;</li>
-<li>对象的创建过程独立于创建该对象的类,在建造者模式中引入了指挥者类,将创建过程封装在指挥者类中;</li>
-<li>隔离复杂对象的创建和使用,并使得相同的创建过程可以创建不同的产品;</li>
-</ol>
-<h4 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h4><p><a href="https://github.com/kevinhqf/DesignPattern/tree/master/src/builder" target="_blank" rel="external">代码参考</a><br>本次按照惯例,还是使用手机作为例子;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 复杂的产品对象</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">    <span class="comment">//手机产品的属性</span></span><br><span class="line">    <span class="keyword">private</span> String cpu = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">private</span> String os = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">private</span> String brand = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCpu</span><span class="params">(String cpu)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cpu = cpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOs</span><span class="params">(String os)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.os = os;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBrand</span><span class="params">(String brand)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.brand = brand;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This phone is "</span> + brand + <span class="string">"'s phone with "</span> + cpu + <span class="string">" CPU and "</span> + os + <span class="string">" operating system!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象的建造者类</span><br><span class="line"> * 用于指定创建复杂产品的各个部件接口</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneBuilder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> Phone phone;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Phone <span class="title">getPhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> phone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createNewPhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phone = <span class="keyword">new</span> Phone();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//用于创建手机对象的接口</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">buildCPU</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">buildOS</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">buildBrand</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体的产品对象,实现产品各个部件的装配</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AndroidPhoneBuilder</span> <span class="keyword">extends</span> <span class="title">PhoneBuilder</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildCPU</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phone.setCpu(<span class="string">"Qualcomm"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildOS</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phone.setOs(<span class="string">"Android"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildBrand</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phone.setBrand(<span class="string">"Google"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体的产品对象,实现产品各个部件的装配</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplePhoneBuilder</span> <span class="keyword">extends</span> <span class="title">PhoneBuilder</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildCPU</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phone.setCpu(<span class="string">"A10"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildOS</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phone.setOs(<span class="string">"IOS"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildBrand</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phone.setBrand(<span class="string">"Apple"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 指挥者 使用Builder来构建复杂的对象</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Worker</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> PhoneBuilder phoneBuilder;</span><br><span class="line">    <span class="comment">//设置具体的PhoneBuilder</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPhoneBuilder</span><span class="params">(PhoneBuilder phoneBuilder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.phoneBuilder = phoneBuilder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Phone <span class="title">getPhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> phoneBuilder.getPhone();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//使用phoneBuilder构建装配Phone</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">constructPhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phoneBuilder.createNewPhone();</span><br><span class="line">        phoneBuilder.buildCPU();</span><br><span class="line">        phoneBuilder.buildOS();</span><br><span class="line">        phoneBuilder.buildBrand();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 测试类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Worker worker=<span class="keyword">new</span> Worker();</span><br><span class="line">        PhoneBuilder appleBuilder=<span class="keyword">new</span> ApplePhoneBuilder();</span><br><span class="line">        worker.setPhoneBuilder(appleBuilder);</span><br><span class="line">        worker.constructPhone();</span><br><span class="line">        Phone phone = worker.getPhone();</span><br><span class="line">        phone.info();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This phone is Apple&apos;s phone with A10 CPU and IOS operating system!</span><br></pre></td></tr></table></figure></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>建造者模式的优点在于它将产品本身与产品的创建过程解耦,使得相同的创建过程可以创建不同的产品对象;<br>每一个建造者都是独立的,因此也可以方便的添加新的建造者;<br>但由于建造者模式所创建的产品具有较多的共同点,如果产品内部复杂,则需要较多的建造者类来实现这种变化;</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://zh.wikipedia.org/zh/%E7%94%9F%E6%88%90%E5%99%A8%E6%A8%A1%E5%BC%8F" target="_blank" rel="external">生成器模式</a><br><a href="http://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/builder.html" target="_blank" rel="external">建造者模式</a></p>
-
+<li>包含定义组成部件的类,包括将这些部件装配成最终产品的接口
+        
+          <p class="article-more-link">
+            <a href="/2016/06/14/DesignPatterns_05/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/" data-id="cipfg5ey30007vq86wzv6lqt2" data_title="浅谈Java设计模式系列0x05---建造者模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/" data-id="cipfg7cn00008ya86zzi51ma3" data_title="浅谈Java设计模式系列0x05---建造者模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
       
         <a href="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/#disqus_thread" class="article-comment-link">Comentarios</a>
       
@@ -152,7 +143,7 @@
       
 	  
 <span>
-Updated:<time datetime="2016-06-14T12:49:34.005Z" itemprop="dateModified">2016-06-14</time>
+更新日期:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-06-14</time>
 </span>
 
 
@@ -207,7 +198,7 @@ Updated:<time datetime="2016-06-14T12:49:34.005Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="cipfg5eyl0009vq86ebyxasaw" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="cipfg7cmt0006ya86b1ofhwgj" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
       
         <a href="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/#disqus_thread" class="article-comment-link">Comentarios</a>
       
@@ -217,7 +208,7 @@ Updated:<time datetime="2016-06-14T12:49:34.005Z" itemprop="dateModified">2016-0
       
 	  
 <span>
-Updated:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-06-13</time>
+更新日期:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-06-13</time>
 </span>
 
 
@@ -276,7 +267,7 @@ Updated:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="cipfg5exs0005vq86dg6dt1bj" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="cipfg7cmi0004ya86psxf6si3" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
       
         <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/#disqus_thread" class="article-comment-link">Comentarios</a>
       
@@ -286,7 +277,7 @@ Updated:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-0
       
 	  
 <span>
-Updated:<time datetime="2016-06-11T14:35:39.577Z" itemprop="dateModified">2016-06-11</time>
+更新日期:<time datetime="2016-06-11T14:35:39.577Z" itemprop="dateModified">2016-06-11</time>
 </span>
 
 
@@ -341,7 +332,7 @@ Updated:<time datetime="2016-06-11T14:35:39.577Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/" data-id="cipfg5ex80002vq86v282r329" data_title="浅谈Java设计模式系列0x01---单例模式" data_summary="浅谈Java设计模式系列0x00  
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/" data-id="cipfg7cm20002ya867ougfgcj" data_title="浅谈Java设计模式系列0x01---单例模式" data_summary="浅谈Java设计模式系列0x00  
 上次我们对设计模..." class="article-share-link">Compartir</a>
       
         <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/#disqus_thread" class="article-comment-link">Comentarios</a>
@@ -352,7 +343,7 @@ Updated:<time datetime="2016-06-11T14:35:39.577Z" itemprop="dateModified">2016-0
       
 	  
 <span>
-Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-06-11</time>
+更新日期:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-06-11</time>
 </span>
 
 
@@ -409,7 +400,7 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/" data-id="cipfg5ewm0000vq861s765ns3" data_title="浅谈Java设计模式系列0x00" data_summary="本系列是我对于各种设计模式的一些理解,我会以最简单,最..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/" data-id="cipfg7clf0000ya86okz2r18a" data_title="浅谈Java设计模式系列0x00" data_summary="本系列是我对于各种设计模式的一些理解,我会以最简单,最..." class="article-share-link">Compartir</a>
       
         <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/#disqus_thread" class="article-comment-link">Comentarios</a>
       
@@ -419,7 +410,7 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
       
 	  
 <span>
-Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-06-11</time>
+更新日期:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-06-11</time>
 </span>
 
 
