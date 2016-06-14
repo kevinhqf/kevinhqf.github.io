@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Kevin&#39;s GHB</title>
+  <title>浅谈Java设计模式系列0x05---建造者模式 | Kevin&#39;s GHB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kevin's GHB">
-<meta property="og:url" content="http://kevinhqf.github.io/index.html">
+  <meta name="description" content="浅谈Java设计模式系列0x00浅谈Java设计模式系列0x01—单例模式浅谈Java设计模式系列0x02—简单工厂模式浅谈Java设计模式系列0x03—工厂方法模式浅谈Java设计模式系列0x04—抽象工厂模式
+我们前面讲的设计模式都是创建型的模式,这次要讲的也是一种创建型的模式—–建造者模式;  
+建造者模式建造者模式是将一个复杂对象的构建与它的表示分离,使得同样的构建过程可以创建不同的表示;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Java设计模式系列0x05---建造者模式">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/index.html">
 <meta property="og:site_name" content="Kevin's GHB">
-<meta property="og:description">
+<meta property="og:description" content="浅谈Java设计模式系列0x00浅谈Java设计模式系列0x01—单例模式浅谈Java设计模式系列0x02—简单工厂模式浅谈Java设计模式系列0x03—工厂方法模式浅谈Java设计模式系列0x04—抽象工厂模式
+我们前面讲的设计模式都是创建型的模式,这次要讲的也是一种创建型的模式—–建造者模式;  
+建造者模式建造者模式是将一个复杂对象的构建与它的表示分离,使得同样的构建过程可以创建不同的表示;">
+<meta property="og:updated_time" content="2016-06-14T12:49:34.005Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kevin's GHB">
-<meta name="twitter:description">
+<meta name="twitter:title" content="浅谈Java设计模式系列0x05---建造者模式">
+<meta name="twitter:description" content="浅谈Java设计模式系列0x00浅谈Java设计模式系列0x01—单例模式浅谈Java设计模式系列0x02—简单工厂模式浅谈Java设计模式系列0x03—工厂方法模式浅谈Java设计模式系列0x04—抽象工厂模式
+我们前面讲的设计模式都是创建型的模式,这次要讲的也是一种创建型的模式—–建造者模式;  
+建造者模式建造者模式是将一个复杂对象的构建与它的表示分离,使得同样的构建过程可以创建不同的表示;">
   
     <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
   
@@ -72,9 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-DesignPatterns_05" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-DesignPatterns_05" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
 <a href="/2016/06/14/DesignPatterns_05/" class="article-date">
@@ -94,8 +99,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/14/DesignPatterns_05/">浅谈Java设计模式系列0x05---建造者模式</a>
+    <h1 class="article-title" itemprop="name">
+      浅谈Java设计模式系列0x05---建造者模式
     </h1>
   
 
@@ -159,290 +164,39 @@ Updated:<time datetime="2016-06-14T12:49:34.005Z" itemprop="dateModified">2016-0
     </footer>
   </div>
   
-</article>
-
-
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-DesignPatterns_04" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/13/DesignPatterns_04/" class="article-date">
-  <time datetime="2016-06-13T06:20:08.766Z" itemprop="datePublished">2016-06-13</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/13/DesignPatterns_04/">浅谈Java设计模式系列0x04---抽象工厂模式</a>
-    </h1>
+    <a href="/2016/06/13/DesignPatterns_04/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Viejo</strong>
+      <div class="article-nav-title">浅谈Java设计模式系列0x04---抽象工厂模式</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01—单例模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02—简单工厂模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_03/">浅谈Java设计模式系列0x03—工厂方法模式</a></p>
-<p>本次我们要给大家介绍的是工厂类的最后一个设计模式——抽象工厂模式;  </p>
-<h4 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h4><p>抽象工厂模式与工厂方法模式的不同在于:抽象工厂模式中的具体工厂不单单创建一种产品,它负责创建一族产品;<br>这里的一族产品可以这样理解:在同一个工厂生产的,位于不同产品等级结构的一组产品;<br>简单的说就是在同一工厂生产的不同类型的产品:比如苹果手机和苹果电脑就是一族产品;<br>抽象工厂模式提供一个创建一系列相关或相互依赖对象的接口,而无须指定它们具体的类;  </p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/13/DesignPatterns_04/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="cipfg5eyl0009vq86ebyxasaw" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/#disqus_thread" class="article-comment-link">Comentarios</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-06-13</time>
-</span>
-
-
-    </footer>
-  </div>
   
 </article>
 
 
-
-
-
-  
-    <article id="post-DesignPatterns_02" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/11/DesignPatterns_02/" class="article-date">
-  <time datetime="2016-06-11T14:35:39.577Z" itemprop="datePublished">2016-06-11</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02---简单工厂模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01—单例模式</a>  </p>
-<h4 id="什么是工厂模式"><a href="#什么是工厂模式" class="headerlink" title="什么是工厂模式"></a>什么是工厂模式</h4><p>工厂就是用来生产产品的地方,而在设计模式中,工厂就是一个创建各种对象的地方(类);<br>工厂通常包含一个或多个方法,用来创建该工厂所能创建的各种类型的对象;<br>它和上次的单例模式一样也是创建型模式;</p>
-<h4 id="什么是简单工厂模式"><a href="#什么是简单工厂模式" class="headerlink" title="什么是简单工厂模式"></a>什么是简单工厂模式</h4><p>我认为可以用一句话来概括简单工厂模式的关键:</p>
-<blockquote>
-<p><strong><em>just say what you want,don’t worry the detail</em></strong>;  </p>
-</blockquote>
-<p>当然这句话只是我对这简单工厂模式的理解,你只要说你需要什么,不必关心它是怎样创建的;<br>因为简单工厂模式可以根据传进来的参数创建特定的对象,而且创建的对象都具有共同的父类;<br>在简单工厂模式中用来创建对象实例的方法都是静态方法,所以简单工厂模式又叫做静态工厂方法（Static Factory Method）模式;<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/11/DesignPatterns_02/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="cipfg5exs0005vq86dg6dt1bj" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/#disqus_thread" class="article-comment-link">Comentarios</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-11T14:35:39.577Z" itemprop="dateModified">2016-06-11</time>
-</span>
+</section>
 
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-DesignPatterns_01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/11/DesignPatterns_01/" class="article-date">
-  <time datetime="2016-06-11T14:35:39.569Z" itemprop="datePublished">2016-06-11</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01---单例模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>  </p>
-<p>上次我们对设计模式有了一些基本的了解,现在就从最简单最容易理解的单例模式开始吧;</p>
-<h4 id="什么是单例模式-Singleton"><a href="#什么是单例模式-Singleton" class="headerlink" title="什么是单例模式(Singleton)"></a>什么是单例模式(Singleton)</h4><p>这个模式看到名字就知道它是什么意思了,就是确保某个类只有一个实例,并且自动实例化和向全局提供该实例;<br>它是创建型模式;<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/11/DesignPatterns_01/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/" data-id="cipfg5ex80002vq86v282r329" data_title="浅谈Java设计模式系列0x01---单例模式" data_summary="浅谈Java设计模式系列0x00  
-上次我们对设计模..." class="article-share-link">Compartir</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/#disqus_thread" class="article-comment-link">Comentarios</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-06-11</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-DesignPatterns_00" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/11/DesignPatterns_00/" class="article-date">
-  <time datetime="2016-06-11T14:35:39.561Z" itemprop="datePublished">2016-06-11</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;<br>首先我们先对设计模式做一些基本的了解;<br><strong>学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思</strong></p>
-<h4 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h4><blockquote>
-<p><strong>Wikipedia</strong>:<br>In software engineering, a software design pattern is a <code>general</code> <code>reusable</code> solution to a commonly occurring problem within a given context in software design.  </p>
-</blockquote>
-<p>上面是维基百科对设计模式的定义,其中我认为<code>general</code>和<code>reusable</code>非常明确的表明了设计模式的任务;<br>它是对软件设计中经常出现的问题的一种 <strong>通用</strong>,<strong>可重用</strong> 的解决方案;<br>说白了就是软件工程师为了偷懒而想出来的一种方法,它可以帮工程师们解决一些重复和麻烦的工作;<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/11/DesignPatterns_00/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/" data-id="cipfg5ewm0000vq861s765ns3" data_title="浅谈Java设计模式系列0x00" data_summary="本系列是我对于各种设计模式的一些理解,我会以最简单,最..." class="article-share-link">Compartir</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/#disqus_thread" class="article-comment-link">Comentarios</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-06-11</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Siguiente &raquo;</a>
-  </nav>
 
 </section>
         
           
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#建造者模式"><span class="toc-number">1.</span> <span class="toc-text">建造者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式结构"><span class="toc-number">2.</span> <span class="toc-text">模式结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式特征"><span class="toc-number">3.</span> <span class="toc-text">模式特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#举个例子"><span class="toc-number">4.</span> <span class="toc-text">举个例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+    
+  </div>
+
 <aside id="sidebar">
 
   
@@ -547,11 +301,13 @@ Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-0
 <script>
   var disqus_shortname = 'kevinhqf';
   
+  var disqus_url = 'http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//go.disqus.com/count.js';
+    dsq.src = '//go.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
@@ -576,6 +332,11 @@ Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-0
 	<script src="/js/gotop.js"></script>
 	-->
 
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
 
 </div>
 <script src="/js/toc_aside_toggle.js"></script>
