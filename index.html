@@ -74,6 +74,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-DesingPatterns_07" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/16/DesingPatterns_07/" class="article-date">
+  <time datetime="2016-06-16T02:46:02.392Z" itemprop="datePublished">2016-06-16</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/16/DesingPatterns_07/">浅谈Java设计模式系列0x07---桥接模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://kevinhqf.github.io/2016/06/15/DesignPatterns_00/">浅谈Java设计模式系列0x06—适配器模式</a><br>本次我来继续给大家介绍结构型模式—-桥接模式</p>
+<h4 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h4><p>桥接模式是让具体实现与抽象分离,使他们可以各自独立变化的一种设计模式;<br>桥接模式通过将类的静态继承关系转换为动态的对象组合关系,以此来实现系统的解耦,这种关联的关系就像是连接各部分的桥;  </p>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><p><strong>抽象类(Abstraction)</strong> : 用于定义抽象类的接口,其中包含一个 <code>实现类接口(Implementor)</code> 的引用;<br><strong>扩充抽象类(RefinedAbstraction)</strong> : 扩充以及实现由 <code>抽象类(Abstraction)</code> 定义的接口的具体类,可以调用 <code>实现类接口(Implementor)</code> 中定义的业务方法;<br><strong>实现类接口(Implementor)</strong> : 定义实现类的接口;<br><strong>具体实现类(ConcreteImplementor)</strong> : 实现Implementor接口;<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/06/16/DesingPatterns_07/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/16/DesingPatterns_07/" data-id="ciphpgr1p0007yf86apzw2drk" data_title="浅谈Java设计模式系列0x07---桥接模式" data_summary="浅谈Java设计模式系列0x06—适配器模式本次我来继..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/16/DesingPatterns_07/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-16T02:46:02.392Z" itemprop="dateModified">2016-06-16</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-DesignPatterns_06" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -115,7 +180,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/" data-id="cipgm9wpt0009u386dq0hrcr5" data_title="浅谈Java设计模式系列0x06---适配器模式" data_summary="前面我所介绍的都是创建型的设计模式,本篇开始我来给大家..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/" data-id="ciphpgr3n000fyf86zkbkxch2" data_title="浅谈Java设计模式系列0x06---适配器模式" data_summary="前面我所介绍的都是创建型的设计模式,本篇开始我来给大家..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -198,7 +263,7 @@ Updated:<time datetime="2016-06-15T08:28:18.046Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/" data-id="cipgm9wqn000eu386qwiqaaw2" data_title="浅谈Java设计模式系列0x05---建造者模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/" data-id="ciphpgr4u000jyf86wu9eq4hz" data_title="浅谈Java设计模式系列0x05---建造者模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -263,7 +328,7 @@ Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="cipgm9wpk0007u386ojd67psm" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="ciphpgr1e0005yf86qk57xp5i" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -332,7 +397,7 @@ Updated:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="cipgm9wp70005u3866scliysz" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="ciphpgr170003yf86iffurr61" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -343,72 +408,6 @@ Updated:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-06-11T14:35:39.577Z" itemprop="dateModified">2016-06-11</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-DesignPatterns_01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/11/DesignPatterns_01/" class="article-date">
-  <time datetime="2016-06-11T14:35:39.569Z" itemprop="datePublished">2016-06-11</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01---单例模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>  </p>
-<p>上次我们对设计模式有了一些基本的了解,现在就从最简单最容易理解的单例模式开始吧;</p>
-<h4 id="什么是单例模式-Singleton"><a href="#什么是单例模式-Singleton" class="headerlink" title="什么是单例模式(Singleton)"></a>什么是单例模式(Singleton)</h4><p>这个模式看到名字就知道它是什么意思了,就是确保某个类只有一个实例,并且自动实例化和向全局提供该实例;<br>它是创建型模式;<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/11/DesignPatterns_01/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/" data-id="cipgm9wop0002u386ljz6jpw0" data_title="浅谈Java设计模式系列0x01---单例模式" data_summary="浅谈Java设计模式系列0x00  
-上次我们对设计模..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-06-11</time>
 </span>
 
 
@@ -454,7 +453,7 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -467,7 +466,7 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">8</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">9</span></li></ul>
     </div>
   </div>
 
@@ -478,6 +477,10 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/06/16/DesingPatterns_07/">浅谈Java设计模式系列0x07---桥接模式</a>
+          </li>
         
           <li>
             <a href="/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06---适配器模式</a>
@@ -493,10 +496,6 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02---简单工厂模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01---单例模式</a>
           </li>
         
       </ul>

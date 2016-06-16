@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈Java设计模式系列0x07---桥接模式 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浅谈Java设计模式系列0x06—适配器模式本次我来继续给大家介绍结构型模式—-桥接模式
+桥接模式桥接模式是让具体实现与抽象分离,使他们可以各自独立变化的一种设计模式;桥接模式通过将类的静态继承关系转换为动态的对象组合关系,以此来实现系统的解耦,这种关联的关系就像是连接各部分的桥;  
+模式结构抽象类(Abstraction) : 用于定义抽象类的接口,其中包含一个 实现类接口(Implement">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Java设计模式系列0x07---桥接模式">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/06/16/DesingPatterns_07/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="浅谈Java设计模式系列0x06—适配器模式本次我来继续给大家介绍结构型模式—-桥接模式
+桥接模式桥接模式是让具体实现与抽象分离,使他们可以各自独立变化的一种设计模式;桥接模式通过将类的静态继承关系转换为动态的对象组合关系,以此来实现系统的解耦,这种关联的关系就像是连接各部分的桥;  
+模式结构抽象类(Abstraction) : 用于定义抽象类的接口,其中包含一个 实现类接口(Implement">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/designpattern/uml/BridgeInherit.png">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/designpattern/uml/Bridge.png">
+<meta property="og:updated_time" content="2016-06-16T02:46:02.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Java设计模式系列0x07---桥接模式">
+<meta name="twitter:description" content="浅谈Java设计模式系列0x06—适配器模式本次我来继续给大家介绍结构型模式—-桥接模式
+桥接模式桥接模式是让具体实现与抽象分离,使他们可以各自独立变化的一种设计模式;桥接模式通过将类的静态继承关系转换为动态的对象组合关系,以此来实现系统的解耦,这种关联的关系就像是连接各部分的桥;  
+模式结构抽象类(Abstraction) : 用于定义抽象类的接口,其中包含一个 实现类接口(Implement">
+<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/designpattern/uml/BridgeInherit.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-DesingPatterns_07" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/16/DesingPatterns_07/" class="article-date">
+  <time datetime="2016-06-16T02:46:02.392Z" itemprop="datePublished">2016-06-16</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈Java设计模式系列0x07---桥接模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p><a href="https://kevinhqf.github.io/2016/06/15/DesignPatterns_00/">浅谈Java设计模式系列0x06—适配器模式</a><br>本次我来继续给大家介绍结构型模式—-桥接模式</p>
+<h4 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h4><p>桥接模式是让具体实现与抽象分离,使他们可以各自独立变化的一种设计模式;<br>桥接模式通过将类的静态继承关系转换为动态的对象组合关系,以此来实现系统的解耦,这种关联的关系就像是连接各部分的桥;  </p>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><p><strong>抽象类(Abstraction)</strong> : 用于定义抽象类的接口,其中包含一个 <code>实现类接口(Implementor)</code> 的引用;<br><strong>扩充抽象类(RefinedAbstraction)</strong> : 扩充以及实现由 <code>抽象类(Abstraction)</code> 定义的接口的具体类,可以调用 <code>实现类接口(Implementor)</code> 中定义的业务方法;<br><strong>实现类接口(Implementor)</strong> : 定义实现类的接口;<br><strong>具体实现类(ConcreteImplementor)</strong> : 实现Implementor接口;<br><a id="more"></a></p>
+<h4 id="什么时候能用"><a href="#什么时候能用" class="headerlink" title="什么时候能用"></a>什么时候能用</h4><p>在下面的情况可以使用桥接模式:  </p>
+<ul>
+<li>对于那些不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统，桥接模式尤为适用;  </li>
+<li>系统需要抽象化角色和具体化角色独立变化时;  </li>
+<li>将继承关联的对象转换为动态组合时;  </li>
+</ul>
+<h4 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h4><p>这里我借用一下 <a href="http://www.jasongj.com/design_pattern/bridge/" target="_blank" rel="external">Jason’s Blog</a> 的例子,因为他所具的例子是比较容易理解的;<br>首先我们如果不采用桥接模式的话,由于继承关系会使我们的类过于复杂,其UML图如下:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/designpattern/uml/BridgeInherit.png" alt="继承关系"><br>从上图可以看到，对于每种组合都需要创建一个具体类，类非常多，并且非常多的重复功能;  </p>
+<p>作为对比桥接模式的类图如下:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/designpattern/uml/Bridge.png" alt="桥接模式"><br>由此可以看出桥接模式使抽象和实现进行分离,并且可以独立变化;  </p>
+<p><a href="https://github.com/kevinhqf/DesignPattern/tree/master/src/bridge" target="_blank" rel="external">代码参考</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 实现类接口,抽象变速器</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Transmission</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">gear</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体实现类,手动档</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Manual</span> <span class="keyword">extends</span> <span class="title">Transmission</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Manual transmission."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体实现类,自动档</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Auto</span> <span class="keyword">extends</span> <span class="title">Transmission</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Auto transmission."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象类(Abstraction)</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractCar</span> </span>&#123;</span><br><span class="line">    <span class="comment">//持有实现类接口的一个实例</span></span><br><span class="line">    Transmission gear;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGear</span><span class="params">(Transmission gear)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.gear = gear;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 扩充抽象类(RefinedAbstraction)</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BMWCar</span> <span class="keyword">extends</span> <span class="title">AbstractCar</span></span>&#123;</span><br><span class="line">    <span class="comment">//实现抽象类的接口</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//调用实现类接口的业务方法</span></span><br><span class="line">        gear.gear();</span><br><span class="line">        System.out.println(<span class="string">"BMW is running........"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 扩充抽象类(RefinedAbstraction)</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BenZCar</span> <span class="keyword">extends</span> <span class="title">AbstractCar</span></span>&#123;</span><br><span class="line">    <span class="comment">//实现抽象类的接口</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//调用实现类接口的业务方法</span></span><br><span class="line">        gear.gear();</span><br><span class="line">        System.out.println(<span class="string">"BenZCar is running........"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 扩充抽象类(RefinedAbstraction)</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LandRoverCar</span> <span class="keyword">extends</span> <span class="title">AbstractCar</span></span>&#123;</span><br><span class="line">    <span class="comment">//实现抽象类的接口</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//调用实现类接口的业务方法</span></span><br><span class="line">        gear.gear();</span><br><span class="line">        System.out.println(<span class="string">"LandRoverCar is running........"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 测试类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//通过聚合,实现不同品牌不同变速器的组合</span></span><br><span class="line">        Transmission auto = <span class="keyword">new</span> Auto();</span><br><span class="line">        AbstractCar bmw = <span class="keyword">new</span> BMWCar();</span><br><span class="line">        bmw.setGear(auto);</span><br><span class="line">        bmw.run();</span><br><span class="line"></span><br><span class="line">        Transmission manual = <span class="keyword">new</span> Manual();</span><br><span class="line">        AbstractCar benz = <span class="keyword">new</span> BenZCar();</span><br><span class="line">        benz.setGear(manual);</span><br><span class="line">        benz.run();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Auto transmission.</span><br><span class="line">BMW is running........</span><br><span class="line">Manual transmission.</span><br><span class="line">BenZCar is running........</span><br></pre></td></tr></table></figure></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>桥接模式通过将多维度的对象组合通过抽象化,各维度能独立的变化,大大增加了可扩展性,减少了各维度之间的耦合;<br>分离抽象接口及其实现部分，是比多继承方案更好的解决方法，在多个变化维度中任意扩展一个维度，都不需要修改原有系统;<br>其主要缺点是增加系统的理解与设计难度，且识别出系统中两个独立变化的维度并不是一件容易的事情;</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.jasongj.com/design_pattern/bridge/" target="_blank" rel="external">Java设计模式（九） 桥接模式</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/16/DesingPatterns_07/" data-id="ciphpgr1p0007yf86apzw2drk" data_title="浅谈Java设计模式系列0x07---桥接模式" data_summary="浅谈Java设计模式系列0x06—适配器模式本次我来继..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/16/DesingPatterns_07/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-16T02:46:02.392Z" itemprop="dateModified">2016-06-16</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/15/DesignPatterns_06/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">浅谈Java设计模式系列0x06---适配器模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#桥接模式"><span class="toc-number">1.</span> <span class="toc-text">桥接模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式结构"><span class="toc-number">2.</span> <span class="toc-text">模式结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么时候能用"><span class="toc-number">3.</span> <span class="toc-text">什么时候能用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实例"><span class="toc-number">4.</span> <span class="toc-text">代码实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/16/DesingPatterns_07/">浅谈Java设计模式系列0x07---桥接模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06---适配器模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/14/DesignPatterns_05/">浅谈Java设计模式系列0x05---建造者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/13/DesignPatterns_04/">浅谈Java设计模式系列0x04---抽象工厂模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02---简单工厂模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/06/16/DesingPatterns_07/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
