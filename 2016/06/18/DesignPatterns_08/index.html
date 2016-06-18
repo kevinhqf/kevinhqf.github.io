@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈Java设计模式系列0x08---装饰器模式 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浅谈Java设计模式系列0x06—适配器模式浅谈Java设计模式系列0x07—桥接模式  
+上次我给大家介绍了桥接模式,它是一个非常实用的设计模式;本次再给大家介绍一个结构型模式—–装饰器模式;  
+装饰器是什么鬼就像装饰我们的汽车,房间一样,在设计模式中,装饰器模式就是允许我们为现有的对象添加新的功能或特性,而不必去修改原有的代码;装饰器模式是通过组合的方式实现对象功能或特性的扩展,这相比继承更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Java设计模式系列0x08---装饰器模式">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="浅谈Java设计模式系列0x06—适配器模式浅谈Java设计模式系列0x07—桥接模式  
+上次我给大家介绍了桥接模式,它是一个非常实用的设计模式;本次再给大家介绍一个结构型模式—–装饰器模式;  
+装饰器是什么鬼就像装饰我们的汽车,房间一样,在设计模式中,装饰器模式就是允许我们为现有的对象添加新的功能或特性,而不必去修改原有的代码;装饰器模式是通过组合的方式实现对象功能或特性的扩展,这相比继承更">
+<meta property="og:updated_time" content="2016-06-18T02:59:01.025Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Java设计模式系列0x08---装饰器模式">
+<meta name="twitter:description" content="浅谈Java设计模式系列0x06—适配器模式浅谈Java设计模式系列0x07—桥接模式  
+上次我给大家介绍了桥接模式,它是一个非常实用的设计模式;本次再给大家介绍一个结构型模式—–装饰器模式;  
+装饰器是什么鬼就像装饰我们的汽车,房间一样,在设计模式中,装饰器模式就是允许我们为现有的对象添加新的功能或特性,而不必去修改原有的代码;装饰器模式是通过组合的方式实现对象功能或特性的扩展,这相比继承更">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-DesignPatterns_08" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/18/DesignPatterns_08/" class="article-date">
+  <time datetime="2016-06-18T02:59:01.025Z" itemprop="datePublished">2016-06-18</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈Java设计模式系列0x08---装饰器模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p><a href="https://kevinhqf.github.io/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06—适配器模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_07/">浅谈Java设计模式系列0x07—桥接模式</a>  </p>
+<p>上次我给大家介绍了桥接模式,它是一个非常实用的设计模式;<br>本次再给大家介绍一个结构型模式—–装饰器模式;  </p>
+<h4 id="装饰器是什么鬼"><a href="#装饰器是什么鬼" class="headerlink" title="装饰器是什么鬼"></a>装饰器是什么鬼</h4><p>就像装饰我们的汽车,房间一样,在设计模式中,装饰器模式就是允许我们为现有的对象添加新的功能或特性,而不必去修改原有的代码;<br>装饰器模式是通过组合的方式实现对象功能或特性的扩展,这相比继承更加的灵活;  </p>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><ul>
+<li><strong>抽象构件(Component)</strong> : 它是<code>具体构件(ConcreteComponent)</code>和<code>抽象装饰类(Decorator)</code>的共同父类,声明了具体构件中实现的业务方法;</li>
+<li><strong>具体构件(ConcreteComponent)</strong> : 它是<code>抽象构件类(Component)</code>的子类,定义具体的构件对象,并实现抽象构件类中定义的方法;</li>
+<li><strong>抽象装饰类(Decorator)</strong> : 它也是<code>抽象构件类(Component)</code>的子类,用于给具体构件增加职责,具体职责在其子类中实现;</li>
+<li><strong>具体装饰类(ConcreteDecorator)</strong> : 它是<code>抽象装饰类(Decorator)</code>的子类,负责向构件添加新的职责,扩充对象的行为;<a id="more"></a>
+</li>
+</ul>
+<h4 id="什么时候能用"><a href="#什么时候能用" class="headerlink" title="什么时候能用"></a>什么时候能用</h4><p>在以下情况下可以使用装饰模式：</p>
+<ul>
+<li>在不影响其他对象的情况下，以动态、透明的方式给单个对象添加职责;</li>
+<li>需要动态地给一个对象增加功能，这些功能也可以动态地被撤销;</li>
+<li>…..</li>
+</ul>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p>本次我们的例子还是熟悉的手机例子,我们对一台<code>ApplePhone</code>的<code>call</code>和<code>message</code>功能进行装饰;<br><a href="https://github.com/kevinhqf/DesignPattern/tree/master/src/decorator" target="_blank" rel="external">代码参考</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象构件(Component) 抽象手机构件</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 手机构件的业务方法,打电话</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">// 手机构件的业务方法,发信息</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">message</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体的构件(ConcreteComponent)</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplePhone</span> <span class="keyword">implements</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"apple phone is calling..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">message</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"apple phone is sending message..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象装饰类(Decorator)</span><br><span class="line"> * 在 PhoneDecorator 中并未真正实现 call() 方法,而只是调用原有 phone 对象的 call() 方法</span><br><span class="line"> * 它没有真正实施装饰,而是提供一个统一的接口,将具体装饰过程交给子类完成.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneDecorator</span> <span class="keyword">implements</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">    <span class="comment">//持有一个抽象构件实例的引用</span></span><br><span class="line">    <span class="keyword">private</span> Phone phone;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//注入抽象构件类型的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PhoneDecorator</span><span class="params">(Phone phone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.phone = phone;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//调用原有的业务方法</span></span><br><span class="line">        <span class="keyword">this</span>.phone.call();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">message</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.phone.message();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体的装饰类(ConcreteComponent)</span><br><span class="line"> * 在具体装饰类中可以调用到抽象装饰类的方法，同时可以定义新的业务方法</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FaceTimeDecorator</span> <span class="keyword">extends</span> <span class="title">PhoneDecorator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FaceTimeDecorator</span><span class="params">(Phone phone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(phone);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.call();<span class="comment">//调用原有的业务方法</span></span><br><span class="line">        callWithFaceTime();<span class="comment">//调用新增的业务方法</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//新增的业务方法,</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callWithFaceTime</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this call is powered by FaceTime..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体的装饰类(ConcreteComponent)</span><br><span class="line"> * 在具体装饰类中可以调用到抽象装饰类的方法，同时可以定义新的业务方法</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IMessageDecorator</span> <span class="keyword">extends</span> <span class="title">PhoneDecorator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">IMessageDecorator</span><span class="params">(Phone phone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(phone);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">message</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.message();<span class="comment">//调用原有的业务方法</span></span><br><span class="line">        messageWithIMessage();<span class="comment">//调用新增的业务方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//新增的业务方法,</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">messageWithIMessage</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this message is powered by IMessage..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 测试类</span><br><span class="line"> * 在具体装饰类中可以调用到抽象装饰类的方法，同时可以定义新的业务方法</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Phone phone=<span class="keyword">new</span> ApplePhone();</span><br><span class="line">        phone.call();</span><br><span class="line">        phone.message();</span><br><span class="line">        System.out.println(<span class="string">"--------------------------------------"</span>);</span><br><span class="line">        phone = <span class="keyword">new</span> FaceTimeDecorator(phone);<span class="comment">//第一次装饰,对call()进行装饰</span></span><br><span class="line">        phone = <span class="keyword">new</span> IMessageDecorator(phone);<span class="comment">//第二次装饰,对message()进行装饰</span></span><br><span class="line">        <span class="comment">//也可以使用如下方法进行多次嵌套装饰</span></span><br><span class="line">        <span class="comment">//phone = new IMessageDecorator(new FaceTimeDecorator(phone));</span></span><br><span class="line">        phone.call();</span><br><span class="line">        phone.message();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apple phone is calling...</span><br><span class="line">apple phone is sending message...</span><br><span class="line">--------------------------------------</span><br><span class="line">apple phone is calling...</span><br><span class="line">this call is powered by FaceTime...</span><br><span class="line">apple phone is sending message...</span><br><span class="line">this message is powered by IMessage...</span><br></pre></td></tr></table></figure></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>装饰模式通过动态的方式扩展一个对象的功能,并且具体构件类和具体装饰类可以独立的变化,通过不同的组合方式可以创造很多不同的行为;<br>但是装饰模式在系统设计时会产生很多小对象,而且经过多次装饰的对象出错时,查错会变得复杂繁琐;</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://wiki.jikexueyuan.com/project/design-pattern-structurized/decorator-two.html" target="_blank" rel="external">扩展系统功能——装饰模式（二）</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/" data-id="cipkksz720009dw86dlhhxjqs" data_title="浅谈Java设计模式系列0x08---装饰器模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-18T02:59:01.025Z" itemprop="dateModified">2016-06-18</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/18/DesignPatterns_07/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">浅谈Java设计模式系列0x07---桥接模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#装饰器是什么鬼"><span class="toc-number">1.</span> <span class="toc-text">装饰器是什么鬼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式结构"><span class="toc-number">2.</span> <span class="toc-text">模式结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么时候能用"><span class="toc-number">3.</span> <span class="toc-text">什么时候能用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例"><span class="toc-number">4.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/18/DesignPatterns_08/">浅谈Java设计模式系列0x08---装饰器模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/18/DesignPatterns_07/">浅谈Java设计模式系列0x07---桥接模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06---适配器模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/14/DesignPatterns_05/">浅谈Java设计模式系列0x05---建造者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/13/DesignPatterns_04/">浅谈Java设计模式系列0x04---抽象工厂模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
