@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈Java设计模式系列0x0A---代理模式 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浅谈Java设计模式系列0x06—适配器模式浅谈Java设计模式系列0x07—桥接模式浅谈Java设计模式系列0x08—装饰器模式浅谈Java设计模式系列0x09—外观模式  
+上次我给大家介绍了外观模式,它提供了高层的统一接口,使得子系统的使用更加的容易;本次我给大家介绍的同样也是一种结构型的设计模式—-代理模式;  
+代理是什么鬼其实代理比较好理解,就像我们不想到实体店买东西,我们就通过上网,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Java设计模式系列0x0A---代理模式">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="浅谈Java设计模式系列0x06—适配器模式浅谈Java设计模式系列0x07—桥接模式浅谈Java设计模式系列0x08—装饰器模式浅谈Java设计模式系列0x09—外观模式  
+上次我给大家介绍了外观模式,它提供了高层的统一接口,使得子系统的使用更加的容易;本次我给大家介绍的同样也是一种结构型的设计模式—-代理模式;  
+代理是什么鬼其实代理比较好理解,就像我们不想到实体店买东西,我们就通过上网,">
+<meta property="og:updated_time" content="2016-06-24T05:05:03.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Java设计模式系列0x0A---代理模式">
+<meta name="twitter:description" content="浅谈Java设计模式系列0x06—适配器模式浅谈Java设计模式系列0x07—桥接模式浅谈Java设计模式系列0x08—装饰器模式浅谈Java设计模式系列0x09—外观模式  
+上次我给大家介绍了外观模式,它提供了高层的统一接口,使得子系统的使用更加的容易;本次我给大家介绍的同样也是一种结构型的设计模式—-代理模式;  
+代理是什么鬼其实代理比较好理解,就像我们不想到实体店买东西,我们就通过上网,">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-DesignPatterns_0A" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/24/DesignPatterns_0A/" class="article-date">
+  <time datetime="2016-06-24T05:05:03.321Z" itemprop="datePublished">2016-06-24</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈Java设计模式系列0x0A---代理模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p><a href="https://kevinhqf.github.io/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06—适配器模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_07/">浅谈Java设计模式系列0x07—桥接模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_08/">浅谈Java设计模式系列0x08—装饰器模式</a><br><a href="https://kevinhqf.github.io/2016/06/19/DesignPatterns_09/">浅谈Java设计模式系列0x09—外观模式</a>  </p>
+<p>上次我给大家介绍了外观模式,它提供了高层的统一接口,使得子系统的使用更加的容易;<br>本次我给大家介绍的同样也是一种结构型的设计模式—-代理模式;  </p>
+<h4 id="代理是什么鬼"><a href="#代理是什么鬼" class="headerlink" title="代理是什么鬼"></a>代理是什么鬼</h4><p>其实代理比较好理解,就像我们不想到实体店买东西,我们就通过上网,在网上商店购买商品;<br>我们下单后,网上的代购网站就会帮我们代购商品,购买商品的是代购网站,这个代购网站就是代理了;<br><strong>代理模式(Proxy Pattern)</strong> : 给某一个对象提供一个代理,并由代理对象控制原对象的引用;  </p>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><ul>
+<li><strong>抽象主题角色(Subject)</strong>:它声明了<code>真实主题</code>和<code>代理主题</code>的共同接口，这样一来在任何使用真实主题的地方都可以使用代理主题，客户端通常需要针对抽象主题角色进行编程;</li>
+<li><strong>代理主题角色(Proxy)</strong>:用来代理和封装<code>真实主题</code>;</li>
+<li><strong>真实主题角色(RealSubject)</strong>:它定义了<code>代理角色</code>所代表的<code>真实对象</code>，在真实主题角色中实现了真实的业务操作，客户端可以通过代理主题角色间接调用真实主题角色中定义的操作;<a id="more"></a>
+</li>
+</ul>
+<h4 id="什么时候能用"><a href="#什么时候能用" class="headerlink" title="什么时候能用"></a>什么时候能用</h4><p>根据代理模式的使用目的，常见的代理模式有以下几种类型：</p>
+<ul>
+<li><strong>远程(Remote)代理</strong>：为一个位于不同的地址空间的对象提供一个本地 的代理对象，这个不同的地址空间可以是在同一台主机中，也可是在 另一台主机中，远程代理又叫做大使(Ambassador);</li>
+<li><strong>虚拟(Virtual)代理</strong>：如果需要创建一个资源消耗较大的对象，先创建一个消耗相对较小的对象来表示，真实对象只在需要时才会被真正创建;</li>
+<li><strong>Copy-on-Write代理</strong>：它是虚拟代理的一种，把复制（克隆）操作延迟 到只有在客户端真正需要时才执行。一般来说，对象的深克隆是一个  开销较大的操作，Copy-on-Write代理可以让这个操作延迟，只有对象被用到的时候才被克隆;</li>
+<li><strong>保护(Protect or Access)代理</strong>：控制对一个对象的访问，可以给不同的用户提供不同级别的使用权限;</li>
+<li><strong>缓冲(Cache)代理</strong>：为某一个目标操作的结果提供临时的存储空间，以便多个客户端可以共享这些结果;</li>
+<li><strong>防火墙(Firewall)代理</strong>：保护目标不让恶意用户接近;</li>
+<li><strong>同步化(Synchronization)代理</strong>：使几个用户能够同时使用一个对象而没有冲突;</li>
+<li><strong>智能引用(Smart Reference)代理</strong>：当一个对象被引用时，提供一些额外的操作，如将此对象被调用的次数记录下来等;</li>
+</ul>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p>本次的代码,我们模仿网络图片的加载来实现代理模式;<br><a href="https://github.com/kevinhqf/DesignPattern/tree/master/src/proxy" target="_blank" rel="external">代码参考</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象角色 声明代理角色和真实角色的共同接口</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Photo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getPhoto</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 真实角色</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NetworkPhoto</span> <span class="keyword">implements</span> <span class="title">Photo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getPhoto</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Network Photo is loading"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 代理角色:代理对象与真实对象实现相同的接口,所以它能够在任何时刻都能够代理真实对象</span><br><span class="line"> * 代理角色内部包含有对真实对象的引用,所以可以操作真实对象,同时也可以附加其他的操作</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpProxy</span> <span class="keyword">implements</span> <span class="title">Photo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> NetworkPhoto np;<span class="comment">//持有真实对象的引用</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HttpProxy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.np = <span class="keyword">new</span> NetworkPhoto();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     *附加操作</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">beforeLoad</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"doing jobs before load."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getPhoto</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        beforeLoad();</span><br><span class="line">        np.getPhoto();</span><br><span class="line">        afterLoad();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     *附加操作</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">afterLoad</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"doing jobs after load."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 测试类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        HttpProxy proxy=<span class="keyword">new</span> HttpProxy();</span><br><span class="line">        proxy.getPhoto();<span class="comment">//通过代理对象引用真实对象</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">doing jobs before load.</span><br><span class="line">Network Photo is loading</span><br><span class="line">doing jobs after load.</span><br></pre></td></tr></table></figure></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>代理模式能够协调调用者和被调用者，在一定程度上降低了系统的耦合度,代理模式对外部提供统一的接口方法，而且代理类在接口中实现对真实类的附加操作行为，从而可以在不影响外部调用情况下，进行系统扩展;<br>由于在客户端和真实主题之间增加了代理对象，因此有些类型的代理模式可能会造成请求的处理速度变慢,而且有些代理模式的实现非常复杂;</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/proxy.html" target="_blank" rel="external">代理模式</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/" data-id="cipt9ylaa000cz3868f57duvj" data_title="浅谈Java设计模式系列0x0A---代理模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-06-24</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/19/DesignPatterns_09/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">浅谈Java设计模式系列0x09---外观模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#代理是什么鬼"><span class="toc-number">1.</span> <span class="toc-text">代理是什么鬼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式结构"><span class="toc-number">2.</span> <span class="toc-text">模式结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么时候能用"><span class="toc-number">3.</span> <span class="toc-text">什么时候能用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例"><span class="toc-number">4.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/24/DesignPatterns_0A/">浅谈Java设计模式系列0x0A---代理模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/19/DesignPatterns_09/">浅谈Java设计模式系列0x09---外观模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/18/DesignPatterns_08/">浅谈Java设计模式系列0x08---装饰器模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/18/DesignPatterns_07/">浅谈Java设计模式系列0x07---桥接模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06---适配器模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
