@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈Java设计模式系列0x0B---观察者模式 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前我给大家介绍了对象创建型和结构型的设计模,式接下来我会为大家介绍行为型的设计模式;给大家介绍的第一个的行为型设计模式就是观察者模式;  
+观察者是什么鬼其实就像在生活中,当你想买一样商品的时候,因为价格太贵,所有你并没有马上入手.但你却会关注它的价格变化,当商品的价格下降的时候,你就会收到通知,并且决定入手;上面的例子就是一个观察者模式的例子,你就是观察者,商品就是观察目标,当商品的状态发生变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Java设计模式系列0x0B---观察者模式">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="之前我给大家介绍了对象创建型和结构型的设计模,式接下来我会为大家介绍行为型的设计模式;给大家介绍的第一个的行为型设计模式就是观察者模式;  
+观察者是什么鬼其实就像在生活中,当你想买一样商品的时候,因为价格太贵,所有你并没有马上入手.但你却会关注它的价格变化,当商品的价格下降的时候,你就会收到通知,并且决定入手;上面的例子就是一个观察者模式的例子,你就是观察者,商品就是观察目标,当商品的状态发生变">
+<meta property="og:updated_time" content="2016-06-25T07:34:10.428Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Java设计模式系列0x0B---观察者模式">
+<meta name="twitter:description" content="之前我给大家介绍了对象创建型和结构型的设计模,式接下来我会为大家介绍行为型的设计模式;给大家介绍的第一个的行为型设计模式就是观察者模式;  
+观察者是什么鬼其实就像在生活中,当你想买一样商品的时候,因为价格太贵,所有你并没有马上入手.但你却会关注它的价格变化,当商品的价格下降的时候,你就会收到通知,并且决定入手;上面的例子就是一个观察者模式的例子,你就是观察者,商品就是观察目标,当商品的状态发生变">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-DesignPatterns_0B" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/25/DesignPatterns_0B/" class="article-date">
+  <time datetime="2016-06-25T07:34:10.428Z" itemprop="datePublished">2016-06-25</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈Java设计模式系列0x0B---观察者模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>之前我给大家介绍了<code>对象创建型</code>和<code>结构型</code>的设计模,式接下来我会为大家介绍行为型的设计模式;<br>给大家介绍的第一个的行为型设计模式就是<code>观察者模式</code>;  </p>
+<h4 id="观察者是什么鬼"><a href="#观察者是什么鬼" class="headerlink" title="观察者是什么鬼"></a>观察者是什么鬼</h4><p>其实就像在生活中,当你想买一样商品的时候,因为价格太贵,所有你并没有马上入手.但你却会关注它的价格变化,当商品的价格下降的时候,你就会收到通知,并且决定入手;<br>上面的例子就是一个观察者模式的例子,你就是观察者,商品就是观察目标,当商品的状态发生变化时,观察者会得到通知并做出相应的动作;  </p>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><ul>
+<li><strong>目标(Subject)</strong>：被观察的对象,定义了一个观察者的集合,提供增加和删除观察者对象的方法,同时定义了通知方法;</li>
+<li><strong>具体目标(ConcreteSubject)</strong>：目标类的子类,实现目标类中定义的抽象业务逻辑方法;</li>
+<li><strong>观察者(Observer)</strong>：对观察目标的改变做出反应,声明更新数据的接口方法;</li>
+<li><strong>具体观察者(ConcreteObserver)</strong>：维护一个指向具体目标对象的引用,实现观察者接口的更新数据方法,可以调用具体目标类的 attach() 方法将自己添加到目标类的集合中或通过 detach() 方法将自己从目标类的集合中删除;</li>
+</ul>
+<a id="more"></a>
+<h4 id="什么时候可以使用"><a href="#什么时候可以使用" class="headerlink" title="什么时候可以使用"></a>什么时候可以使用</h4><p>在以下情况下可以使用观察者模式：</p>
+<ul>
+<li>一个抽象模型有两个方面，其中一个方面依赖于另一个方面。将这些方面封装在独立的对象中使它们可以各自独立地改变和复用;</li>
+<li>一个对象的改变将导致其他一个或多个对象也发生改变，而不知道具体有多少对象将发生改变，可以降低对象之间的耦合度;</li>
+<li>一个对象必须通知其他对象，而并不知道这些对象是谁;</li>
+<li>需要在系统中创建一个触发链，A对象的行为将影响B对象，B对象的行为将影响C对象……，可以使用观察者模式创建一种链式触发机制;</li>
+</ul>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p><a href="https://github.com/kevinhqf/DesignPattern/tree/master/src/observer" target="_blank" rel="external">代码参考</a><br>本次以前面购买商品的例子来实现观察者模式;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象观察者类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(String state)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象目标类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneSubject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 观察者的列表</span></span><br><span class="line">    <span class="keyword">protected</span> List&lt;Observer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 注册观察者对象</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Observer observer)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        list.add(observer);</span><br><span class="line">        System.out.println(<span class="string">"Observer attached"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 删除观察者模式</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">detach</span><span class="params">(Observer observer)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        list.remove(observer);</span><br><span class="line">        System.out.println(<span class="string">"Observer detached"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体目标类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IPhone</span> <span class="keyword">extends</span> <span class="title">PhoneSubject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String state;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 商品的优惠活动</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preferential</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.state = <span class="string">"the iPhone is on promotion."</span>;</span><br><span class="line">        notifyObservers();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 当商品状态改变时,调用通知方法</span><br><span class="line">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(Observer o:list)&#123;</span><br><span class="line">            o.update(state);<span class="comment">//调用观察者的更新方法,进行相应的操作</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体观察者类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span>  <span class="keyword">implements</span> <span class="title">Observer</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String state;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String state)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//更新状态</span></span><br><span class="line">        <span class="keyword">this</span>.state=state;</span><br><span class="line">        System.out.println(state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 测试类</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line"></span><br><span class="line">        IPhone iPhone=<span class="keyword">new</span> IPhone();</span><br><span class="line">        Observer consumer = <span class="keyword">new</span> Consumer();</span><br><span class="line">        iPhone.attach(consumer);</span><br><span class="line">        iPhone.preferential();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Observer attached</span><br><span class="line">the iPhone is on promotion.</span><br></pre></td></tr></table></figure></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个目标对象，当这个目标对象的状态发生变化时，会通知所有观察者对象，使它们能够自动更新;<br>观察者模式可以实现表示层和数据逻辑层的分离，并在观察目标和观察者之间建立一个抽象的耦合，支持广播通信；<br>但是如果一个观察目标对象有很多直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间，而且如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃;  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/" data-id="cipuupjw8000i0c862lbxho3z" data_title="浅谈Java设计模式系列0x0B---观察者模式" data_summary="之前我给大家介绍了对象创建型和结构型的设计模,式接下来..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-06-25</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/24/DesignPatterns_0A/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">浅谈Java设计模式系列0x0A---代理模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#观察者是什么鬼"><span class="toc-number">1.</span> <span class="toc-text">观察者是什么鬼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式结构"><span class="toc-number">2.</span> <span class="toc-text">模式结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么时候可以使用"><span class="toc-number">3.</span> <span class="toc-text">什么时候可以使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例"><span class="toc-number">4.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/25/DesignPatterns_0B/">浅谈Java设计模式系列0x0B---观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/24/DesignPatterns_0A/">浅谈Java设计模式系列0x0A---代理模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/19/DesignPatterns_09/">浅谈Java设计模式系列0x09---外观模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/18/DesignPatterns_08/">浅谈Java设计模式系列0x08---装饰器模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/18/DesignPatterns_07/">浅谈Java设计模式系列0x07---桥接模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
