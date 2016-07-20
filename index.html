@@ -78,7 +78,7 @@
   <div class="article-meta">
     
 <a href="/2016/07/20/annotation/" class="article-date">
-  <time datetime="2016-07-20T06:30:04.126Z" itemprop="datePublished">2016-07-20</time>
+  <time datetime="2016-07-20T06:38:48.822Z" itemprop="datePublished">2016-07-20</time>
 </a>
 
 
@@ -103,53 +103,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
         <p>下面的代码片段相信有过Android开发经验的朋友都会非常的熟悉.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>其中<code>OnCreate()</code>方法前的<code>@Override</code>便是今天的主角,没错它就是Java的注解Annotation.</p>
-<h4 id="什么是Annotation"><a href="#什么是Annotation" class="headerlink" title="什么是Annotation"></a>什么是Annotation</h4><p>简单的说注解就是给Java代码标上标签,让Java虚拟机知道该如何处理被标注的代码.</p>
-<h4 id="Java的内置Annotations"><a href="#Java的内置Annotations" class="headerlink" title="Java的内置Annotations"></a>Java的内置Annotations</h4><p>Java的注解分为:</p>
-<ol>
-<li>普通注解(用于注解:类,方法,变量,参数,包)<ul>
-<li>@Override: 标注的方法为复写方法</li>
-<li>@Deprecated: 标注的方法已过时,被弃用</li>
-<li>@SuppressWarnings: 标注的方法被编译时忽略其他的注解警告</li>
-<li>@SafeVarargs: 修饰”堆污染”警告</li>
-<li>@FunctionalInterface: 修饰函数式接口</li>
-</ul>
-</li>
-<li>元注解(用于标注注解的注解)<ul>
-<li>@Retention: 注解保留策略<ul>
-<li>RetentionPolicy.SOURCE: 停留在Java源文件,被编译器丢弃</li>
-<li>RetentionPolicy.CLASS: 停留在class文件中,但被虚拟机丢弃</li>
-<li>RetentionPolicy.RUNTIME: 内存中的字节码,在运行时保留,可通过反射获取相关信息</li>
-</ul>
-</li>
-<li>@Target: 注解修饰目标<ul>
-<li>ElementType.CONSTRUCTOR: 构造器声明</li>
-<li>ElementType.FIELD: 成员变量,对象,属性</li>
-<li>ElementType.LOCAL_VARIABLE: 局部变量声明</li>
-<li>ElementType.METHOD: 方法声明</li>
-<li>ElementType.PACKAGE: 包声明</li>
-<li>ElementType.PARAMETER: 参数声明</li>
-<li>ElementType.TYPE: 类,接口(包括注解类型),枚举声明</li>
-</ul>
-</li>
-<li>＠Documented: 注解文档提取</li>
-<li>@Inherited: 注解继承声明</li>
-</ul>
-</li>
-</ol>
-<h4 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h4><p>废话少说,下面我们通过注解来实现对一个person的信息注入:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">* 简单的Person类</span><br><span class="line">**/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(<span class="keyword">int</span> age, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        System.out.println(name+<span class="string">" "</span>+age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>下面是一个自定义注解,声明了一个用于注解变量的运行时注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME) <span class="comment">//运行时保留,可通过反射获取相关信息</span></span><br><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)          <span class="comment">//用于注解成员变量</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> PersonAnnotation &#123;</span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>; 	<span class="comment">//Person的名字,默认值为空</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">age</span><span class="params">()</span></span>;               	<span class="comment">//Person的年龄,没有默认值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>之后我们需要对我们的注解进行处理,让它能够对我们使用了<code>PersonAnnotation</code>标注的<code>Person</code>成员变量进行自动赋值.这部分工作由下面的<code>AnnotationPaser</code>类完成.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationParser</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">    * 完成对注解的处理</span><br><span class="line">    * <span class="doctag">@param</span> object 持有注解目标的对象</span><br><span class="line">    **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">parse</span><span class="params">(Object object)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        Person p;</span><br><span class="line">        Class&lt;?&gt; clazz = object.getClass();</span><br><span class="line">        <span class="comment">//获取Object对象的所有声明变量</span></span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="comment">//遍历成员变量</span></span><br><span class="line">        <span class="keyword">for</span>(Field f:fields)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="comment">//检查成员变量是否被PersonAnnotation注解修饰</span></span><br><span class="line">            <span class="keyword">if</span>(f.isAnnotationPresent(PersonAnnotation.class))&#123;</span><br><span class="line">                PersonAnnotation personAnnotation=f.getAnnotation(PersonAnnotation.class);</span><br><span class="line">                <span class="keyword">int</span> age = personAnnotation.age();</span><br><span class="line">                String name = personAnnotation.name();</span><br><span class="line">                p = <span class="keyword">new</span> Person(age,name);</span><br><span class="line">                <span class="comment">//设置访问权限</span></span><br><span class="line">                f.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                	<span class="comment">//设置属性</span></span><br><span class="line">                    f.set(object,p);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>完成了对注解的处理后,我们的自定义注解就可以使用了.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PersonAnnotation</span>(name = <span class="string">"kevin"</span>,age = <span class="number">20</span>)</span><br><span class="line">    Person person;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Test t=<span class="keyword">new</span> Test();</span><br><span class="line">        AnnotationParser.parse(t);</span><br><span class="line">        t.person.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kevin 20</span><br></pre></td></tr></table></figure></p>
-
+<h4 id="什么是Annotation"><a href="#什么是Annotation" class="headerlink" title="什么是Annotation"></a>什么是Annotation</h4><p>简单的说注解就是给Java代码标上标签,让Java虚拟机知道该如何处理被标注的代码.<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/20/annotation/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="ciquikiqj000imp86v2k0g8c6" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="ciquiqdvi000qpw8606q8s9ba" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/20/annotation/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -159,7 +125,7 @@
       
 	  
 <span>
-Updated:<time datetime="2016-07-20T06:30:04.122Z" itemprop="dateModified">2016-07-20</time>
+Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-07-20</time>
 </span>
 
 
@@ -219,7 +185,7 @@ Updated:<time datetime="2016-07-20T06:30:04.122Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/" data-id="ciquikiqu000mmp86ch7if3bm" data_title="浅谈Java设计模式系列0x0B---观察者模式" data_summary="之前我给大家介绍了对象创建型和结构型的设计模,式接下来..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/" data-id="ciquiqdv0000mpw863r1oznuw" data_title="浅谈Java设计模式系列0x0B---观察者模式" data_summary="之前我给大家介绍了对象创建型和结构型的设计模,式接下来..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -288,7 +254,7 @@ Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/" data-id="ciquikiqp000kmp86x9pajy5z" data_title="浅谈Java设计模式系列0x0A---代理模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/" data-id="ciquiqduv000kpw86h732mgqa" data_title="浅谈Java设计模式系列0x0A---代理模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -353,7 +319,7 @@ Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/" data-id="ciquikiqd000gmp86d3iashth" data_title="浅谈Java设计模式系列0x09---外观模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/" data-id="ciquiqduo000ipw869uqb0wgz" data_title="浅谈Java设计模式系列0x09---外观模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -423,7 +389,7 @@ Updated:<time datetime="2016-06-19T06:24:59.211Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/" data-id="ciquikipo000cmp86l3h8ztlv" data_title="浅谈Java设计模式系列0x08---装饰器模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/" data-id="ciquiqduf000gpw86bjowzszd" data_title="浅谈Java设计模式系列0x08---装饰器模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/#disqus_thread" class="article-comment-link">Comments</a>
       
