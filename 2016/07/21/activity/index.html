@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android学习笔记---Activity | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通常我们创建一个Android项目的时候,IDE工具通常都会帮我们生成一个默认的MainActivity和它的布局文件.它就是本次的主角–Activity.
+Activity是Android的四大基本组件之一,基本的App开发根本离不开它.而要掌握Activity的基本用法,只要熟悉和理解Activity的生命周期就可以了.
+Activity的生命周期先来张熟悉的图片:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记---Activity">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/07/21/activity/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="通常我们创建一个Android项目的时候,IDE工具通常都会帮我们生成一个默认的MainActivity和它的布局文件.它就是本次的主角–Activity.
+Activity是Android的四大基本组件之一,基本的App开发根本离不开它.而要掌握Activity的基本用法,只要熟悉和理解Activity的生命周期就可以了.
+Activity的生命周期先来张熟悉的图片:">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/activity_lifecycle.png">
+<meta property="og:updated_time" content="2016-07-21T04:35:07.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android学习笔记---Activity">
+<meta name="twitter:description" content="通常我们创建一个Android项目的时候,IDE工具通常都会帮我们生成一个默认的MainActivity和它的布局文件.它就是本次的主角–Activity.
+Activity是Android的四大基本组件之一,基本的App开发根本离不开它.而要掌握Activity的基本用法,只要熟悉和理解Activity的生命周期就可以了.
+Activity的生命周期先来张熟悉的图片:">
+<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/activity_lifecycle.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-activity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/21/activity/" class="article-date">
+  <time datetime="2016-07-21T04:35:07.637Z" itemprop="datePublished">2016-07-21</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android学习笔记---Activity
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>通常我们创建一个Android项目的时候,IDE工具通常都会帮我们生成一个默认的<code>MainActivity</code>和它的布局文件.它就是本次的主角–Activity.</p>
+<p><code>Activity</code>是Android的四大基本组件之一,基本的App开发根本离不开它.而要掌握<code>Activity</code>的基本用法,只要熟悉和理解<code>Activity</code>的生命周期就可以了.</p>
+<h4 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h4><p>先来张熟悉的图片:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/activity_lifecycle.png" alt="Activity的生命周期"><br><a id="more"></a><br>其实熟悉了这张图就可以掌握Activity的生命周期了.这张图讲述了<code>Activity</code>在各种情况下的各种状态的转换.<code>Activity</code>在各种状态之间转换都会回调相应的生命周期函数,我们可以复写相应的生命周期函数来完成我们需要完成的工作.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        <span class="comment">// 当Activity被第一次创建时会被调用</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onStart();</span><br><span class="line">        <span class="comment">// 当Activity变成可见时被调用</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume();</span><br><span class="line">        <span class="comment">// 当Activity为当前焦点时被调用</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause();</span><br><span class="line">        <span class="comment">// 当前Activity被抢占焦点,即别的Activity被调到前台</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onStop();</span><br><span class="line">        <span class="comment">// 当前Activity,用户不可见</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        <span class="comment">// Activity被销毁时调用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码是基本的<code>Activity</code>生命周期函数,下面的表是对<code>Activity</code>生命周期函数的总结.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">生命周期函数</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:center">Killable after</th>
+<th style="text-align:center">下一个被调用的生命周期函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">onCreate()</td>
+<td style="text-align:left">当第一次创建时被调用,可以在此方法进行初始化工作(创建View,绑定数据到列表…).此方法的参数是保存着<code>Activity</code>之前状态的<code>Bundle</code>对象</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>onStart()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">onRestart()</td>
+<td style="text-align:left">在<code>Activity</code>已被Stopped,并在重新启动前被调用</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>onStart()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">onStart()</td>
+<td style="text-align:left">在<code>Activity</code>变成用户可见前被调用,当<code>Activity</code>变成前台时后跟<code>onResume()</code>,当<code>Activity</code>变成隐藏是后跟<code>onStop()</code>.</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>onResume()</code>或<code>onStop()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">onResume()</td>
+<td style="text-align:left">在<code>Activity</code>与用户开始交互前被调用,此时<code>Activity</code>在任务栈的顶端</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center"><code>onPause()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">onPause()</td>
+<td style="text-align:left">当其他<code>Activity</code>被调到前台时调用,此方法通常用于保存持久性的数据,停止正在运行的动画,以及其他消耗CPU资源的任务.在此函数中应该执行快速的代码,因为在此函数返回前,准备调到前台的下一个<code>Activity</code>是没有响应的.当此<code>Activity</code>从后台返回前台时后跟<code>onResume()</code>,当此<code>Activity</code>变为不可见时后跟<code>onStop()</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>onResume()</code>或<code>onStop()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">onStop()</td>
+<td style="text-align:left">当<code>Activity</code>不再被用户可见时调用.当<code>Activity</code>被销毁时或其他Activity被调到前台时会发生这种情况.当<code>Activity</code>被调回前台与用户交互时后跟<code>onRestart()</code>,<code>Activity</code>被销毁时后跟<code>onDestroy()</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>onRestart()</code>或<code>onDestroy()</code></td>
+</tr>
+<tr>
+<td style="text-align:center">onDestroy()</td>
+<td style="text-align:left"><code>Activity</code>被销毁前调用,当<code>finish()</code>被调用或者系统因内存不足回收空间时会发生这种情况.可以使用<code>isFinishing()</code>来区分这两种情况.</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">nothing</td>
+</tr>
+</tbody>
+</table>
+<p>上表中的<code>Killable after</code>表示在通常情况下,函数返回后系统是否可以杀死<code>Activity</code>所在的进程.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="ciqvtscmt000ikv86f138johz" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/21/activity/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-07-21</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/20/annotation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java学习笔记---Annotation</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Activity的生命周期"><span class="toc-number">1.</span> <span class="toc-text">Activity的生命周期</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/21/activity/">Android学习笔记---Activity</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/20/annotation/">Java学习笔记---Annotation</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/25/DesignPatterns_0B/">浅谈Java设计模式系列0x0B---观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/24/DesignPatterns_0A/">浅谈Java设计模式系列0x0A---代理模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/19/DesignPatterns_09/">浅谈Java设计模式系列0x09---外观模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/07/21/activity/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
