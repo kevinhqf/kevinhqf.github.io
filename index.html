@@ -74,6 +74,75 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-service" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/22/service/" class="article-date">
+  <time datetime="2016-07-22T07:05:41.621Z" itemprop="datePublished">2016-07-22</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/22/service/">Android学习笔记---Service</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Service</code>是Android四大组件之一,它适合于执行长时间的任务,例如长时间的网络任务,播放音乐,文件I/O等.</p>
+<h4 id="Service的一些基本知识"><a href="#Service的一些基本知识" class="headerlink" title="Service的一些基本知识"></a>Service的一些基本知识</h4><p>若要创建一个Service必须继承于系统提供的<code>Service</code>类,并复写<code>Service</code>的一些回调方法.下列是一些重要的回调方法:</p>
+<ol>
+<li><strong>onStartCommand()</strong><br> 此方法会在<code>Service</code>被其他组件通过<code>startService()</code>方法启动时调用.一旦此方法此方法执行后,<code>Service</code>便可在后台无限期的运行.如果实现了此方法,当<code>Service</code>的任务完成时,应该通过<code>stopSelf()</code>或<code>stopService()</code>方法停止<code>Service</code>.</li>
+<li><strong>onBind()</strong><br> 当其他组件通过<code>bindService()</code>绑定<code>Service</code>时会调用此方法.此方法是必须要实现的,必须提供一个对外的接口(<code>IBinder</code>)让用户与<code>Service</code>进行交互,但如果不想对<code>Service</code>进行绑定可以在此方法返回<code>null</code>.</li>
+<li><strong>onCreate()</strong><br> 当<code>Service</code>第一次创建时会调用此方法.可以在此方法执行一次性的设置工作,当<code>Service</code>已经运行,此方法不会再被调用.</li>
+<li><p><strong>onDestroy()</strong><br> 当<code>Service</code>不再使用并被销毁时会调用此方法.应该在此方法进行资源的回收.</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/22/service/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="ciqxel4kw000thp86x1xdbnuw" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/22/service/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-07-22</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-activity" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -115,7 +184,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="ciqvtscmt000ikv86f138johz" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="ciqxel4kg000mhp86s4xmz1as" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/21/activity/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -180,7 +249,7 @@ Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="ciqvtscmw000kkv86zs33vefv" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="ciqxel4kr000rhp8699qq1xbm" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/20/annotation/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -250,7 +319,7 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/" data-id="ciqvtscq7000xkv860eehfvip" data_title="浅谈Java设计模式系列0x0B---观察者模式" data_summary="之前我给大家介绍了对象创建型和结构型的设计模,式接下来..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/" data-id="ciqxel4kb000khp868sxa4adc" data_title="浅谈Java设计模式系列0x0B---观察者模式" data_summary="之前我给大家介绍了对象创建型和结构型的设计模,式接下来..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -319,7 +388,7 @@ Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/" data-id="ciqvtscmp000gkv86qk7pwhv7" data_title="浅谈Java设计模式系列0x0A---代理模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/" data-id="ciqxel4k5000ihp86x42l2am1" data_title="浅谈Java设计模式系列0x0A---代理模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -343,76 +412,11 @@ Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-0
 
 
   
-    <article id="post-DesignPatterns_09" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/19/DesignPatterns_09/" class="article-date">
-  <time datetime="2016-06-19T06:24:59.211Z" itemprop="datePublished">2016-06-19</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/19/DesignPatterns_09/">浅谈Java设计模式系列0x09---外观模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://kevinhqf.github.io/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06—适配器模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_07/">浅谈Java设计模式系列0x07—桥接模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_08/">浅谈Java设计模式系列0x08—装饰器模式</a>  </p>
-<p>本次我给大家介绍的同样是一种对象结构型模式—–外观模式;  </p>
-<h4 id="外观模式是什么鬼"><a href="#外观模式是什么鬼" class="headerlink" title="外观模式是什么鬼"></a>外观模式是什么鬼</h4><p>外观模式为子系统的一组接口提供一个统一的高层接口,使得子系统更容易使用,这是<a href="https://zh.wikipedia.org/wiki/%E5%A4%96%E8%A7%80%E6%A8%A1%E5%BC%8F">维基百科</a>上的定义;<br>但这定义根本看不懂有木有,所以我就以我的理解给大家解释一下外观模式是什么鬼;<br>我们先看一下下面这张图片:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/designpattern/uml/facade%20pattern.png" alt="外观模式"><br>很明显当我们要自己泡咖啡的时候,我们要自己烧开水,自己冲咖啡;<br>但当我们要到Starbucks喝咖啡时星巴克里的服务员会帮我们做所有泡咖啡的事情,我们只有Oder一杯咖啡便可轻松的等待咖啡的到来;<br>这里的Starbucks就是我们为子系统提供的一个统一的高层接口,这里可以很清晰的看到外观模式的好处;<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/19/DesignPatterns_09/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/" data-id="ciqvtscph000ukv86drnqri63" data_title="浅谈Java设计模式系列0x09---外观模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-19T06:24:59.211Z" itemprop="dateModified">2016-06-19</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -440,7 +444,7 @@ Updated:<time datetime="2016-06-19T06:24:59.211Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -453,7 +457,7 @@ Updated:<time datetime="2016-06-19T06:24:59.211Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -464,6 +468,10 @@ Updated:<time datetime="2016-06-19T06:24:59.211Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/07/22/service/">Android学习笔记---Service</a>
+          </li>
         
           <li>
             <a href="/2016/07/21/activity/">Android学习笔记---Activity</a>
@@ -479,10 +487,6 @@ Updated:<time datetime="2016-06-19T06:24:59.211Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/06/24/DesignPatterns_0A/">浅谈Java设计模式系列0x0A---代理模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/19/DesignPatterns_09/">浅谈Java设计模式系列0x09---外观模式</a>
           </li>
         
       </ul>
