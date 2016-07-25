@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android学习笔记---Content Providers | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Content Provider是Android四大组件之一,它是存取和访问数据的一个统一的接口.
+Content Provider基本知识通过应用Context中的ContentResolver对象与provider对象进行通信请求数据.Android内部提供了常用的provider,如视频,音频,图像和通讯录信息等,所有的应用都可访问这些数据.Content Provider是通过表的方式对数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记---Content Providers">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/07/25/content-provider/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="Content Provider是Android四大组件之一,它是存取和访问数据的一个统一的接口.
+Content Provider基本知识通过应用Context中的ContentResolver对象与provider对象进行通信请求数据.Android内部提供了常用的provider,如视频,音频,图像和通讯录信息等,所有的应用都可访问这些数据.Content Provider是通过表的方式对数">
+<meta property="og:updated_time" content="2016-07-25T09:08:25.328Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android学习笔记---Content Providers">
+<meta name="twitter:description" content="Content Provider是Android四大组件之一,它是存取和访问数据的一个统一的接口.
+Content Provider基本知识通过应用Context中的ContentResolver对象与provider对象进行通信请求数据.Android内部提供了常用的provider,如视频,音频,图像和通讯录信息等,所有的应用都可访问这些数据.Content Provider是通过表的方式对数">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-content-provider" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/25/content-provider/" class="article-date">
+  <time datetime="2016-07-25T09:08:25.336Z" itemprop="datePublished">2016-07-25</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android学习笔记---Content Providers
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p><code>Content Provider</code>是Android四大组件之一,它是存取和访问数据的一个统一的接口.</p>
+<h4 id="Content-Provider基本知识"><a href="#Content-Provider基本知识" class="headerlink" title="Content Provider基本知识"></a>Content Provider基本知识</h4><p>通过应用<code>Context</code>中的<code>ContentResolver</code>对象与<code>provider</code>对象进行通信请求数据.<br>Android内部提供了常用的<code>provider</code>,如视频,音频,图像和通讯录信息等,所有的应用都可访问这些数据.<br><code>Content Provider</code>是通过表的方式对数据进行存储访问的.</p>
+<h4 id="访问Provider"><a href="#访问Provider" class="headerlink" title="访问Provider"></a>访问Provider</h4><p>我们通过<code>ContentResolver</code>来对<code>ContentProvider</code>中的数据进行访问,<code>ContentResolver</code>对象提供了基本的<strong>CRUD</strong>等方法对数据进行操作.通过<code>ContentResolver.query()</code>可对数据进行操作,下面的表格列出了<code>query(Uri,projection,selection,selectionArgs,sortOrder)</code>函数中的参数与<code>SQL SELECT</code>语句的对应关系.  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><code>query()</code>的参数</th>
+<th style="text-align:center"><code>SELECT</code>关键字/参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Uri</td>
+<td style="text-align:center">From <em>table_name</em></td>
+<td style="text-align:left"><code>Uri</code>对应<code>provider</code>中的表名</td>
+</tr>
+<tr>
+<td style="text-align:center">projection</td>
+<td style="text-align:center"><em>col,col,col,…</em></td>
+<td style="text-align:left"><code>projection</code>是一个对应表中提取的一行数据所包含的列的一个数组</td>
+</tr>
+<tr>
+<td style="text-align:center">selection</td>
+<td style="text-align:center">WHERE <em>col = value</em></td>
+<td style="text-align:left"><code>selection</code>表示对提取行的数据的约束变量</td>
+</tr>
+<tr>
+<td style="text-align:center">selectionArgs</td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><code>selection</code>约束变量的值,若没有约束变量则使用<code>?</code>占位符</td>
+</tr>
+<tr>
+<td style="text-align:center">sortOrder</td>
+<td style="text-align:center">ORDER BY <em>col,col…</em></td>
+<td style="text-align:left">提取数据的排序方式</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h4 id="Content-URI"><a href="#Content-URI" class="headerlink" title="Content URI"></a>Content URI</h4><p><code>Content Provider</code>使用得到路径是采用<code>Content URI</code>对表进行访问,每个表都有相应的路径,如用户词典的单词:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content://user_dictionary/words</span><br></pre></td></tr></table></figure></p>
+<p><code>user_dictionary</code>是<code>provider</code>的授权,<code>words</code>是表的路径,<code>content://</code>代表了这个URI是一个<code>Content URI</code>.</p>
+<h4 id="Content-Provider的创建"><a href="#Content-Provider的创建" class="headerlink" title="Content Provider的创建"></a>Content Provider的创建</h4><p>如果你希望自己的应用的数据能够被其他的应用访问,你可以创建自己的<code>Content Provider</code>给其他应用提供可访问的数据.下面是一个创建<code>Content Provider</code>的基本步骤:</p>
+<ol>
+<li>设计数据的访问方式:<ul>
+<li>文件数据(数据为图片,音频,视频等,会保存在应用私有空间)</li>
+<li>结构化数据(数据会保存在数据库)</li>
+</ul>
+</li>
+<li>定义一个继承于<code>ContentProvider</code>的类并复写相应的方法</li>
+<li>定义<code>provider</code>的授权字符串,即自定义你的URI</li>
+<li>添加其他可选服务</li>
+</ol>
+<h5 id="创建你的ContentProvider类"><a href="#创建你的ContentProvider类" class="headerlink" title="创建你的ContentProvider类"></a>创建你的ContentProvider类</h5><p>创建的<code>ContentProvider</code>的子类用于管理共享数据的访问,所有的访问形式最后都是由<code>ContentResolver</code>完成的,它可以调用<code>ContentProvider</code>的具体方法.<br>需要实现的抽象方法有:</p>
+<ul>
+<li><strong>query()</strong><br>  获取<code>provider</code>提供的数据(条件提取)</li>
+<li><strong>insert()</strong><br>  向<code>provider</code>插入一行数据</li>
+<li><strong>update()</strong><br>  更新<code>provider</code>现有的数据</li>
+<li><strong>delete()</strong><br>  删除<code>provider</code>的数据(条件删除)</li>
+<li><strong>getType()</strong><br>  返回<code>Content URI</code>的MIME类型</li>
+<li><strong>onCreate()</strong><br>  初始化<code>provider</code></li>
+</ul>
+<p>关于更多创建<code>Content Provider</code>可查看<a href="https://developer.android.com/guide/topics/providers/content-provider-creating.html" target="_blank" rel="external">官方文档</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cir1ta7g4000x7d86z67ieorb" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-07-25</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/22/service/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android学习笔记---Service</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Content-Provider基本知识"><span class="toc-number">1.</span> <span class="toc-text">Content Provider基本知识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问Provider"><span class="toc-number">2.</span> <span class="toc-text">访问Provider</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Content-URI"><span class="toc-number">3.</span> <span class="toc-text">Content URI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Content-Provider的创建"><span class="toc-number">4.</span> <span class="toc-text">Content Provider的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建你的ContentProvider类"><span class="toc-number">4.1.</span> <span class="toc-text">创建你的ContentProvider类</span></a></li></ol></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/25/content-provider/">Android学习笔记---Content Providers</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/22/service/">Android学习笔记---Service</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/21/activity/">Android学习笔记---Activity</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/20/annotation/">Java学习笔记---Annotation</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/25/DesignPatterns_0B/">浅谈Java设计模式系列0x0B---观察者模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/07/25/content-provider/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

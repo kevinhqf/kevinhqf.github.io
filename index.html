@@ -74,6 +74,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-content-provider" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/25/content-provider/" class="article-date">
+  <time datetime="2016-07-25T09:08:25.336Z" itemprop="datePublished">2016-07-25</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/25/content-provider/">Android学习笔记---Content Providers</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Content Provider</code>是Android四大组件之一,它是存取和访问数据的一个统一的接口.</p>
+<h4 id="Content-Provider基本知识"><a href="#Content-Provider基本知识" class="headerlink" title="Content Provider基本知识"></a>Content Provider基本知识</h4><p>通过应用<code>Context</code>中的<code>ContentResolver</code>对象与<code>provider</code>对象进行通信请求数据.<br>Android内部提供了常用的<code>provider</code>,如视频,音频,图像和通讯录信息等,所有的应用都可访问这些数据.<br><code>Content Provider</code>是通过表的方式对数据进行存储访问的.</p>
+<h4 id="访问Provider"><a href="#访问Provider" class="headerlink" title="访问Provider"></a>访问Provider</h4><p>我们通过<code>ContentResolver</code>来对<code>ContentProvider</code>中的数据进行访问,<code>ContentResolver</code>对象提供了基本的<strong>CRUD</strong>等方法对数据进行操作.通过<code>ContentResolver.query()</code>可对数据进行操作,下面的表格列出了<code>query(Uri,projection,selection,selectionArgs,sortOrder)</code>函数中的参数与<code>SQL SELECT</code>语句的对应关系.  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><code>query()</code>的参数</th>
+<th style="text-align:center"><code>SELECT</code>关键字/参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Uri</td>
+<td style="text-align:center">From <em>table_name</em></td>
+<td style="text-align:left"><code>Uri</code>对应<code>provider</code>中的表名</td>
+</tr>
+<tr>
+<td style="text-align:center">projection</td>
+<td style="text-align:center"><em>col,col,col,…</em></td>
+<td style="text-align:left"><code>projection</code>是一个对应表中提取的一行数据所包含的列的一个数组</td>
+</tr>
+<tr>
+<td style="text-align:center">selection</td>
+<td style="text-align:center">WHERE <em>col = value</em></td>
+<td style="text-align:left"><code>selection</code>表示对提取行的数据的约束变量</td>
+</tr>
+<tr>
+<td style="text-align:center">selectionArgs</td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><code>selection</code>约束变量的值,若没有约束变量则使用<code>?</code>占位符</td>
+</tr>
+<tr>
+<td style="text-align:center">sortOrder</td>
+<td style="text-align:center">ORDER BY <em>col,col…</em></td>
+<td style="text-align:left">提取数据的排序方式</td>
+</tr>
+</tbody>
+</table>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/25/content-provider/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cir1ta7g4000x7d86z67ieorb" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-07-25</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-service" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -119,7 +220,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="ciqxel4kw000thp86x1xdbnuw" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="cir1ta7g1000v7d869o0brc71" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/22/service/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -184,7 +285,7 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="ciqxel4kg000mhp86s4xmz1as" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="cir1ta7fv000t7d86l7acoef5" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/21/activity/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -249,7 +350,7 @@ Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="ciqxel4kr000rhp8699qq1xbm" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="cir1ta7fe000q7d867kzoq4uw" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/20/annotation/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -319,7 +420,7 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/" data-id="ciqxel4kb000khp868sxa4adc" data_title="浅谈Java设计模式系列0x0B---观察者模式" data_summary="之前我给大家介绍了对象创建型和结构型的设计模,式接下来..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/" data-id="cir1ta7f6000m7d8645kqs7z1" data_title="浅谈Java设计模式系列0x0B---观察者模式" data_summary="之前我给大家介绍了对象创建型和结构型的设计模,式接下来..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -330,75 +431,6 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-06-25</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-DesignPatterns_0A" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/24/DesignPatterns_0A/" class="article-date">
-  <time datetime="2016-06-24T05:05:03.321Z" itemprop="datePublished">2016-06-24</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/24/DesignPatterns_0A/">浅谈Java设计模式系列0x0A---代理模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://kevinhqf.github.io/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06—适配器模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_07/">浅谈Java设计模式系列0x07—桥接模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_08/">浅谈Java设计模式系列0x08—装饰器模式</a><br><a href="https://kevinhqf.github.io/2016/06/19/DesignPatterns_09/">浅谈Java设计模式系列0x09—外观模式</a>  </p>
-<p>上次我给大家介绍了外观模式,它提供了高层的统一接口,使得子系统的使用更加的容易;<br>本次我给大家介绍的同样也是一种结构型的设计模式—-代理模式;  </p>
-<h4 id="代理是什么鬼"><a href="#代理是什么鬼" class="headerlink" title="代理是什么鬼"></a>代理是什么鬼</h4><p>其实代理比较好理解,就像我们不想到实体店买东西,我们就通过上网,在网上商店购买商品;<br>我们下单后,网上的代购网站就会帮我们代购商品,购买商品的是代购网站,这个代购网站就是代理了;<br><strong>代理模式(Proxy Pattern)</strong> : 给某一个对象提供一个代理,并由代理对象控制原对象的引用;  </p>
-<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><ul>
-<li><strong>抽象主题角色(Subject)</strong>:它声明了<code>真实主题</code>和<code>代理主题</code>的共同接口，这样一来在任何使用真实主题的地方都可以使用代理主题，客户端通常需要针对抽象主题角色进行编程;</li>
-<li><strong>代理主题角色(Proxy)</strong>:用来代理和封装<code>真实主题</code>;</li>
-<li><strong>真实主题角色(RealSubject)</strong>:它定义了<code>代理角色</code>所代表的<code>真实对象</code>，在真实主题角色中实现了真实的业务操作，客户端可以通过代理主题角色间接调用真实主题角色中定义的操作;
-        
-          <p class="article-more-link">
-            <a href="/2016/06/24/DesignPatterns_0A/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/" data-id="ciqxel4k5000ihp86x42l2am1" data_title="浅谈Java设计模式系列0x0A---代理模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-06-24</time>
 </span>
 
 
@@ -444,7 +476,7 @@ Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -457,7 +489,7 @@ Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -468,6 +500,10 @@ Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/07/25/content-provider/">Android学习笔记---Content Providers</a>
+          </li>
         
           <li>
             <a href="/2016/07/22/service/">Android学习笔记---Service</a>
@@ -483,10 +519,6 @@ Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/06/25/DesignPatterns_0B/">浅谈Java设计模式系列0x0B---观察者模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/24/DesignPatterns_0A/">浅谈Java设计模式系列0x0A---代理模式</a>
           </li>
         
       </ul>
