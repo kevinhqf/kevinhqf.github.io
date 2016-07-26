@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Kevin&#39;s GHB</title>
+  <title>Android学习笔记---Broadcast Receiver | Kevin&#39;s GHB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kevin's GHB">
-<meta property="og:url" content="http://kevinhqf.github.io/index.html">
+  <meta name="description" content="Broadcast Receiver同样也是Android的四大组件之一,我们将它称为广播接受器.
+Broadcast Receiver基础知识Android系统会随时随地的发送各种各样的广播信息,如开机完成,网络状态改变,有短信到达等.这些广播都可以被开发者所捕获,我们可以通过Broadcast Receiver去获取我们感兴趣的广播.
+Broadcast Receiver的创建要创建自己的Br">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记---Broadcast Receiver">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/index.html">
 <meta property="og:site_name" content="Kevin's GHB">
-<meta property="og:description">
+<meta property="og:description" content="Broadcast Receiver同样也是Android的四大组件之一,我们将它称为广播接受器.
+Broadcast Receiver基础知识Android系统会随时随地的发送各种各样的广播信息,如开机完成,网络状态改变,有短信到达等.这些广播都可以被开发者所捕获,我们可以通过Broadcast Receiver去获取我们感兴趣的广播.
+Broadcast Receiver的创建要创建自己的Br">
+<meta property="og:updated_time" content="2016-07-26T07:48:34.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kevin's GHB">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Android学习笔记---Broadcast Receiver">
+<meta name="twitter:description" content="Broadcast Receiver同样也是Android的四大组件之一,我们将它称为广播接受器.
+Broadcast Receiver基础知识Android系统会随时随地的发送各种各样的广播信息,如开机完成,网络状态改变,有短信到达等.这些广播都可以被开发者所捕获,我们可以通过Broadcast Receiver去获取我们感兴趣的广播.
+Broadcast Receiver的创建要创建自己的Br">
   
     <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
   
@@ -72,9 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-broadcast-receiver" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-broadcast-receiver" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
 <a href="/2016/07/26/broadcast-receiver/" class="article-date">
@@ -94,8 +99,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/26/broadcast-receiver/">Android学习笔记---Broadcast Receiver</a>
+    <h1 class="article-title" itemprop="name">
+      Android学习笔记---Broadcast Receiver
     </h1>
   
 
@@ -134,323 +139,39 @@ Updated:<time datetime="2016-07-26T07:48:34.091Z" itemprop="dateModified">2016-0
     </footer>
   </div>
   
-</article>
-
-
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-content-provider" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/07/25/content-provider/" class="article-date">
-  <time datetime="2016-07-25T09:08:25.336Z" itemprop="datePublished">2016-07-25</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/25/content-provider/">Android学习笔记---Content Providers</a>
-    </h1>
+    <a href="/2016/07/25/content-provider/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android学习笔记---Content Providers</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Content Provider</code>是Android四大组件之一,它是存取和访问数据的一个统一的接口.</p>
-<h4 id="Content-Provider基本知识"><a href="#Content-Provider基本知识" class="headerlink" title="Content Provider基本知识"></a>Content Provider基本知识</h4><p>通过应用<code>Context</code>中的<code>ContentResolver</code>对象与<code>provider</code>对象进行通信请求数据.<br>Android内部提供了常用的<code>provider</code>,如视频,音频,图像和通讯录信息等,所有的应用都可访问这些数据.<br><code>Content Provider</code>是通过表的方式对数据进行存储访问的.</p>
-<h4 id="访问Provider"><a href="#访问Provider" class="headerlink" title="访问Provider"></a>访问Provider</h4><p>我们通过<code>ContentResolver</code>来对<code>ContentProvider</code>中的数据进行访问,<code>ContentResolver</code>对象提供了基本的<strong>CRUD</strong>等方法对数据进行操作.通过<code>ContentResolver.query()</code>可对数据进行操作,下面的表格列出了<code>query(Uri,projection,selection,selectionArgs,sortOrder)</code>函数中的参数与<code>SQL SELECT</code>语句的对应关系.  </p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"><code>query()</code>的参数</th>
-<th style="text-align:center"><code>SELECT</code>关键字/参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Uri</td>
-<td style="text-align:center">From <em>table_name</em></td>
-<td style="text-align:left"><code>Uri</code>对应<code>provider</code>中的表名</td>
-</tr>
-<tr>
-<td style="text-align:center">projection</td>
-<td style="text-align:center"><em>col,col,col,…</em></td>
-<td style="text-align:left"><code>projection</code>是一个对应表中提取的一行数据所包含的列的一个数组</td>
-</tr>
-<tr>
-<td style="text-align:center">selection</td>
-<td style="text-align:center">WHERE <em>col = value</em></td>
-<td style="text-align:left"><code>selection</code>表示对提取行的数据的约束变量</td>
-</tr>
-<tr>
-<td style="text-align:center">selectionArgs</td>
-<td style="text-align:center"></td>
-<td style="text-align:left"><code>selection</code>约束变量的值,若没有约束变量则使用<code>?</code>占位符</td>
-</tr>
-<tr>
-<td style="text-align:center">sortOrder</td>
-<td style="text-align:center">ORDER BY <em>col,col…</em></td>
-<td style="text-align:left">提取数据的排序方式</td>
-</tr>
-</tbody>
-</table>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/25/content-provider/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cir35vjrh000v2h86oj6w4sn7" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-07-25</time>
-</span>
-
-
-    </footer>
-  </div>
   
 </article>
 
 
-
-
-
-  
-    <article id="post-service" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/07/22/service/" class="article-date">
-  <time datetime="2016-07-22T07:05:41.621Z" itemprop="datePublished">2016-07-22</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/22/service/">Android学习笔记---Service</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Service</code>是Android四大组件之一,它适合于执行长时间的任务,例如长时间的网络任务,播放音乐,文件I/O等.</p>
-<h4 id="Service的一些基本知识"><a href="#Service的一些基本知识" class="headerlink" title="Service的一些基本知识"></a>Service的一些基本知识</h4><p>若要创建一个Service必须继承于系统提供的<code>Service</code>类,并复写<code>Service</code>的一些回调方法.下列是一些重要的回调方法:</p>
-<ol>
-<li><strong>onStartCommand()</strong><br> 此方法会在<code>Service</code>被其他组件通过<code>startService()</code>方法启动时调用.一旦此方法此方法执行后,<code>Service</code>便可在后台无限期的运行.如果实现了此方法,当<code>Service</code>的任务完成时,应该通过<code>stopSelf()</code>或<code>stopService()</code>方法停止<code>Service</code>.</li>
-<li><strong>onBind()</strong><br> 当其他组件通过<code>bindService()</code>绑定<code>Service</code>时会调用此方法.此方法是必须要实现的,必须提供一个对外的接口(<code>IBinder</code>)让用户与<code>Service</code>进行交互,但如果不想对<code>Service</code>进行绑定可以在此方法返回<code>null</code>.</li>
-<li><strong>onCreate()</strong><br> 当<code>Service</code>第一次创建时会调用此方法.可以在此方法执行一次性的设置工作,当<code>Service</code>已经运行,此方法不会再被调用.</li>
-<li><p><strong>onDestroy()</strong><br> 当<code>Service</code>不再使用并被销毁时会调用此方法.应该在此方法进行资源的回收.</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/22/service/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="cir35vjrr000y2h86p19a73ib" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/07/22/service/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-07-22</time>
-</span>
+</section>
 
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-activity" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/07/21/activity/" class="article-date">
-  <time datetime="2016-07-21T04:35:07.637Z" itemprop="datePublished">2016-07-21</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/21/activity/">Android学习笔记---Activity</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通常我们创建一个Android项目的时候,IDE工具通常都会帮我们生成一个默认的<code>MainActivity</code>和它的布局文件.它就是本次的主角–Activity.</p>
-<p><code>Activity</code>是Android的四大基本组件之一,基本的App开发根本离不开它.而要掌握<code>Activity</code>的基本用法,只要熟悉和理解<code>Activity</code>的生命周期就可以了.</p>
-<h4 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h4><p>先来张熟悉的图片:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/activity_lifecycle.png" alt="Activity的生命周期"><br>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/21/activity/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="cir35vjqm000m2h86ifqmxa4f" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/07/21/activity/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-07-21</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-annotation" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/07/20/annotation/" class="article-date">
-  <time datetime="2016-07-20T06:38:48.822Z" itemprop="datePublished">2016-07-20</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/20/annotation/">Java学习笔记---Annotation</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>下面的代码片段相信有过Android开发经验的朋友都会非常的熟悉.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>其中<code>OnCreate()</code>方法前的<code>@Override</code>便是今天的主角,没错它就是Java的注解Annotation.</p>
-<h4 id="什么是Annotation"><a href="#什么是Annotation" class="headerlink" title="什么是Annotation"></a>什么是Annotation</h4><p>简单的说注解就是给Java代码标上标签,让Java虚拟机知道该如何处理被标注的代码.<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/20/annotation/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="cir35vjqy000r2h863u9dkhxd" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/07/20/annotation/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-07-20</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
           
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Broadcast-Receiver基础知识"><span class="toc-number">1.</span> <span class="toc-text">Broadcast Receiver基础知识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Broadcast-Receiver的创建"><span class="toc-number">2.</span> <span class="toc-text">Broadcast Receiver的创建</span></a></li></ol>
+    
+  </div>
+
 <aside id="sidebar">
 
   
@@ -555,11 +276,13 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
 <script>
   var disqus_shortname = 'kevinhqf';
   
+  var disqus_url = 'http://kevinhqf.github.io/2016/07/26/broadcast-receiver/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//go.disqus.com/count.js';
+    dsq.src = '//go.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
@@ -584,6 +307,11 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
 	<script src="/js/gotop.js"></script>
 	-->
 
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
 
 </div>
 <script src="/js/toc_aside_toggle.js"></script>
