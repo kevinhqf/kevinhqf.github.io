@@ -15,7 +15,7 @@ Broadcast Receiver的创建要创建自己的Br">
 <meta property="og:description" content="Broadcast Receiver同样也是Android的四大组件之一,我们将它称为广播接受器.
 Broadcast Receiver基础知识Android系统会随时随地的发送各种各样的广播信息,如开机完成,网络状态改变,有短信到达等.这些广播都可以被开发者所捕获,我们可以通过Broadcast Receiver去获取我们感兴趣的广播.
 Broadcast Receiver的创建要创建自己的Br">
-<meta property="og:updated_time" content="2016-07-26T07:48:34.091Z">
+<meta property="og:updated_time" content="2016-07-26T07:51:30.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android学习笔记---Broadcast Receiver">
 <meta name="twitter:description" content="Broadcast Receiver同样也是Android的四大组件之一,我们将它称为广播接受器.
@@ -83,7 +83,7 @@ Broadcast Receiver的创建要创建自己的Br">
   <div class="article-meta">
     
 <a href="/2016/07/26/broadcast-receiver/" class="article-date">
-  <time datetime="2016-07-26T07:48:34.095Z" itemprop="datePublished">2016-07-26</time>
+  <time datetime="2016-07-26T07:51:30.071Z" itemprop="datePublished">2016-07-26</time>
 </a>
 
 
@@ -112,6 +112,7 @@ Broadcast Receiver的创建要创建自己的Br">
         <p><code>Broadcast Receiver</code>同样也是Android的四大组件之一,我们将它称为广播接受器.</p>
 <h4 id="Broadcast-Receiver基础知识"><a href="#Broadcast-Receiver基础知识" class="headerlink" title="Broadcast Receiver基础知识"></a>Broadcast Receiver基础知识</h4><p>Android系统会随时随地的发送各种各样的广播信息,如开机完成,网络状态改变,有短信到达等.这些广播都可以被开发者所捕获,我们可以通过<code>Broadcast Receiver</code>去获取我们感兴趣的广播.</p>
 <h4 id="Broadcast-Receiver的创建"><a href="#Broadcast-Receiver的创建" class="headerlink" title="Broadcast Receiver的创建"></a>Broadcast Receiver的创建</h4><p>要创建自己的<code>Broadcast Receiver</code>对象,需要继承系统的<code>BroadcastReceiver</code>类并实现其<code>onReceive()</code>方法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ACTION = <span class="string">"android.intent.action.MyBroadcastReceiver"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        Log.i(<span class="string">"bail"</span>, <span class="string">"MyBroadcastReceiver接收到数据："</span> + intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>在<code>onReceive()</code>方法内,我们可以获取Intent中的数据.创建完我们的<code>Broadcast Receiver</code>后,我们需要给它注册一个广播地址才能正常工作.<br>我们可以在<code>AndroidManifest.xml</code>文件中进行配置:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">".MyBroadcastReceiver"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MyBroadcastReceiver"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>配置了以上信息之后，只要是<code>android.intent.action.MyBroadcastReceiver</code>这个地址的广播，MyReceiver都能够接收的到。注意，这种方式的注册是常驻型的，也就是说当应用关闭后，如果有广播信息传来，MyReceiver也会被系统调用而自动运行。<br>除此之外,我们也可以在代码中动态的指定广播地址并注册,我们可以在<code>Activity</code>或<code>Service</code>中进行注册:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyBroadcastReceiver receiver = <span class="keyword">new</span> MyBroadcastReceiver();</span><br><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter();</span><br><span class="line">filter.addAction(MyBroadcastReceiver.ACTION);</span><br><span class="line">registerReceiver(receiver,filter );</span><br></pre></td></tr></table></figure></p>
 <p>在这里,我们的<code>Broadcast Receiver</code>的生命周期是与注册的组件绑定在一起的,所有在注册组件的<code>onDestroy()</code>中进行解除注册:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    unregisterReceiver(receiver);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -122,7 +123,7 @@ Broadcast Receiver的创建要创建自己的Br">
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="cir35vjr5000t2h8696red85x" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="cir35zdxy000v5786k04tivtk" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -132,7 +133,7 @@ Broadcast Receiver的创建要创建自己的Br">
       
 	  
 <span>
-Updated:<time datetime="2016-07-26T07:48:34.091Z" itemprop="dateModified">2016-07-26</time>
+Updated:<time datetime="2016-07-26T07:51:30.023Z" itemprop="dateModified">2016-07-26</time>
 </span>
 
 
