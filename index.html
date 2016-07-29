@@ -60,9 +60,9 @@
           <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
         
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS" target="_blank"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
@@ -73,6 +73,88 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-mvp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/29/mvp/" class="article-date">
+  <time datetime="2016-07-29T04:49:54.047Z" itemprop="datePublished">2016-07-29</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/29/mvp/">Android学习笔记---MVP架构系列0x00</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>MVP</code>(Model-View-Presenter)软件设计架构在Android开发中能够帮助我们将业务逻辑和视图展现解耦,便于代码的维护,达到模块化.这个系列我会带大家完成一个完整的<code>MVP</code>架构的应用,希望大家通过这个系列能到<code>MVP</code>架构有个基本的了解.</p>
+<h4 id="MVP具体是如何工作"><a href="#MVP具体是如何工作" class="headerlink" title="MVP具体是如何工作"></a>MVP具体是如何工作</h4><p>在我们编码开发时,我们将系统分为数据模型(<code>Model</code>),视图(<code>View</code>),和一个”中间人”(<code>Presenter</code>)三个部分.其中<code>Presenter</code>作为一个”中间人”,它从<code>Model</code>中获取数据,将数据进行相应的处理后将数据交给<code>View</code>进行展示.这样一来,<code>View</code>只需展现数据给用户看,其它的事情它就不用管了,而<code>Model</code>只需完成数据的请求处理,其它的事情它也不用管,<code>Presenter</code>则负责从<code>Model</code>获取数据,通知<code>View</code>进行数据更新.<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/mvp.png" alt="MVP架构"></p>
+<h4 id="Android开发中的MVP"><a href="#Android开发中的MVP" class="headerlink" title="Android开发中的MVP"></a>Android开发中的MVP</h4><p>首先我们先了解一下各个模块的具体职责:</p>
+<ul>
+<li>Model<ul>
+<li>对外提供业务数据的接口</li>
+<li>实现数据的存取操作(本地与网络)</li>
+<li>只有<code>Presenter</code>可以访问,与<code>View</code>隔离</li>
+</ul>
+</li>
+<li>Presenter<ul>
+<li>持有<code>View</code>对象,可对<code>View</code>进行操作</li>
+<li>持有<code>Model</code>提供的数据访问接口</li>
+<li>从数据接口中获取数据并处理,更新<code>View</code></li>
+</ul>
+</li>
+<li>View<ul>
+<li>包含UI的相关组件</li>
+<li>持有<code>Presenter</code>对象</li>
+<li>由<code>Presenter</code>负责更新UI
+        
+          <p class="article-more-link">
+            <a href="/2016/07/29/mvp/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/29/mvp/" data-id="cir79tja5000yw186ckv6d72h" data_title="Android学习笔记---MVP架构系列0x00" data_summary="MVP(Model-View-Presenter)软件..." class="article-share-link">Compartir</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/29/mvp/#disqus_thread" class="article-comment-link">Comentarios</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-29T04:49:54.043Z" itemprop="dateModified">2016-07-29</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
   
     <article id="post-glide-basic" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -123,9 +205,9 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/28/glide-basic/" data-id="cir69o9ve000xkb86aywmxsta" data_title="Android学习笔记---开源工具Glide的基本使用" data_summary="Glide是一个Android的开源图像加载库,它可以..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/28/glide-basic/" data-id="cir79tjaf0010w186p0dk4ad7" data_title="Android学习笔记---开源工具Glide的基本使用" data_summary="Glide是一个Android的开源图像加载库,它可以..." class="article-share-link">Compartir</a>
       
-        <a href="http://kevinhqf.github.io/2016/07/28/glide-basic/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/07/28/glide-basic/#disqus_thread" class="article-comment-link">Comentarios</a>
       
 
       
@@ -190,9 +272,9 @@ Updated:<time datetime="2016-07-28T11:58:21.713Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/27/retrofit-basic/" data-id="cir69o9vs0011kb86mls6gjbp" data_title="Android学习笔记---开源工具Retrofit的基本使用" data_summary="Retrofit是一个简化Android网络请求的一个..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/27/retrofit-basic/" data-id="cir79tjak0013w186sakc9qsf" data_title="Android学习笔记---开源工具Retrofit的基本使用" data_summary="Retrofit是一个简化Android网络请求的一个..." class="article-share-link">Compartir</a>
       
-        <a href="http://kevinhqf.github.io/2016/07/27/retrofit-basic/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/07/27/retrofit-basic/#disqus_thread" class="article-comment-link">Comentarios</a>
       
 
       
@@ -255,9 +337,9 @@ Updated:<time datetime="2016-07-27T08:46:40.187Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="cir69o9vb000vkb86h91avyry" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="cir79tj9l000tw1863vekfu05" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Compartir</a>
       
-        <a href="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/#disqus_thread" class="article-comment-link">Comentarios</a>
       
 
       
@@ -356,9 +438,9 @@ Updated:<time datetime="2016-07-26T07:51:30.023Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cir69o9vk000zkb86g0uu75ss" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cir79tj9x000vw186r0u69u6l" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Compartir</a>
       
-        <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comentarios</a>
       
 
       
@@ -380,80 +462,11 @@ Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-0
 
 
   
-    <article id="post-service" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/07/22/service/" class="article-date">
-  <time datetime="2016-07-22T07:05:41.621Z" itemprop="datePublished">2016-07-22</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/22/service/">Android学习笔记---Service</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Service</code>是Android四大组件之一,它适合于执行长时间的任务,例如长时间的网络任务,播放音乐,文件I/O等.</p>
-<h4 id="Service的一些基本知识"><a href="#Service的一些基本知识" class="headerlink" title="Service的一些基本知识"></a>Service的一些基本知识</h4><p>若要创建一个Service必须继承于系统提供的<code>Service</code>类,并复写<code>Service</code>的一些回调方法.下列是一些重要的回调方法:</p>
-<ol>
-<li><strong>onStartCommand()</strong><br> 此方法会在<code>Service</code>被其他组件通过<code>startService()</code>方法启动时调用.一旦此方法此方法执行后,<code>Service</code>便可在后台无限期的运行.如果实现了此方法,当<code>Service</code>的任务完成时,应该通过<code>stopSelf()</code>或<code>stopService()</code>方法停止<code>Service</code>.</li>
-<li><strong>onBind()</strong><br> 当其他组件通过<code>bindService()</code>绑定<code>Service</code>时会调用此方法.此方法是必须要实现的,必须提供一个对外的接口(<code>IBinder</code>)让用户与<code>Service</code>进行交互,但如果不想对<code>Service</code>进行绑定可以在此方法返回<code>null</code>.</li>
-<li><strong>onCreate()</strong><br> 当<code>Service</code>第一次创建时会调用此方法.可以在此方法执行一次性的设置工作,当<code>Service</code>已经运行,此方法不会再被调用.</li>
-<li><p><strong>onDestroy()</strong><br> 当<code>Service</code>不再使用并被销毁时会调用此方法.应该在此方法进行资源的回收.</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/22/service/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="cir69o9vw0013kb862wievny9" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/07/22/service/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-07-22</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Siguiente &raquo;</a>
   </nav>
 
 </section>
@@ -479,9 +492,9 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorías</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -492,9 +505,9 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archivos</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -502,9 +515,13 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Posts recientes</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/07/29/mvp/">Android学习笔记---MVP架构系列0x00</a>
+          </li>
         
           <li>
             <a href="/2016/07/28/glide-basic/">Android学习笔记---开源工具Glide的基本使用</a>
@@ -520,10 +537,6 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/07/25/content-provider/">Android学习笔记---Content Providers</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/22/service/">Android学习笔记---Service</a>
           </li>
         
       </ul>
@@ -545,7 +558,7 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Kevin HO<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
     
     </div>
   </div>

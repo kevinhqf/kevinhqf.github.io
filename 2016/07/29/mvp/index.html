@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android学习笔记---MVP架构系列0x00 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MVP(Model-View-Presenter)软件设计架构在Android开发中能够帮助我们将业务逻辑和视图展现解耦,便于代码的维护,达到模块化.这个系列我会带大家完成一个完整的MVP架构的应用,希望大家通过这个系列能到MVP架构有个基本的了解.
+MVP具体是如何工作在我们编码开发时,我们将系统分为数据模型(Model),视图(View),和一个”中间人”(Presenter)三个部分.其中P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记---MVP架构系列0x00">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/07/29/mvp/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="MVP(Model-View-Presenter)软件设计架构在Android开发中能够帮助我们将业务逻辑和视图展现解耦,便于代码的维护,达到模块化.这个系列我会带大家完成一个完整的MVP架构的应用,希望大家通过这个系列能到MVP架构有个基本的了解.
+MVP具体是如何工作在我们编码开发时,我们将系统分为数据模型(Model),视图(View),和一个”中间人”(Presenter)三个部分.其中P">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/mvp.png">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/effect.gif">
+<meta property="og:updated_time" content="2016-07-29T04:49:54.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android学习笔记---MVP架构系列0x00">
+<meta name="twitter:description" content="MVP(Model-View-Presenter)软件设计架构在Android开发中能够帮助我们将业务逻辑和视图展现解耦,便于代码的维护,达到模块化.这个系列我会带大家完成一个完整的MVP架构的应用,希望大家通过这个系列能到MVP架构有个基本的了解.
+MVP具体是如何工作在我们编码开发时,我们将系统分为数据模型(Model),视图(View),和一个”中间人”(Presenter)三个部分.其中P">
+<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/mvp.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-mvp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/29/mvp/" class="article-date">
+  <time datetime="2016-07-29T04:49:54.047Z" itemprop="datePublished">2016-07-29</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android学习笔记---MVP架构系列0x00
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p><code>MVP</code>(Model-View-Presenter)软件设计架构在Android开发中能够帮助我们将业务逻辑和视图展现解耦,便于代码的维护,达到模块化.这个系列我会带大家完成一个完整的<code>MVP</code>架构的应用,希望大家通过这个系列能到<code>MVP</code>架构有个基本的了解.</p>
+<h4 id="MVP具体是如何工作"><a href="#MVP具体是如何工作" class="headerlink" title="MVP具体是如何工作"></a>MVP具体是如何工作</h4><p>在我们编码开发时,我们将系统分为数据模型(<code>Model</code>),视图(<code>View</code>),和一个”中间人”(<code>Presenter</code>)三个部分.其中<code>Presenter</code>作为一个”中间人”,它从<code>Model</code>中获取数据,将数据进行相应的处理后将数据交给<code>View</code>进行展示.这样一来,<code>View</code>只需展现数据给用户看,其它的事情它就不用管了,而<code>Model</code>只需完成数据的请求处理,其它的事情它也不用管,<code>Presenter</code>则负责从<code>Model</code>获取数据,通知<code>View</code>进行数据更新.<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/mvp.png" alt="MVP架构"></p>
+<h4 id="Android开发中的MVP"><a href="#Android开发中的MVP" class="headerlink" title="Android开发中的MVP"></a>Android开发中的MVP</h4><p>首先我们先了解一下各个模块的具体职责:</p>
+<ul>
+<li>Model<ul>
+<li>对外提供业务数据的接口</li>
+<li>实现数据的存取操作(本地与网络)</li>
+<li>只有<code>Presenter</code>可以访问,与<code>View</code>隔离</li>
+</ul>
+</li>
+<li>Presenter<ul>
+<li>持有<code>View</code>对象,可对<code>View</code>进行操作</li>
+<li>持有<code>Model</code>提供的数据访问接口</li>
+<li>从数据接口中获取数据并处理,更新<code>View</code></li>
+</ul>
+</li>
+<li>View<ul>
+<li>包含UI的相关组件</li>
+<li>持有<code>Presenter</code>对象</li>
+<li>由<code>Presenter</code>负责更新UI<a id="more"></a>
+在Android中采用<code>MVP</code>架构可以大大的减轻<code>Activity</code>的职责,下面我将采用一个简单的例子来介绍一下<code>MVP</code>在Android开发中是如何使用的.<br>我们使用豆瓣的电影Top250来进行讲解,为简单起见,我们使用用<code>Retrofit</code>进行网络数据的请求,使用<code>Glide</code>进行图片加载.如果对<code>Retrofit</code>和<code>Glide</code>的使用不了解的话,可以看一下我的另外两篇文章:<br><a href="https://kevinhqf.github.io/2016/07/27/retrofit-basic/">Android学习笔记—开源工具Retrofit的基本使用</a><br><a href="https://kevinhqf.github.io/2016/07/28/glide-basic/">Android学习笔记—开源工具Glide的基本使用</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><ol>
+<li><p>数据准备<br>我们的数据是来自豆瓣电影Top250的API,请求的URL如下:</p>
+<blockquote>
+<p><a href="https://api.douban.com/v2/movie/top250?start=0&amp;count=10" target="_blank" rel="external">https://api.douban.com/v2/movie/top250?start=0&amp;count=10</a>  </p>
+</blockquote>
+<p> 其中<code>start</code>表示从电影起始的下标,<code>count</code>表示要获取电影的数量.</p>
+</li>
+<li><p>依赖配置<br>我们的项目的<code>Gradle</code>依赖配置如下:  </p>
+ <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">  	 <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</span><br><span class="line">   	<span class="keyword">compile</span> <span class="string">'com.android.support:appcompat-v7:23.4.0'</span></span><br><span class="line">   	<span class="keyword">compile</span> <span class="string">'com.github.bumptech.glide:glide:3.7.0'</span></span><br><span class="line">  	 <span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:retrofit:2.1.0'</span></span><br><span class="line">   	<span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:converter-gson:2.1.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>界面设计<br>我们最后完成的界面是一个瀑布流的电影图片与标题的一个主界面,因为我是边写代码边写博客的,所以App的界面效果还没法给大家展示,但我们最后的界面会类似下面的壁纸应用效果图:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/effect.gif" alt="效果图"></p>
+</li>
+</ol>
+<p>所有的准备工作都做好了,下次我们会把项目的<code>MVP</code>架构搭建起来.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/29/mvp/" data-id="cir79tja5000yw186ckv6d72h" data_title="Android学习笔记---MVP架构系列0x00" data_summary="MVP(Model-View-Presenter)软件..." class="article-share-link">Compartir</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/29/mvp/#disqus_thread" class="article-comment-link">Comentarios</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-29T04:49:54.043Z" itemprop="dateModified">2016-07-29</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/28/glide-basic/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Viejo</strong>
+      <div class="article-nav-title">Android学习笔记---开源工具Glide的基本使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVP具体是如何工作"><span class="toc-number">1.</span> <span class="toc-text">MVP具体是如何工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android开发中的MVP"><span class="toc-number">2.</span> <span class="toc-text">Android开发中的MVP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#准备工作"><span class="toc-number">3.</span> <span class="toc-text">准备工作</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categorías</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archivos</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Posts recientes</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/29/mvp/">Android学习笔记---MVP架构系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/28/glide-basic/">Android学习笔记---开源工具Glide的基本使用</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/27/retrofit-basic/">Android学习笔记---开源工具Retrofit的基本使用</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/26/broadcast-receiver/">Android学习笔记---Broadcast Receiver</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/25/content-provider/">Android学习笔记---Content Providers</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/07/29/mvp/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
