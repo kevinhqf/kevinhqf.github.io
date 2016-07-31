@@ -60,9 +60,9 @@
           <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
         
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS" target="_blank"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS" target="_blank"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
@@ -73,6 +73,71 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-DesignPatterns_06" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/15/DesignPatterns_06/" class="article-date">
+  <time datetime="2016-06-15T08:28:18.046Z" itemprop="datePublished">2016-06-15</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06---适配器模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前面我所介绍的都是创建型的设计模式,本篇开始我来给大家介绍结构型的设计模式;<br>首先我要介绍的第一个结构型的设计模式就是 <strong>适配器模式</strong></p>
+<h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4><p>适配器就是一个可以将原本并不兼容的接口能够在一起工作,而适配器模式就是为了解决这个问题;<br>适配器模式通过将一个不兼容的接口转换成客户所希望的接口,由此客户便可以使用相应的服务而无需修改现有的接口;<br>适配器模式有两种实现的方法,一种是类适配器,一种是对象适配器;</p>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><p><strong>目标抽象类(Target)</strong> :定义客户所使用的方法接口;<br><strong>适配器类(Adapter)</strong> :完成从适配者到目标接口的转换适配;<br><strong>适配者类(Adaptee)</strong> :定义需要适配的接口;<br><strong>客户类(Client)</strong> :与符合目标接口的对象进行合作;<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/06/15/DesignPatterns_06/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/" data-id="cira1dqya0009p386ehu1vxhh" data_title="浅谈Java设计模式系列0x06---适配器模式" data_summary="前面我所介绍的都是创建型的设计模式,本篇开始我来给大家..." class="article-share-link">Compartir</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/#disqus_thread" class="article-comment-link">Comentarios</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-15T08:28:18.046Z" itemprop="dateModified">2016-06-15</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
   
     <article id="post-DesignPatterns_05" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -133,9 +198,9 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/" data-id="cir8vfpco00092c86w14xelul" data_title="浅谈Java设计模式系列0x05---建造者模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Partager</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/" data-id="cira1dqy40007p386qknbuz6x" data_title="浅谈Java设计模式系列0x05---建造者模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/#disqus_thread" class="article-comment-link">Commentaires</a>
+        <a href="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/#disqus_thread" class="article-comment-link">Comentarios</a>
       
 
       
@@ -198,9 +263,9 @@ Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="cir8vfpc000052c8623hb2ara" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Partager</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="cira1dqxv0005p386rj7sp0gc" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/#disqus_thread" class="article-comment-link">Commentaires</a>
+        <a href="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/#disqus_thread" class="article-comment-link">Comentarios</a>
       
 
       
@@ -267,9 +332,9 @@ Updated:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="cir8vfpbs00032c861fw6514j" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Partager</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="cira1dqxr0004p3864j9f7hgx" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/#disqus_thread" class="article-comment-link">Commentaires</a>
+        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/#disqus_thread" class="article-comment-link">Comentarios</a>
       
 
       
@@ -332,10 +397,10 @@ Updated:<time datetime="2016-06-11T14:35:39.577Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/" data-id="cir8vfpbb00012c86oewze0jj" data_title="浅谈Java设计模式系列0x01---单例模式" data_summary="浅谈Java设计模式系列0x00  
-上次我们对设计模..." class="article-share-link">Partager</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/" data-id="cira1dqx60001p386gnasnq4j" data_title="浅谈Java设计模式系列0x01---单例模式" data_summary="浅谈Java设计模式系列0x00  
+上次我们对设计模..." class="article-share-link">Compartir</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/#disqus_thread" class="article-comment-link">Commentaires</a>
+        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/#disqus_thread" class="article-comment-link">Comentarios</a>
       
 
       
@@ -357,78 +422,11 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
 
 
   
-    <article id="post-DesignPatterns_00" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/11/DesignPatterns_00/" class="article-date">
-  <time datetime="2016-06-11T14:35:39.561Z" itemprop="datePublished">2016-06-11</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本系列是我对于各种设计模式的一些理解,我会以最简单,最直白的方式将我的理解写下来,如果有什么错误希望各位能帮忙指出;<br>首先我们先对设计模式做一些基本的了解;<br><strong>学习设计模式的目的不是学习设计模式的固定实现方式本身，而是其思</strong></p>
-<h4 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h4><blockquote>
-<p><strong>Wikipedia</strong>:<br>In software engineering, a software design pattern is a <code>general</code> <code>reusable</code> solution to a commonly occurring problem within a given context in software design.  </p>
-</blockquote>
-<p>上面是维基百科对设计模式的定义,其中我认为<code>general</code>和<code>reusable</code>非常明确的表明了设计模式的任务;<br>它是对软件设计中经常出现的问题的一种 <strong>通用</strong>,<strong>可重用</strong> 的解决方案;<br>说白了就是软件工程师为了偷懒而想出来的一种方法,它可以帮工程师们解决一些重复和麻烦的工作;<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/11/DesignPatterns_00/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/" data-id="cir8vfpam00002c868nkdhp9q" data_title="浅谈Java设计模式系列0x00" data_summary="本系列是我对于各种设计模式的一些理解,我会以最简单,最..." class="article-share-link">Partager</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/#disqus_thread" class="article-comment-link">Commentaires</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-06-11</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Précédent</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Suivant &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Previo</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Siguiente &raquo;</a>
   </nav>
 
 </section>
@@ -454,9 +452,9 @@ Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorías</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -467,9 +465,9 @@ Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archivos</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -477,16 +475,20 @@ Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Posts recientes</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/07/30/mvp01/">Android学习笔记---MVP架构系列0x01</a>
+            <a href="/2016/07/31/butterknife-basic/">Android学习笔记---开源工具ButterKnife的使用</a>
           </li>
         
           <li>
-            <a href="/2016/07/30/mvp/">Android学习笔记---MVP架构系列0x00</a>
+            <a href="/2016/07/31/mvp/">Android学习笔记---MVP架构系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/30/mvp01/">Android学习笔记---MVP架构系列0x01</a>
           </li>
         
           <li>
@@ -495,10 +497,6 @@ Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/07/27/retrofit-basic/">Android学习笔记---开源工具Retrofit的基本使用</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/26/broadcast-receiver/">Android学习笔记---Broadcast Receiver</a>
           </li>
         
       </ul>
@@ -520,7 +518,7 @@ Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-0
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Kevin HO<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
     
     </div>
   </div>
