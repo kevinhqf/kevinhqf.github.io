@@ -8,7 +8,7 @@
   <meta name="description" content="上一次我们将MVP的基本架构都搭建起来了,这次我们先来完成UI界面的部分.
 布局文件我们的项目界面是采用RecyclerView作为列表的控件,所以我们需要先将布局文件设计好.
 
-item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;RelativeLayo">
+item_movie.xml 1234567891011121314151617181920   &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;RelativeLayou">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android学习笔记---MVP架构系列0x02">
 <meta property="og:url" content="http://kevinhqf.github.io/2016/08/01/mvp02/index.html">
@@ -16,15 +16,15 @@ item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0
 <meta property="og:description" content="上一次我们将MVP的基本架构都搭建起来了,这次我们先来完成UI界面的部分.
 布局文件我们的项目界面是采用RecyclerView作为列表的控件,所以我们需要先将布局文件设计好.
 
-item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;RelativeLayo">
+item_movie.xml 1234567891011121314151617181920   &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;RelativeLayou">
 <meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/uitest.jpg">
-<meta property="og:updated_time" content="2016-08-01T05:20:58.330Z">
+<meta property="og:updated_time" content="2016-08-01T07:19:50.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android学习笔记---MVP架构系列0x02">
 <meta name="twitter:description" content="上一次我们将MVP的基本架构都搭建起来了,这次我们先来完成UI界面的部分.
 布局文件我们的项目界面是采用RecyclerView作为列表的控件,所以我们需要先将布局文件设计好.
 
-item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;RelativeLayo">
+item_movie.xml 1234567891011121314151617181920   &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;RelativeLayou">
 <meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/uitest.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
@@ -72,9 +72,9 @@ item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0
           <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
         
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS" target="_blank"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
@@ -88,7 +88,7 @@ item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0
   <div class="article-meta">
     
 <a href="/2016/08/01/mvp02/" class="article-date">
-  <time datetime="2016-08-01T05:20:58.334Z" itemprop="datePublished">2016-08-01</time>
+  <time datetime="2016-08-01T07:19:50.902Z" itemprop="datePublished">2016-08-01</time>
 </a>
 
 
@@ -117,13 +117,13 @@ item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0
         <p>上一次我们将<code>MVP</code>的基本架构都搭建起来了,这次我们先来完成UI界面的部分.</p>
 <h4 id="布局文件"><a href="#布局文件" class="headerlink" title="布局文件"></a>布局文件</h4><p>我们的项目界面是采用<code>RecyclerView</code>作为列表的控件,所以我们需要先将布局文件设计好.</p>
 <ol>
-<li><strong><em>item_movie.xml</em></strong> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">    &lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">    <span class="attr">android:padding</span>=<span class="string">"@dimen/activity_horizontal_margin"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/im_iv_movie"</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">        <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_launcher"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">        <span class="attr">android:layout_below</span>=<span class="string">"@id/im_iv_movie"</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/im_tv_title"</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">        <span class="attr">android:gravity</span>=<span class="string">"center"</span></span><br><span class="line">        <span class="attr">android:text</span>=<span class="string">"Re"</span></span><br><span class="line">        <span class="attr">android:textSize</span>=<span class="string">"20sp"</span></span><br><span class="line">        <span class="attr">android:textStyle</span>=<span class="string">"bold"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li><strong><em>item_movie.xml</em></strong> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   &lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">    <span class="attr">android:padding</span>=<span class="string">"5dp"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span><br><span class="line">        <span class="attr">android:scaleType</span>=<span class="string">"centerCrop"</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/im_iv_movie"</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"180dp"</span></span><br><span class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/pictures_no"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">        <span class="attr">android:layout_below</span>=<span class="string">"@id/im_iv_movie"</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/im_tv_title"</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">        <span class="attr">android:gravity</span>=<span class="string">"center"</span></span><br><span class="line">        <span class="attr">android:text</span>=<span class="string">"Re"</span></span><br><span class="line">        <span class="attr">android:textStyle</span>=<span class="string">"bold"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>我们这次使用的是<code>Fragment</code>作为我们的View模块,所以我们也定义好<code>Fragment</code>的布局文件<br><a id="more"></a></p>
 <ol>
 <li><p><strong><em>movie_frag.xml</em></strong></p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   &lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.SwipeRefreshLayout</span></span><br><span class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">android.support.v7.widget.RecyclerView</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/mf_rv_list"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">android.support.v7.widget.RecyclerView</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.v4.widget.SwipeRefreshLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   &lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.SwipeRefreshLayout</span></span><br><span class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/mf_srl"</span></span><br><span class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">android.support.v7.widget.RecyclerView</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/mf_rv_list"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">android.support.v7.widget.RecyclerView</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.v4.widget.SwipeRefreshLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p> 下面的就是我们的<code>Activity</code>的布局文件了</p>
 </li>
 <li><strong><em>activity_main.xml</em></strong> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   &lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">tools:context</span>=<span class="string">"com.source.kevin.doubantop250.MainActivity"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">FrameLayout</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/content_frame"</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">         /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -138,9 +138,9 @@ item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/01/mvp02/" data-id="cirbl8txm0015gq86nmeo1wxy" data_title="Android学习笔记---MVP架构系列0x02" data_summary="上一次我们将MVP的基本架构都搭建起来了,这次我们先来..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/01/mvp02/" data-id="cird45ekk0018mk864137cnt9" data_title="Android学习笔记---MVP架构系列0x02" data_summary="上一次我们将MVP的基本架构都搭建起来了,这次我们先来..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/01/mvp02/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/08/01/mvp02/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -148,7 +148,7 @@ item_movie.xml 1234567891011121314151617181920    &amp;lt;?xml version=&quot;1.0
       
 	  
 <span>
-Updated:<time datetime="2016-08-01T05:20:58.330Z" itemprop="dateModified">2016-08-01</time>
+Updated:<time datetime="2016-08-01T07:19:50.894Z" itemprop="dateModified">2016-08-01</time>
 </span>
 
 
@@ -158,9 +158,18 @@ Updated:<time datetime="2016-08-01T05:20:58.330Z" itemprop="dateModified">2016-0
     
 <nav id="article-nav">
   
+    <a href="/2016/08/02/mvp03/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android学习笔记---MVP架构系列0x03
+        
+      </div>
+    </a>
+  
   
     <a href="/2016/07/31/butterknife-basic/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Viejo</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Android学习笔记---开源工具ButterKnife的使用</div>
     </a>
   
@@ -208,9 +217,9 @@ Updated:<time datetime="2016-08-01T05:20:58.330Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorías</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -221,9 +230,9 @@ Updated:<time datetime="2016-08-01T05:20:58.330Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archivos</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -231,9 +240,13 @@ Updated:<time datetime="2016-08-01T05:20:58.330Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Posts recientes</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/02/mvp03/">Android学习笔记---MVP架构系列0x03</a>
+          </li>
         
           <li>
             <a href="/2016/08/01/mvp02/">Android学习笔记---MVP架构系列0x02</a>
@@ -249,10 +262,6 @@ Updated:<time datetime="2016-08-01T05:20:58.330Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/07/30/mvp01/">Android学习笔记---MVP架构系列0x01</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/28/glide-basic/">Android学习笔记---开源工具Glide的基本使用</a>
           </li>
         
       </ul>
@@ -274,7 +283,7 @@ Updated:<time datetime="2016-08-01T05:20:58.330Z" itemprop="dateModified">2016-0
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Kevin HO<br>
-      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
     
     </div>
   </div>

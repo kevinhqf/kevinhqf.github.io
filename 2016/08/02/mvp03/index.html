@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android学习笔记---MVP架构系列0x03 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上次我们完成了界面的展现,这次我们把数据绑定到界面上,然后把整个项目都完善好.想查看完整的代码可以到这里
+代码MovieContract.java1234567891011121314151617181920/** * 用于管理loadMovie功能模块的View与Presenter */public class MovieContract &amp;#123;    /**     * loadMovi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记---MVP架构系列0x03">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/02/mvp03/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="上次我们完成了界面的展现,这次我们把数据绑定到界面上,然后把整个项目都完善好.想查看完整的代码可以到这里
+代码MovieContract.java1234567891011121314151617181920/** * 用于管理loadMovie功能模块的View与Presenter */public class MovieContract &amp;#123;    /**     * loadMovi">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/final-effect.gif">
+<meta property="og:updated_time" content="2016-08-02T05:59:48.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android学习笔记---MVP架构系列0x03">
+<meta name="twitter:description" content="上次我们完成了界面的展现,这次我们把数据绑定到界面上,然后把整个项目都完善好.想查看完整的代码可以到这里
+代码MovieContract.java1234567891011121314151617181920/** * 用于管理loadMovie功能模块的View与Presenter */public class MovieContract &amp;#123;    /**     * loadMovi">
+<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/final-effect.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-mvp03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/02/mvp03/" class="article-date">
+  <time datetime="2016-08-02T05:59:48.440Z" itemprop="datePublished">2016-08-02</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android学习笔记---MVP架构系列0x03
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>上次我们完成了界面的展现,这次我们把数据绑定到界面上,然后把整个项目都完善好.想查看完整的代码可以到<a href="https://github.com/kevinhqf/DouBanTop250" target="_blank" rel="external">这里</a></p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><code>MovieContract.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 用于管理loadMovie功能模块的View与Presenter</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MovieContract</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * loadMovie模块的View,提供对外的UI更新接口</span><br><span class="line">     */</span></span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">View</span> <span class="keyword">extends</span> <span class="title">BaseView</span>&lt;<span class="title">Presenter</span>&gt;</span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">loadMore</span><span class="params">(ArrayList&lt;Movie&gt; movie)</span></span>;<span class="comment">//上拉加载更多</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">refresh</span><span class="params">(ArrayList&lt;Movie&gt; movie)</span></span>;<span class="comment">//下拉刷新</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">loadCompleted</span><span class="params">()</span></span>;<span class="comment">//改变上拉加载状态</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * loadMovie模块的Presenter,负责获取数据并处理,更新UI</span><br><span class="line">     */</span></span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">Presenter</span> <span class="keyword">extends</span> <span class="title">BasePresenter</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span></span>;<span class="comment">//刷新</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">loadMore</span><span class="params">(<span class="keyword">int</span> start)</span></span>;<span class="comment">//加载更多</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>现在我们需要定义项目的数据对象,按照HTTP返回的JSON数据,我们定义了下面3个数据对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 电影图片对象</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MovieImage</span></span>&#123;</span><br><span class="line">    String small;</span><br><span class="line">    String large;</span><br><span class="line">    String medium;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getSmall</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> small;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSmall</span><span class="params">(String small)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.small = small;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getLarge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> large;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLarge</span><span class="params">(String large)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.large = large;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMedium</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> medium;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMedium</span><span class="params">(String medium)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.medium = medium;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 一个电影对象,包含标题和图片URL</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Movie</span> </span>&#123;</span><br><span class="line">    String title;</span><br><span class="line">    MovieImage images;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> title;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(String title)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.title = title;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> MovieImage <span class="title">getImages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> images;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setImages</span><span class="params">(MovieImage images)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.images = images;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 网络请求返回的Json数据</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpResult</span> </span>&#123;</span><br><span class="line">    ArrayList&lt;Movie&gt; subjects;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Movie&gt; <span class="title">getSubjects</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> subjects;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSubjects</span><span class="params">(ArrayList&lt;Movie&gt; subjects)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.subjects = subjects;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来我们就可以完成数据请求和展现了,首先我们先完成数据的获取,按照<code>Retrofit</code>的请求方法完成数据的请求.<br><strong><em>MovieService.java</em></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MovieService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"top250"</span>)</span><br><span class="line">    <span class="function">Call&lt;HttpResult&gt; <span class="title">getMovie</span><span class="params">(@Query(<span class="string">"start"</span>)</span> <span class="keyword">int</span> start,@<span class="title">Query</span><span class="params">(<span class="string">"count"</span>)</span> <span class="keyword">int</span> count)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>MoviePresenter.java</em></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体的loadMovie模块的Presenter</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoviePresenter</span> <span class="keyword">implements</span> <span class="title">MovieContract</span>.<span class="title">Presenter</span> </span>&#123;</span><br><span class="line">    <span class="comment">//持有View对象,用于对UI进行更新</span></span><br><span class="line">    MovieContract.View mView;</span><br><span class="line">    String BASIC_URL = <span class="string">"https://api.douban.com/v2/movie/"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MoviePresenter</span><span class="params">(MovieContract.View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mView = view;</span><br><span class="line">        mView.setPresenter(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        MovieService service = getMovieService();</span><br><span class="line">        Call&lt;HttpResult&gt; call = service.getMovie(<span class="number">0</span>, <span class="number">25</span>);</span><br><span class="line">        call.enqueue(<span class="keyword">new</span> Callback&lt;HttpResult&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call&lt;HttpResult&gt; call, Response&lt;HttpResult&gt; response)</span> </span>&#123;</span><br><span class="line">                ArrayList&lt;Movie&gt; subjects = response.body().getSubjects();</span><br><span class="line">                mView.refresh(subjects);<span class="comment">//更新UI</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call&lt;HttpResult&gt; call, Throwable t)</span> </span>&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获取MovieService</span><br><span class="line">     * <span class="doctag">@return</span></span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> MovieService <span class="title">getMovieService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">                .baseUrl(BASIC_URL)</span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                .build();</span><br><span class="line">        <span class="keyword">return</span> retrofit.create(MovieService.class);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadMore</span><span class="params">(<span class="keyword">int</span> start)</span> </span>&#123;</span><br><span class="line">        Log.e(<span class="string">"start"</span>, start + <span class="string">""</span>);</span><br><span class="line">        MovieService service = getMovieService();</span><br><span class="line">        Call&lt;HttpResult&gt; call = service.getMovie(start, <span class="number">25</span>);</span><br><span class="line">        call.enqueue(<span class="keyword">new</span> Callback&lt;HttpResult&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call&lt;HttpResult&gt; call, Response&lt;HttpResult&gt; response)</span> </span>&#123;</span><br><span class="line">                ArrayList&lt;Movie&gt; subjects = response.body().getSubjects();</span><br><span class="line">                <span class="keyword">if</span> (subjects != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    mView.loadMore(subjects);<span class="comment">//更新UI</span></span><br><span class="line">                    mView.loadCompleted();<span class="comment">//改变加载状态</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call&lt;HttpResult&gt; call, Throwable t)</span> </span>&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后只要完成界面的显示处理即可<br><strong><em>MovieFragment.java</em></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MovieFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> <span class="keyword">implements</span> <span class="title">MovieContract</span>.<span class="title">View</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//持有Presenter的实例</span></span><br><span class="line">    MoviePresenter mPresenter;</span><br><span class="line">    ArrayList&lt;Movie&gt; movies = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    MovieAdapter mAdapter;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.mf_rv_list)</span><br><span class="line">    RecyclerView rv_list;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.mf_srl)</span><br><span class="line">    SwipeRefreshLayout srl;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.load_more)</span><br><span class="line">    LinearLayout load_more;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isLoading=<span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MovieFragment <span class="title">newInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MovieFragment();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MovieFragment</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        View root = inflater.inflate(R.layout.movie_frag, container, <span class="keyword">false</span>);</span><br><span class="line">        ButterKnife.bind(<span class="keyword">this</span>, root);</span><br><span class="line">        mAdapter = <span class="keyword">new</span> MovieAdapter(getActivity(), movies);</span><br><span class="line">        initView();</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        load_more.setVisibility(View.GONE);</span><br><span class="line">        srl.setColorSchemeColors(R.color.colorPrimary);</span><br><span class="line">        srl.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                srl.setRefreshing(<span class="keyword">true</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        srl.setOnRefreshListener(<span class="keyword">new</span> SwipeRefreshLayout.OnRefreshListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRefresh</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                mPresenter.refresh();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        mPresenter.refresh();</span><br><span class="line">        <span class="keyword">final</span> StaggeredGridLayoutManager layoutManager = <span class="keyword">new</span> StaggeredGridLayoutManager(<span class="number">3</span>, StaggeredGridLayoutManager.VERTICAL);</span><br><span class="line">        rv_list.setLayoutManager(layoutManager);</span><br><span class="line">        rv_list.setAdapter(mAdapter);</span><br><span class="line">        rv_list.addOnScrollListener(<span class="keyword">new</span> RecyclerView.OnScrollListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrolled</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">super</span>.onScrolled(recyclerView, dx, dy);</span><br><span class="line">                <span class="keyword">int</span> lastPositions[] = layoutManager.findLastVisibleItemPositions(<span class="keyword">new</span> <span class="keyword">int</span>[layoutManager.getSpanCount()]);</span><br><span class="line">                <span class="keyword">int</span> lastVisiableItemPos = findMax(lastPositions);</span><br><span class="line">                <span class="keyword">if</span> (lastVisiableItemPos == mAdapter.getItemCount()-<span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(!isLoading) &#123;</span><br><span class="line">                        isLoading=<span class="keyword">true</span>;</span><br><span class="line">                        load_more.setVisibility(View.VISIBLE);</span><br><span class="line">                        mPresenter.loadMore(lastVisiableItemPos + <span class="number">1</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollStateChanged</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> newState)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">super</span>.onScrollStateChanged(recyclerView, newState);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findMax</span><span class="params">(<span class="keyword">int</span>[] lastPositions)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = lastPositions[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> value : lastPositions) &#123;</span><br><span class="line">            <span class="keyword">if</span> (value &gt; max) &#123;</span><br><span class="line">                max = value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPresenter</span><span class="params">(MovieContract.Presenter presenter)</span> </span>&#123;</span><br><span class="line">        mPresenter = (MoviePresenter) presenter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadMore</span><span class="params">(ArrayList&lt;Movie&gt; movie)</span> </span>&#123;</span><br><span class="line">        movies.addAll(movie);</span><br><span class="line">        mAdapter.notifyDataSetChanged();</span><br><span class="line">        load_more.setVisibility(View.GONE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">(ArrayList&lt;Movie&gt; movie)</span> </span>&#123;</span><br><span class="line">        movies.clear();</span><br><span class="line">        movies.addAll(movie);</span><br><span class="line">        mAdapter.notifyDataSetChanged();</span><br><span class="line">        srl.setRefreshing(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadCompleted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        isLoading = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后我们把其余部分的代码完善便可<br><strong><em>MovieAdapter.java</em></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * Movie列表的Adapter</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MovieAdapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">MovieVH</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    Context mContext;</span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;Movie&gt; movies;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MovieAdapter</span><span class="params">(Context context, ArrayList&lt;Movie&gt; movies)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mContext = context;</span><br><span class="line">        <span class="keyword">this</span>.movies = movies;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MovieVH <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="keyword">int</span> viewType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MovieVH(LayoutInflater.from(mContext).inflate(R.layout.item_movie, <span class="keyword">null</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(MovieVH holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        String url = movies.get(position).getImages().getMedium();</span><br><span class="line">        Glide.with(mContext).load(url).placeholder(R.drawable.pictures_no).centerCrop().into(holder.iv_movie);</span><br><span class="line">        holder.tv_title.setText(movies.get(position).getTitle());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> movies == <span class="keyword">null</span> ? <span class="number">0</span> : movies.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MovieVH</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.im_iv_movie)</span><br><span class="line">    ImageView iv_movie;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.im_tv_title)</span><br><span class="line">    TextView tv_title;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MovieVH</span><span class="params">(View itemView)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(itemView);</span><br><span class="line">        ButterKnife.bind(<span class="keyword">this</span>, itemView);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>完整的代码可以到我的<a href="https://github.com/kevinhqf/DouBanTop250" target="_blank" rel="external">Github</a>上查看.</p>
+<h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><p>最后我们的效果图如下<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/final-effect.gif" alt="豆瓣电影Top250"></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过本次的一个简单的项目,介绍了<code>MVP</code>架构在Android上该如何实现.希望能对大家起到帮助.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/02/mvp03/" data-id="cird45eko001amk86ymkna368" data_title="Android学习笔记---MVP架构系列0x03" data_summary="上次我们完成了界面的展现,这次我们把数据绑定到界面上,..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/02/mvp03/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-02T05:59:48.436Z" itemprop="dateModified">2016-08-02</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/01/mvp02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android学习笔记---MVP架构系列0x02</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码"><span class="toc-number">1.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果"><span class="toc-number">2.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/02/mvp03/">Android学习笔记---MVP架构系列0x03</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/01/mvp02/">Android学习笔记---MVP架构系列0x02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/31/butterknife-basic/">Android学习笔记---开源工具ButterKnife的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/31/mvp/">Android学习笔记---MVP架构系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/30/mvp01/">Android学习笔记---MVP架构系列0x01</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/02/mvp03/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
