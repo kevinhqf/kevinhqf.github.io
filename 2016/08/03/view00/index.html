@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android学习笔记---自定义View基础 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android系统中提供给我们的View控件基本上能满足我们的基本应用的需求,但有时因为一些特殊的需求,我们不得不自己创建符合我们要求的View.所以学会自定义View控件还是很有必要的.
+自定义View的基本步骤
+创建View
+处理View布局
+进行View的绘制
+处理View的事件监听
+优化View  
+
+上面的步骤就是创建自定义View的一些基本的步骤了.下面是各个步骤的详细介绍.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记---自定义View基础">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/03/view00/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="Android系统中提供给我们的View控件基本上能满足我们的基本应用的需求,但有时因为一些特殊的需求,我们不得不自己创建符合我们要求的View.所以学会自定义View控件还是很有必要的.
+自定义View的基本步骤
+创建View
+处理View布局
+进行View的绘制
+处理View的事件监听
+优化View  
+
+上面的步骤就是创建自定义View的一些基本的步骤了.下面是各个步骤的详细介绍.">
+<meta property="og:updated_time" content="2016-08-03T11:52:13.225Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android学习笔记---自定义View基础">
+<meta name="twitter:description" content="Android系统中提供给我们的View控件基本上能满足我们的基本应用的需求,但有时因为一些特殊的需求,我们不得不自己创建符合我们要求的View.所以学会自定义View控件还是很有必要的.
+自定义View的基本步骤
+创建View
+处理View布局
+进行View的绘制
+处理View的事件监听
+优化View  
+
+上面的步骤就是创建自定义View的一些基本的步骤了.下面是各个步骤的详细介绍.">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-view00" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/03/view00/" class="article-date">
+  <time datetime="2016-08-03T11:52:13.241Z" itemprop="datePublished">2016-08-03</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android学习笔记---自定义View基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>Android系统中提供给我们的View控件基本上能满足我们的基本应用的需求,但有时因为一些特殊的需求,我们不得不自己创建符合我们要求的View.所以学会自定义View控件还是很有必要的.</p>
+<h4 id="自定义View的基本步骤"><a href="#自定义View的基本步骤" class="headerlink" title="自定义View的基本步骤"></a>自定义View的基本步骤</h4><ol>
+<li>创建View</li>
+<li>处理View布局</li>
+<li>进行View的绘制</li>
+<li>处理View的事件监听</li>
+<li>优化View  </li>
+</ol>
+<p>上面的步骤就是创建自定义View的一些基本的步骤了.下面是各个步骤的详细介绍.<br><a id="more"></a></p>
+<h5 id="创建View"><a href="#创建View" class="headerlink" title="创建View"></a>创建View</h5><p>要创建一个自定义的View,就需要继承系统的View类或其子类,而且我们需要实现View类的一些基础的方法.其中构造方法是必须要有的,而且我们要在布局文件中使用自定义View就必须在构造方法中声明.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;<span class="comment">//继承View</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;<span class="comment">//为了支持布局文件中进行创建和编辑</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通常我们的自定义View都会有自定义的属性,便于在布局文件中使用,而自定义属性通常都会写在<code>res/values/attrs.xml</code>文件中,如下:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"MyView"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"showText"</span> <span class="attr">format</span>=<span class="string">"boolean"</span> /&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"position"</span> <span class="attr">format</span>=<span class="string">"enum"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"left"</span> <span class="attr">value</span>=<span class="string">"0"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"right"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">attr</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的文件声明了两个自定义属性,<code>showText</code>和<code>position</code>,他们都是<code>MyView</code>控件的属性,我们可以在布局文件中使用他们:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">   <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res/res-auto"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">com.customview.MyView</span></span><br><span class="line">     <span class="attr">app:showText</span>=<span class="string">"true"</span></span><br><span class="line">     <span class="attr">app:position</span>=<span class="string">"left"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在使用自定义属性时需要指定命名空间,在<code>Android Studio</code>中所有的自定义命名空间都可使用<code>http://schemas.android.com/apk/res/res-auto</code>.<br>在布局文件中使用了自定义属性后,我们就需要在代码中对自定义属性在View上进行一些相应的设置,否则自定义属性便没有意义了.<br>首先我们可以通过下面的代码获取自定义属性:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">super</span>(context, attrs);</span><br><span class="line">   TypedArray a = context.getTheme().obtainStyledAttributes(</span><br><span class="line">        attrs,</span><br><span class="line">        R.styleable.MyView,</span><br><span class="line">        <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">       mShowText = a.getBoolean(R.styleable.MyView_showText, <span class="keyword">false</span>);</span><br><span class="line">       mTextPos = a.getInteger(R.styleable.MyView_labelPosition, <span class="number">0</span>);</span><br><span class="line">   &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">       a.recycle();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当我们在布局文件中使用一个自定义View时,所有使用到的属性都会被传入到View的构造方法中的<code>AttributeSet</code>类型的参数中,通过<code>Context</code>的<code>obtainStyledAttributes()</code>方法返回一个<code>TypedArray</code>对象,可以通过这个对象获取自定义属性的值.由于<code>TypedArray</code>对象是共享的资源，所以在获取完值之后必须要调用<code>recycle()</code>方法来回收。<br>自定义属性只有在View被初始化时才能获取,若我们想要在运行时对自定义的属性进行修改就需要对外提供修改的方法.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public boolean isShowText() &#123;</span><br><span class="line">   return mShowText;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void setShowText(boolean showText) &#123;</span><br><span class="line">   mShowText = showText;</span><br><span class="line">   invalidate();</span><br><span class="line">   requestLayout();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码对外提供了获取和修改<code>mShowText</code>属性的方法.在<code>setShowText()</code>方法中,修改了<code>mShowText</code>属性后分别调用了<code>invalidate()</code>和<code>requestLayout()</code>方法,因为当我们的控件属性发生改变时,控件的展现外观也可能会发生改变,在这种情况下就需要调用<code>invalidate()</code>方法让系统去调用view的<code>onDraw()</code>重新绘制。同样的，控件属性的改变可能导致控件所占的大小和形状发生改变，所以我们需要调用<code>requestLayout()</code>来请求测量获取一个新的布局位置。</p>
+<h5 id="处理View的布局"><a href="#处理View的布局" class="headerlink" title="处理View的布局"></a>处理View的布局</h5><p>要完成View的布局就必须要知道View的大小,这时我们就需要对View进行测量.Android系统通过<code>onMeasure()</code>方法来完成View的测量.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>onMeasure()</code>方法有两个参数,分别是<code>widthMeasureSpec</code>和<code>heightMeasureSpec</code>.它们包含了View的<code>mode</code>和<code>size</code>,可以通过下面代码获取:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> specMode = MeasureSpec.getMode(measureSpec);</span><br><span class="line"><span class="keyword">int</span> specSize = MeasureSpec.getSize(measureSpec);</span><br></pre></td></tr></table></figure></p>
+<p><code>mode</code>代表了我们当前控件的父控件告诉我们控件，你应该按怎样的方式来布局。<br><code>mode</code>有三个可选值：<code>EXACTLY</code>, <code>AT_MOST</code>, <code>UNSPECIFIED</code>,它们的含义是:  </p>
+<ul>
+<li><code>EXACTLY</code>：父控件告诉我们子控件了一个确定的大小，你就按这个大小来布局。比如我们指定了确定的dp值和macth_parent的情况.  </li>
+<li><code>AT_MOST</code>：当前控件不能超过一个固定的最大值，一般是wrap_content的情况.  </li>
+<li><code>UNSPECIFIED</code>:当前控件没有限制，要多大就有多大，这种情况很少出现.  </li>
+</ul>
+<p><code>size</code>其实就是父布局传递过来的一个大小，父布局希望当前布局的大小.</p>
+<h5 id="绘制View"><a href="#绘制View" class="headerlink" title="绘制View"></a>绘制View</h5><p>当View被创建并测量结束后,我们就可以实现<code>onDraw()</code>方法来完成View的绘制了,这个方法比较简单,大家可以去查看一下Android提供的API.</p>
+<h5 id="处理View的事件监听"><a href="#处理View的事件监听" class="headerlink" title="处理View的事件监听"></a>处理View的事件监听</h5><p>如果你的自定义控件需要与用户进行交互,那么我们就需要给我们的View实现相应的事件方法了,比较常用的有点击事件和触摸事件等.</p>
+<h5 id="优化View"><a href="#优化View" class="headerlink" title="优化View"></a>优化View</h5><p>通过一些技巧我们可以对View进行一些优化.</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>上面所介绍的就是自定义View的一些基础知识,更详细的实现我希望后面能通过一些例子和大家分享.</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://blog.csdn.net/yissan/article/details/51136088" target="_blank" rel="external">Android自定义控件1</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/03/view00/" data-id="cireu3lj9001ek286n2tebybf" data_title="Android学习笔记---自定义View基础" data_summary="Android系统中提供给我们的View控件基本上能满..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/03/view00/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-03T11:52:13.225Z" itemprop="dateModified">2016-08-03</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/02/mvp03/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android学习笔记---MVP架构系列0x03</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义View的基本步骤"><span class="toc-number">1.</span> <span class="toc-text">自定义View的基本步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建View"><span class="toc-number">1.1.</span> <span class="toc-text">创建View</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#处理View的布局"><span class="toc-number">1.2.</span> <span class="toc-text">处理View的布局</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#绘制View"><span class="toc-number">1.3.</span> <span class="toc-text">绘制View</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#处理View的事件监听"><span class="toc-number">1.4.</span> <span class="toc-text">处理View的事件监听</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#优化View"><span class="toc-number">1.5.</span> <span class="toc-text">优化View</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/03/view00/">Android学习笔记---自定义View基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/02/mvp03/">Android学习笔记---MVP架构系列0x03</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/01/mvp02/">Android学习笔记---MVP架构系列0x02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/31/butterknife-basic/">Android学习笔记---开源工具ButterKnife的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/31/mvp/">Android学习笔记---MVP架构系列0x00</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/03/view00/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
