@@ -74,6 +74,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-DesignPatterns_05" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/14/DesignPatterns_05/" class="article-date">
+  <time datetime="2016-06-14T12:51:46.629Z" itemprop="datePublished">2016-06-14</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/14/DesignPatterns_05/">浅谈Java设计模式系列0x05---建造者模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01—单例模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02—简单工厂模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_03/">浅谈Java设计模式系列0x03—工厂方法模式</a><br><a href="https://kevinhqf.github.io/2016/06/13/DesignPatterns_04/">浅谈Java设计模式系列0x04—抽象工厂模式</a></p>
+<p>我们前面讲的设计模式都是创建型的模式,这次要讲的也是一种创建型的模式—–建造者模式;  </p>
+<h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><p>建造者模式是将一个复杂对象的构建与它的表示分离,使得同样的构建过程可以创建不同的表示;<br>建造者模式是一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户不需要知道内部的具体构建细节;  </p>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><p><strong>抽象建造者(Builder)</strong>:  </p>
+<ul>
+<li>为创建一个Product对象的各个部件指定的抽象接口;  </li>
+</ul>
+<p><strong>具体建造者(ConcreteBuilder)</strong>:  </p>
+<ul>
+<li>实现Builder的接口以构造和装配该产品的各个部件;  </li>
+<li>定义并明确它所创建的表示;  </li>
+<li>提供一个检索产品的接口;  </li>
+</ul>
+<p><strong>指挥者(Director)</strong>:</p>
+<ul>
+<li>构造一个使用Builder接口的对象;</li>
+</ul>
+<p><strong>产品角色(Product)</strong>:</p>
+<ul>
+<li>表示被构造的复杂对象,ConcreteBuilder创建该产品的内部表示并定义它的装配过程;  </li>
+<li>包含定义组成部件的类,包括将这些部件装配成最终产品的接口
+        
+          <p class="article-more-link">
+            <a href="/2016/06/14/DesignPatterns_05/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/" data-id="cirgeixx60009kb8607yms4ks" data_title="浅谈Java设计模式系列0x05---建造者模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-06-14</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-DesignPatterns_04" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -115,7 +198,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="cireu3ld20005k286rvrnjk7k" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/" data-id="cirgeixwy0007kb865m7214f8" data_title="浅谈Java设计模式系列0x04---抽象工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/13/DesignPatterns_04/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -184,7 +267,7 @@ Updated:<time datetime="2016-06-13T06:20:08.766Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="cireu3lcs0003k2867f2okuq8" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/" data-id="cirgeixwl0005kb86zswc72be" data_title="浅谈Java设计模式系列0x02---简单工厂模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_02/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -249,7 +332,7 @@ Updated:<time datetime="2016-06-11T14:35:39.577Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/" data-id="cireu3lc00001k286c62acer7" data_title="浅谈Java设计模式系列0x01---单例模式" data_summary="浅谈Java设计模式系列0x00  
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/" data-id="cirgeixw10002kb8639f1i4q1" data_title="浅谈Java设计模式系列0x01---单例模式" data_summary="浅谈Java设计模式系列0x00  
 上次我们对设计模..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_01/#disqus_thread" class="article-comment-link">Comments</a>
@@ -317,7 +400,7 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/" data-id="cireu3lb60000k2860s6bwu42" data_title="浅谈Java设计模式系列0x00" data_summary="本系列是我对于各种设计模式的一些理解,我会以最简单,最..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/" data-id="cirgeixvd0000kb868ixn3ws7" data_title="浅谈Java设计模式系列0x00" data_summary="本系列是我对于各种设计模式的一些理解,我会以最简单,最..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_00/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -328,71 +411,6 @@ Updated:<time datetime="2016-06-11T14:35:39.569Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-06-11T14:35:39.561Z" itemprop="dateModified">2016-06-11</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-DesignPatterns_03" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/11/DesignPatterns_03/" class="article-date">
-  <time datetime="2016-06-11T14:35:39.549Z" itemprop="datePublished">2016-06-11</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/11/DesignPatterns_03/">浅谈Java设计模式系列0x03---工厂方法模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01—单例模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02—简单工厂模式</a>  </p>
-<p>上次我们讲了简单工厂模式,这次我们来讲一下工厂方法模式;<br>简单工厂模式是工厂方法模式的一种,有了对简单工厂模式的了解后,对工厂方法模式的理解也就容易多了;  </p>
-<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><p>相对于简单工厂模式,工厂方法模式将工厂类分为了工厂父类和工厂子类;<br>工厂父类负责定义创建产品对象的公共接口,工厂子类则负责生成具体的产品对象;<br>将实例化操作延迟到子类进行,由于工厂方法模式动态创建对象的特点,所有也叫多肽工厂模式;  </p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/11/DesignPatterns_03/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/11/DesignPatterns_03/" data-id="cireu3lcx0004k2860bp4r3ra" data_title="浅谈Java设计模式系列0x03---工厂方法模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/11/DesignPatterns_03/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-11T14:35:39.549Z" itemprop="dateModified">2016-06-11</time>
 </span>
 
 
@@ -438,7 +456,7 @@ Updated:<time datetime="2016-06-11T14:35:39.549Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -451,7 +469,7 @@ Updated:<time datetime="2016-06-11T14:35:39.549Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -462,6 +480,10 @@ Updated:<time datetime="2016-06-11T14:35:39.549Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/04/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
+          </li>
         
           <li>
             <a href="/2016/08/03/view00/">Android学习笔记---自定义View基础</a>
@@ -477,10 +499,6 @@ Updated:<time datetime="2016-06-11T14:35:39.549Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/07/31/butterknife-basic/">Android学习笔记---开源工具ButterKnife的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/31/mvp/">Android学习笔记---MVP架构系列0x00</a>
           </li>
         
       </ul>
