@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android项目实战---指尖翻译系列0x01 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="从这次开始,我就会带着大家一步一步的实现指尖翻译这个项目.首先要做到即时的翻译就需要获取到粘贴板的内容.因为我们的项目是通过复制内容然后从粘贴板中获取再进行翻译的.所以首先我们要先获取粘贴板的内容.
+粘贴板API的使用通过查看官网手册的粘贴板的API,我们可以通过getSystemService(CLIPBOARD_SERVICE)得到ClipboardManager对象,系统粘贴板中每次只会持有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android项目实战---指尖翻译系列0x01">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/05/fingertrans01/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="从这次开始,我就会带着大家一步一步的实现指尖翻译这个项目.首先要做到即时的翻译就需要获取到粘贴板的内容.因为我们的项目是通过复制内容然后从粘贴板中获取再进行翻译的.所以首先我们要先获取粘贴板的内容.
+粘贴板API的使用通过查看官网手册的粘贴板的API,我们可以通过getSystemService(CLIPBOARD_SERVICE)得到ClipboardManager对象,系统粘贴板中每次只会持有">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/effect01.png">
+<meta property="og:updated_time" content="2016-08-05T07:08:22.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android项目实战---指尖翻译系列0x01">
+<meta name="twitter:description" content="从这次开始,我就会带着大家一步一步的实现指尖翻译这个项目.首先要做到即时的翻译就需要获取到粘贴板的内容.因为我们的项目是通过复制内容然后从粘贴板中获取再进行翻译的.所以首先我们要先获取粘贴板的内容.
+粘贴板API的使用通过查看官网手册的粘贴板的API,我们可以通过getSystemService(CLIPBOARD_SERVICE)得到ClipboardManager对象,系统粘贴板中每次只会持有">
+<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/effect01.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-fingertrans01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/05/fingertrans01/" class="article-date">
+  <time datetime="2016-08-05T07:08:22.175Z" itemprop="datePublished">2016-08-05</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android项目实战---指尖翻译系列0x01
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>从这次开始,我就会带着大家一步一步的实现<code>指尖翻译</code>这个项目.首先要做到即时的翻译就需要获取到粘贴板的内容.因为我们的项目是通过复制内容然后从粘贴板中获取再进行翻译的.所以首先我们要先获取粘贴板的内容.</p>
+<h4 id="粘贴板API的使用"><a href="#粘贴板API的使用" class="headerlink" title="粘贴板API的使用"></a>粘贴板API的使用</h4><p>通过查看官网手册的<a href="https://developer.android.com/guide/topics/text/copy-paste.html" target="_blank" rel="external">粘贴板的API</a>,我们可以通过<code>getSystemService(CLIPBOARD_SERVICE)</code>得到<code>ClipboardManager</code>对象,系统粘贴板中每次只会持有一个<code>ClipData</code>对象,而一个<code>ClipData</code>对象包含一个<code>ClipDescription</code>和一个或多个的<code>ClipData.Item</code>对象.其中的<code>ClipData.Item</code>对象包含的就是我们需要的数据.这些数据包含文本,URI或是<code>Intent data</code>.我们只需关注文本即可.<br>从粘贴板获取我们所需的文本基本上可以通过下面的步骤实现:</p>
+<ol>
+<li><p>获取全局的<code>ClipboardManager</code>对象</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断当前的粘贴板的数据格式是否符合要求</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 粘贴板是否有数据</span></span><br><span class="line"><span class="keyword">if</span> (!(clipboard.hasPrimaryClip())) &#123;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!(clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN))) &#123;</span><br><span class="line"><span class="comment">// 数据格式不符合要求</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">// 数据格式符合要求</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从粘贴板获取文本数据</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// 假设应用每次只处理一个item</span></span><br><span class="line">ClipData.Item item = clipboard.getPrimaryClip().getItemAt(<span class="number">0</span>);</span><br><span class="line">   <span class="comment">// 将数据转换为文本</span></span><br><span class="line">   String text = item.coerceToText(context).toString();</span><br></pre></td></tr></table></figure>
+ <a id="more"></a>
+<h4 id="对复制的行为设置监听"><a href="#对复制的行为设置监听" class="headerlink" title="对复制的行为设置监听"></a>对复制的行为设置监听</h4><p>我们清楚了如何获取粘贴板的内容后,那么我们该在什么时候获取呢?根据项目的功能,我们想要在用户进行复制时得到翻译后的内容,所以我们应该在用户进行复制时获取粘贴板的内容,然后进行处理.<br>这时我们就需要对用户的复制行为进行监听了.通过查看API,发现了<code>ClipboardManager</code>中的<code>addPrimaryClipChangedListener()</code>方法能对粘贴板的改变进行监听,我们利用这个方法便能实现所需的功能.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">ClipboardManager</span>.<span class="title">OnPrimaryClipChangedListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    ClipboardManager clipboardManager;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        clipboardManager = (ClipboardManager) getApplicationContext().getSystemService(CLIPBOARD_SERVICE);</span><br><span class="line">        clipboardManager.addPrimaryClipChangedListener(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPrimaryClipChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ClipData.Item item = clipboardManager.getPrimaryClip().getItemAt(<span class="number">0</span>);</span><br><span class="line">        String text = item.coerceToText(getApplicationContext()).toString();</span><br><span class="line">        Log.e(<span class="string">"Text"</span>, <span class="string">"粘贴板的内容是:"</span> + text);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>我们运行一下代码,然后在手机其他的应用进行一下复制操作,可以在日志输出中看到,我们已经得到了想要的效果<br><img src="http://o7x6n1hmo.bkt.clouddn.com/effect01.png" alt="Log"><br>上面的是测试用的代码,现在我们来将代码封装一下.<br>首先创建一个Application类,<code>FingerApp.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 作为全局的Application</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FingerApp</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context mContext;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        mContext = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> FingerApp <span class="title">get</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (FingerApp) mContext.getApplicationContext();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>创建完成后记得替换<code>AndroidManifest.xml</code>文件的Application节点的实例<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">application</span></span><br><span class="line">        <span class="attr">android:name</span>=<span class="string">".FingerApp"</span></span><br><span class="line">        <span class="attr">android:allowBackup</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_launcher"</span></span><br><span class="line">        <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></span><br><span class="line">        <span class="attr">android:supportsRtl</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:theme</span>=<span class="string">"@style/AppTheme.NoActionBar"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>创建一个管理粘贴板的类<code>ClipBoard.java</code>,我们采用单例模式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * the clipboard</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Clipboard</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ClipboardManager mClipboard;</span><br><span class="line">    <span class="keyword">private</span> List&lt;ClipboardManager.OnPrimaryClipChangedListener&gt; listeners = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Clipboard</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mClipboard = (ClipboardManager) FingerApp.get().getSystemService(Context.CLIPBOARD_SERVICE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获取粘贴板的文本数据</span><br><span class="line">     * <span class="doctag">@return</span></span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mClipboard.getPrimaryClip().getItemAt(<span class="number">0</span>).coerceToText(FingerApp.get()).toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 判断是否有监听对象</span><br><span class="line">     * <span class="doctag">@return</span></span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isStartListened</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> listeners.size() != <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 设置监听</span><br><span class="line">     * <span class="doctag">@param</span> listener</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrimaryClipChangedListener</span><span class="params">(ClipboardManager.OnPrimaryClipChangedListener listener)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (listener == <span class="keyword">null</span>) &#123;</span><br><span class="line">            removeAllListener();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        mClipboard.addPrimaryClipChangedListener(listener);</span><br><span class="line">        listeners.add(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 移除所有监听</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeAllListener</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (ClipboardManager.OnPrimaryClipChangedListener l : listeners)</span><br><span class="line">            mClipboard.removePrimaryClipChangedListener(l);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 单例模式</span><br><span class="line">     * <span class="doctag">@return</span></span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Clipboard <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Clipboard instance = <span class="keyword">new</span> Clipboard();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们已经完成了获取粘贴板的文本数据以及对复制行为的监听,下次我们将会实现悬浮窗的功能.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/05/fingertrans01/" data-id="cirheu36k00127h863giiage8" data_title="Android项目实战---指尖翻译系列0x01" data_summary="从这次开始,我就会带着大家一步一步的实现指尖翻译这个项..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/05/fingertrans01/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-05T07:08:22.167Z" itemprop="dateModified">2016-08-05</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/04/fingertrans00/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android项目实战---指尖翻译系列0x00</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#粘贴板API的使用"><span class="toc-number">1.</span> <span class="toc-text">粘贴板API的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对复制的行为设置监听"><span class="toc-number">2.</span> <span class="toc-text">对复制的行为设置监听</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/05/fingertrans01/">Android项目实战---指尖翻译系列0x01</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/04/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/03/view00/">Android学习笔记---自定义View基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/02/mvp03/">Android学习笔记---MVP架构系列0x03</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/01/mvp02/">Android学习笔记---MVP架构系列0x02</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/05/fingertrans01/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
