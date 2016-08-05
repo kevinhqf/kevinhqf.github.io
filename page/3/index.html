@@ -74,6 +74,73 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-retrofit-basic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/27/retrofit-basic/" class="article-date">
+  <time datetime="2016-07-27T08:46:40.195Z" itemprop="datePublished">2016-07-27</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/27/retrofit-basic/">Android学习笔记---开源工具Retrofit的基本使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Retrofit</code>是一个简化Android网络请求的一个开源工具,本文主要记录<code>Retrofit</code>的基本用法,想要了解更多可以转到<a href="http://square.github.io/retrofit/">Retrofit的官方网站</a>.</p>
+<h4 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h4><p>要想在项目中使用<code>Retrofit</code>,我们可以通过以下的方式将<code>Retrofit</code>添加到项目中:</p>
+<h5 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.squareup.retrofit2<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>retrofit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;com.squareup.retrofit2:retrofit:2.1.0&apos;</span><br><span class="line">compile &apos;com.squareup.retrofit2:converter-gson:2.1.0&apos;</span><br></pre></td></tr></table></figure>
+<p>第二句是为了使用Gson进行数据格式的转换.<br><code>Retrofit</code>需要运行于 Java7 , Android2.3 以上的版本<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/27/retrofit-basic/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/27/retrofit-basic/" data-id="cirhxzrdu001i9686qxk5kbap" data_title="Android学习笔记---开源工具Retrofit的基本使用" data_summary="Retrofit是一个简化Android网络请求的一个..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/27/retrofit-basic/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-27T08:46:40.187Z" itemprop="dateModified">2016-07-27</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-broadcast-receiver" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -115,7 +182,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="cirheu35z000t7h865u2dcdj2" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="cirhxzrbl000t96868qfd45ey" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -216,7 +283,7 @@ Updated:<time datetime="2016-07-26T07:51:30.023Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cirheu36e00107h866hj5x9js" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cirhxzrc5001096861ob80b6f" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -285,7 +352,7 @@ Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="cirheu38n001k7h865zxl2xbz" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="cirhxzre5001k9686uuialvzc" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/22/service/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -350,7 +417,7 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="cirheu35h000q7h86e0xmsmu6" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="cirhxzrba000r9686y84vi3bl" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/21/activity/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -361,71 +428,6 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-07-21</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-annotation" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/07/20/annotation/" class="article-date">
-  <time datetime="2016-07-20T06:38:48.822Z" itemprop="datePublished">2016-07-20</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/20/annotation/">Java学习笔记---Annotation</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>下面的代码片段相信有过Android开发经验的朋友都会非常的熟悉.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>其中<code>OnCreate()</code>方法前的<code>@Override</code>便是今天的主角,没错它就是Java的注解Annotation.</p>
-<h4 id="什么是Annotation"><a href="#什么是Annotation" class="headerlink" title="什么是Annotation"></a>什么是Annotation</h4><p>简单的说注解就是给Java代码标上标签,让Java虚拟机知道该如何处理被标注的代码.<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/20/annotation/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="cirheu363000v7h86ln21dw4k" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/07/20/annotation/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-07-20</time>
 </span>
 
 
@@ -471,7 +473,7 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -484,7 +486,7 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -495,6 +497,10 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/05/fingertrans02/">Android项目实战---指尖翻译系列0x02</a>
+          </li>
         
           <li>
             <a href="/2016/08/05/fingertrans01/">Android项目实战---指尖翻译系列0x01</a>
@@ -510,10 +516,6 @@ Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/08/02/mvp03/">Android学习笔记---MVP架构系列0x03</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/01/mvp02/">Android学习笔记---MVP架构系列0x02</a>
           </li>
         
       </ul>

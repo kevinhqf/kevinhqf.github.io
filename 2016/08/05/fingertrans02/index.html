@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android项目实战---指尖翻译系列0x02 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上次我们实现了对粘贴板的内容获取与复制行为的监听,这次我会带着大家完成悬浮窗功能.
+创建悬浮窗的布局首先我们先来点简单的,就是创建我们悬浮窗的布局文件.项目中的悬浮窗比较简单,是一个位于屏幕上方简洁的卡片,其布局文件如下:12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android项目实战---指尖翻译系列0x02">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/05/fingertrans02/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="上次我们实现了对粘贴板的内容获取与复制行为的监听,这次我会带着大家完成悬浮窗功能.
+创建悬浮窗的布局首先我们先来点简单的,就是创建我们悬浮窗的布局文件.项目中的悬浮窗比较简单,是一个位于屏幕上方简洁的卡片,其布局文件如下:12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/layout.png">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/test.jpg">
+<meta property="og:updated_time" content="2016-08-05T09:47:38.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android项目实战---指尖翻译系列0x02">
+<meta name="twitter:description" content="上次我们实现了对粘贴板的内容获取与复制行为的监听,这次我会带着大家完成悬浮窗功能.
+创建悬浮窗的布局首先我们先来点简单的,就是创建我们悬浮窗的布局文件.项目中的悬浮窗比较简单,是一个位于屏幕上方简洁的卡片,其布局文件如下:12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849">
+<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/layout.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-fingertrans02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/05/fingertrans02/" class="article-date">
+  <time datetime="2016-08-05T09:47:38.435Z" itemprop="datePublished">2016-08-05</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android项目实战---指尖翻译系列0x02
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>上次我们实现了对粘贴板的内容获取与复制行为的监听,这次我会带着大家完成悬浮窗功能.</p>
+<h4 id="创建悬浮窗的布局"><a href="#创建悬浮窗的布局" class="headerlink" title="创建悬浮窗的布局"></a>创建悬浮窗的布局</h4><p>首先我们先来点简单的,就是创建我们悬浮窗的布局文件.项目中的悬浮窗比较简单,是一个位于屏幕上方简洁的卡片,其布局文件如下:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:background</span>=<span class="string">"#00000000"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">android.support.v7.widget.CardView</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">        <span class="attr">app:cardBackgroundColor</span>=<span class="string">"#f2f4f6"</span></span><br><span class="line">        <span class="attr">app:cardCornerRadius</span>=<span class="string">"2dp"</span></span><br><span class="line">        <span class="attr">app:contentPaddingLeft</span>=<span class="string">"10dp"</span></span><br><span class="line">        <span class="attr">app:contentPaddingRight</span>=<span class="string">"10dp"</span></span><br><span class="line">        <span class="attr">app:contentPaddingBottom</span>=<span class="string">"10dp"</span></span><br><span class="line">        <span class="attr">app:contentPaddingTop</span>=<span class="string">"5dp"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">RelativeLayout</span></span><br><span class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/pv_rl_content"</span></span><br><span class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">            <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/pv_tv_query"</span></span><br><span class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">                <span class="attr">android:layout_marginBottom</span>=<span class="string">"3dp"</span></span><br><span class="line">                <span class="attr">android:ellipsize</span>=<span class="string">"end"</span></span><br><span class="line">                <span class="attr">android:maxLines</span>=<span class="string">"1"</span></span><br><span class="line">                <span class="attr">android:text</span>=<span class="string">"复制的内容"</span></span><br><span class="line">                <span class="attr">android:textColor</span>=<span class="string">"@android:color/black"</span></span><br><span class="line">                <span class="attr">android:textStyle</span>=<span class="string">"bold"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/pv_tv_translate"</span></span><br><span class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">                <span class="attr">android:layout_below</span>=<span class="string">"@id/pv_tv_query"</span></span><br><span class="line">                <span class="attr">android:ellipsize</span>=<span class="string">"end"</span></span><br><span class="line">                <span class="attr">android:lineSpacingExtra</span>=<span class="string">"2dp"</span></span><br><span class="line">                <span class="attr">android:text</span>=<span class="string">"翻译的结果"</span></span><br><span class="line">                <span class="attr">android:maxLines</span>=<span class="string">"4"</span></span><br><span class="line">                <span class="attr">android:textColor</span>=<span class="string">"#aa000000"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">                <span class="attr">android:text</span>=<span class="string">"词典的详细解析"</span></span><br><span class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/pv_tv_explains"</span></span><br><span class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">                <span class="attr">android:layout_below</span>=<span class="string">"@id/pv_tv_translate"</span></span><br><span class="line">                <span class="attr">android:ellipsize</span>=<span class="string">"end"</span></span><br><span class="line">                <span class="attr">android:lineSpacingExtra</span>=<span class="string">"2dp"</span></span><br><span class="line">                <span class="attr">android:maxLines</span>=<span class="string">"4"</span></span><br><span class="line">                <span class="attr">android:textColor</span>=<span class="string">"#aa000000"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">android.support.v7.widget.CardView</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>布局的效果如下:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/layout.png" alt="layout">  </p>
+<h4 id="悬浮窗的实现"><a href="#悬浮窗的实现" class="headerlink" title="悬浮窗的实现"></a>悬浮窗的实现</h4><p>其实悬浮窗的实现只需要通过系统的<code>WindowManager</code>向当前的界面添加一个View即可,所添加的View便是我们的悬浮窗.所有我们先来创建我们的View,新建一个名为<code>PopView</code>的类.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PopView</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span></span>&#123;</span><br><span class="line"> <span class="keyword">private</span> WindowManager mWindowManager;</span><br><span class="line">    <span class="keyword">private</span> Context mContext;</span><br><span class="line">    <span class="comment">// 取消悬浮窗的监听器</span></span><br><span class="line">    <span class="keyword">private</span> OnViewDismissListener mOnViewDismissListener;</span><br><span class="line">    <span class="comment">// 悬浮窗的View</span></span><br><span class="line">    <span class="keyword">private</span> LinearLayout mPopView;</span><br><span class="line">    <span class="comment">// 悬浮窗内的各个控件</span></span><br><span class="line">    <span class="meta">@BindView</span>(R.id.pv_tv_query)</span><br><span class="line">    TextView tv_query;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.pv_tv_translate)</span><br><span class="line">    TextView tv_translation;</span><br><span class="line">    <span class="meta">@BindView</span>(R.id.pv_tv_explains)</span><br><span class="line">    TextView tv_explain;</span><br><span class="line">    <span class="comment">// 作为悬浮窗是否显示的标志</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isDismiss = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PopView</span><span class="params">(Context application)</span> </span>&#123;</span><br><span class="line">        mContext = application;</span><br><span class="line">        <span class="comment">// 获取系统的WindowManager</span></span><br><span class="line">        mWindowManager = (WindowManager) application.getSystemService(Context.WINDOW_SERVICE);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 计算获取悬浮窗的布局参数</span><br><span class="line">     * <span class="doctag">@return</span> the popView layout parameter</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">private</span> WindowManager.<span class="function">LayoutParams <span class="title">getPopViewParams</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> w = WindowManager.LayoutParams.MATCH_PARENT;</span><br><span class="line">        <span class="keyword">int</span> h = WindowManager.LayoutParams.WRAP_CONTENT;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> flags = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> type;</span><br><span class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">            type = WindowManager.LayoutParams.TYPE_TOAST;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            type = WindowManager.LayoutParams.TYPE_PHONE;</span><br><span class="line">        &#125;</span><br><span class="line">        WindowManager.LayoutParams layoutParams = <span class="keyword">new</span> WindowManager.LayoutParams(w, h, type, flags, PixelFormat.TRANSLUCENT);</span><br><span class="line">        layoutParams.gravity = Gravity.TOP;</span><br><span class="line">        layoutParams.format = PixelFormat.RGBA_8888;</span><br><span class="line">        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;</span><br><span class="line"></span><br><span class="line">        layoutParams.gravity = Gravity.CENTER | Gravity.TOP;</span><br><span class="line">        layoutParams.x = <span class="number">0</span>;</span><br><span class="line">        layoutParams.y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> layoutParams;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * remove the popView</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">removePoppedView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isDismiss)<span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (mWindowManager != <span class="keyword">null</span> &amp;&amp; mPopView != <span class="keyword">null</span>) &#123;</span><br><span class="line">            mWindowManager.removeView(mPopView);</span><br><span class="line">        &#125;</span><br><span class="line">        isDismiss = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * remove the popView and handle the dismiss mission</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">removePoppedViewAndClear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        removePoppedView();</span><br><span class="line">        <span class="keyword">if</span> (mOnViewDismissListener != <span class="keyword">null</span>) &#123;</span><br><span class="line">            mOnViewDismissListener.onViewDismiss();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        removePoppedViewAndClear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnViewDismissListener</span><span class="params">(OnViewDismissListener listener)</span> </span>&#123;</span><br><span class="line">        mOnViewDismissListener = listener;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * dismiss listener interface</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnViewDismissListener</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">onViewDismiss</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从上面的代码可以看出,创建悬浮窗需要以下的几个步骤:</p>
+<ol>
+<li>获取系统的<code>WindowManager</code>对象</li>
+<li>为悬浮窗设置相应的布局参数</li>
+<li>展现悬浮窗及处理相应的事件</li>
+</ol>
+<p>其中第2步就是我们代码里的<code>getPopViewParams()</code>方法,首先我们为悬浮窗设置了其宽高<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> w = WindowManager.LayoutParams.MATCH_PARENT;</span><br><span class="line"><span class="keyword">int</span> h = WindowManager.LayoutParams.WRAP_CONTENT;</span><br></pre></td></tr></table></figure></p>
+<p>随后根据系统的版本来设置悬浮窗的类型,关于这部分能内容,有兴趣的可以看一下<a href="http://www.liaohuqiu.net/cn/posts/android-windows-manager/" target="_blank" rel="external">Android 悬浮窗的小结</a>这篇博客,里面讲的很详细.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> type;</span><br><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">    type = WindowManager.LayoutParams.TYPE_TOAST;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    type = WindowManager.LayoutParams.TYPE_PHONE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后设置好其他的属性并把布局参数返回<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> flags = <span class="number">0</span>;</span><br><span class="line">WindowManager.LayoutParams layoutParams = <span class="keyword">new</span> WindowManager.LayoutParams(w, h, type, flags, PixelFormat.TRANSLUCENT);</span><br><span class="line">layoutParams.gravity = Gravity.TOP;</span><br><span class="line">layoutParams.format = PixelFormat.RGBA_8888;</span><br><span class="line">layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;</span><br><span class="line">layoutParams.gravity = Gravity.CENTER | Gravity.TOP;</span><br><span class="line">layoutParams.x = <span class="number">0</span>;</span><br><span class="line">layoutParams.y = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">return</span> layoutParams;</span><br></pre></td></tr></table></figure></p>
+<p>第3步是展示我们的悬浮窗,由于项目采用了<code>MVP</code>的架构,而<code>PopView</code>则是其中的一个View模块,下面我先给出有关悬浮窗的<code>MVP</code>代码<br><code>PopContract.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * the popup contract class</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PopContract</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">View</span> <span class="keyword">extends</span> <span class="title">BaseView</span>&lt;<span class="title">Presenter</span>&gt;</span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">showPopView</span><span class="params">(TransInfo info)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">Presenter</span> <span class="keyword">extends</span> <span class="title">BasePresenter</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">translate</span><span class="params">(String query)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们让<code>PopView</code>实现<code>PopContract.View</code>接口,然后实现<code>showPopView()</code>方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showPopView</span><span class="params">(TransInfo info)</span> </span>&#123;</span><br><span class="line">        removePoppedView();</span><br><span class="line">        <span class="keyword">if</span> (mPopView == <span class="keyword">null</span>) &#123;</span><br><span class="line">            mPopView = (LinearLayout) View.inflate(mContext, R.layout.pop_view, <span class="keyword">null</span>);</span><br><span class="line">            ButterKnife.bind(<span class="keyword">this</span>, mPopView);</span><br><span class="line">            mPopView.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        mWindowManager.addView(mPopView, getPopViewParams());</span><br><span class="line">        isDismiss = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中的<code>TranInfo</code>对象是我们获取网络翻译处理后的对象,我们会在后面讲到的.到这里我们的悬浮窗功能基本上实现了,但需要注意的是,由于我们用到了第三方的开源库,所以需要在依赖配置中配置我们的依赖<br><code>app/build.gradle</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;com.android.application&apos;</span><br><span class="line">apply plugin: &apos;android-apt&apos;</span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion 23</span><br><span class="line">    buildToolsVersion &quot;24.0.0 rc3&quot;</span><br><span class="line"></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId &quot;com.source.kevin.fingertrans&quot;</span><br><span class="line">        minSdkVersion 16</span><br><span class="line">        targetSdkVersion 23</span><br><span class="line">        versionCode 1</span><br><span class="line">        versionName &quot;1.0&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled false</span><br><span class="line">            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">        compile fileTree(include: [&apos;*.jar&apos;], dir: &apos;libs&apos;)</span><br><span class="line">        testCompile &apos;junit:junit:4.12&apos;</span><br><span class="line">        compile &apos;com.android.support:appcompat-v7:23.4.0&apos;</span><br><span class="line">        compile &apos;com.android.support:design:23.4.0&apos;</span><br><span class="line">        compile &apos;com.jakewharton:butterknife:8.0.1&apos;</span><br><span class="line">        apt &apos;com.jakewharton:butterknife-compiler:8.0.1&apos;</span><br><span class="line">        compile &apos;com.android.support:cardview-v7:23.4.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>项目根目录下的<code>build.gradle</code>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &apos;com.android.tools.build:gradle:2.0.0&apos;</span><br><span class="line"></span><br><span class="line">        classpath &apos;com.neenbedankt.gradle.plugins:android-apt:1.8&apos;</span><br><span class="line">        // NOTE: Do not place your application dependencies here; they belong</span><br><span class="line">        // in the individual module build.gradle files</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">repositories&#123;</span><br><span class="line">    mavenLocal()</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line">task clean(type: Delete) &#123;</span><br><span class="line">    delete rootProject.buildDir</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后我们可以在<code>MainActivity.java</code>中添加我们的测试代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">ClipboardManager</span>.<span class="title">OnPrimaryClipChangedListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Clipboard clipboard;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        clipboard = Clipboard.getInstance();</span><br><span class="line">        clipboard.setPrimaryClipChangedListener(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPrimaryClipChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String text = clipboard.getText();</span><br><span class="line">        Log.e(<span class="string">"Text"</span>, <span class="string">"粘贴板的内容是:"</span> + text);</span><br><span class="line">        PopView popView = <span class="keyword">new</span> PopView(FingerApp.get());</span><br><span class="line">        popView.showPopView(<span class="keyword">null</span>);</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>记住我们还需要在<code>AndroidManifest.xml</code>文件添加悬浮窗权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.SYSTEM_ALERT_WINDOW"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>运行我们的代码,当我们进行复制的时候就会在屏幕上方弹出我们的悬浮窗.可能部分的机型需要手动添加悬浮窗的权限.<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/test.jpg" alt="测试图">  </p>
+<p>到这里我们悬浮窗的功能就基本上完成了,下次我会带大家完成数据部分的功能.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/05/fingertrans02/" data-id="cirhxzrcf00159686qyd0tv74" data_title="Android项目实战---指尖翻译系列0x02" data_summary="上次我们实现了对粘贴板的内容获取与复制行为的监听,这次..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/05/fingertrans02/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-05T09:47:38.435Z" itemprop="dateModified">2016-08-05</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/05/fingertrans01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android项目实战---指尖翻译系列0x01</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建悬浮窗的布局"><span class="toc-number">1.</span> <span class="toc-text">创建悬浮窗的布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#悬浮窗的实现"><span class="toc-number">2.</span> <span class="toc-text">悬浮窗的实现</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/05/fingertrans02/">Android项目实战---指尖翻译系列0x02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/05/fingertrans01/">Android项目实战---指尖翻译系列0x01</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/04/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/03/view00/">Android学习笔记---自定义View基础</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/02/mvp03/">Android学习笔记---MVP架构系列0x03</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/05/fingertrans02/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
