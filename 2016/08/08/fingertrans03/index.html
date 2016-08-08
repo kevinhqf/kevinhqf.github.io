@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android项目实战---指尖翻译系列0x03 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据请求和处理的部分完成.
+代码实现首先我们使用的是有道翻译API,我们需要申请一个API key才可使用api,申请的步骤很简单,我就不多说了.下面是API的数据接口:
+
+http://fanyi.youdao.com/openapi.do?keyfrom=&amp;amp;key=&amp;amp;type=data&amp;amp;doctype=&amp;amp;vers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android项目实战---指尖翻译系列0x03">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/08/fingertrans03/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据请求和处理的部分完成.
+代码实现首先我们使用的是有道翻译API,我们需要申请一个API key才可使用api,申请的步骤很简单,我就不多说了.下面是API的数据接口:
+
+http://fanyi.youdao.com/openapi.do?keyfrom=&amp;amp;key=&amp;amp;type=data&amp;amp;doctype=&amp;amp;vers">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/sample.gif">
+<meta property="og:updated_time" content="2016-08-08T06:06:02.904Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android项目实战---指尖翻译系列0x03">
+<meta name="twitter:description" content="上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据请求和处理的部分完成.
+代码实现首先我们使用的是有道翻译API,我们需要申请一个API key才可使用api,申请的步骤很简单,我就不多说了.下面是API的数据接口:
+
+http://fanyi.youdao.com/openapi.do?keyfrom=&amp;amp;key=&amp;amp;type=data&amp;amp;doctype=&amp;amp;vers">
+<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/sample.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-fingertrans03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/08/fingertrans03/" class="article-date">
+  <time datetime="2016-08-08T06:06:02.908Z" itemprop="datePublished">2016-08-08</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android项目实战---指尖翻译系列0x03
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据请求和处理的部分完成.</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>首先我们使用的是<a href="http://fanyi.youdao.com/openapi?path=data-mode" target="_blank" rel="external">有道翻译API</a>,我们需要申请一个<code>API key</code>才可使用api,申请的步骤很简单,我就不多说了.下面是API的数据接口:</p>
+<blockquote>
+<p><a href="http://fanyi.youdao.com/openapi.do?keyfrom=" target="_blank" rel="external">http://fanyi.youdao.com/openapi.do?keyfrom=</a><keyfrom>&amp;key=<key>&amp;type=data&amp;doctype=<doctype>&amp;version=1.1&amp;q=要翻译的文本  </doctype></key></keyfrom></p>
+</blockquote>
+<p>可以看到我们需要填入的参数有</p>
+<ul>
+<li>keyfrom 我申请的<code>keyfrom</code>是<code>fingertrans</code></li>
+<li>key 申请的key是<code>1372247841</code></li>
+<li>doctype 返回的数据格式,这里我们选择<code>json</code></li>
+<li>q 是我们需要翻译的内容</li>
+</ul>
+<p>接下来我们来看一下有道官方提供的返回数据的结果<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "errorCode":0</span><br><span class="line">    "query":"good",</span><br><span class="line">    "translation":["好"], // 有道翻译</span><br><span class="line">    "basic":&#123; // 有道词典-基本词典</span><br><span class="line">        "phonetic":"gʊd"</span><br><span class="line">        "uk-phonetic":"gʊd" //英式发音</span><br><span class="line">        "us-phonetic":"ɡʊd" //美式发音</span><br><span class="line">        "explains":[</span><br><span class="line">            "好处",</span><br><span class="line">            "好的"</span><br><span class="line">            "好"</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    "web":[ // 有道词典-网络释义</span><br><span class="line">        &#123;</span><br><span class="line">            "key":"good",</span><br><span class="line">            "value":["良好","善","美好"]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;...&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>根据返回的数据格式,我们只保留部分对我们有用的数据作为我们的数据对象,这里我们需要的是<code>query</code>,<code>translation</code>,<code>basic</code>这些属性的数据.下面我们就可以根据返回的数据构造我们的对象了,创建<code>TransResult.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * the json result</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransResult</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; translation;</span><br><span class="line">    TransBasic basic;</span><br><span class="line">    String query;</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">getTranslation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> translation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTranslation</span><span class="params">(List&lt;String&gt; translation)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.translation = translation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TransBasic <span class="title">getBasic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> basic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBasic</span><span class="params">(TransBasic basic)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.basic = basic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getQuery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> query;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setQuery</span><span class="params">(String query)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.query = query;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>TransBasic.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * the basic translation information</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransBasic</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;String&gt; explains;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">getExplains</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> explains;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setExplains</span><span class="params">(List&lt;String&gt; explains)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.explains = explains;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后我们再把网络的数据进行整合,创建<code>TransInfo.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * the popView data</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransInfo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String query;</span><br><span class="line">    <span class="keyword">private</span> String translations;</span><br><span class="line">    <span class="keyword">private</span> String explains;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TransInfo</span><span class="params">(String query, String translations, String explains)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.query = query;</span><br><span class="line">        <span class="keyword">this</span>.translations = translations;</span><br><span class="line">        <span class="keyword">this</span>.explains = explains;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getQuery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> query;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setQuery</span><span class="params">(String query)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.query = query;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTranslations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> translations;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTranslations</span><span class="params">(String translations)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.translations = translations;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getExplains</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> explains;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setExplains</span><span class="params">(String explains)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.explains = explains;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有了数据对象后我们就可以进行数据请求的封装了,由于我们采用的是<code>retrofit</code>进行网络的数据请求,所以首先创建一个<code>TranslateService.java</code>,根据有道API的数据接口来构造我们的服务接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * the translate service</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TranslateService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"openapi.do"</span>)</span><br><span class="line">    <span class="function">Observable&lt;TransResult&gt; <span class="title">translate</span><span class="params">(@Query(<span class="string">"keyfrom"</span>)</span> String keyfrom,</span><br><span class="line">                                      @<span class="title">Query</span><span class="params">(<span class="string">"key"</span>)</span> String key,</span><br><span class="line">                                      @<span class="title">Query</span><span class="params">(<span class="string">"type"</span>)</span> String type,</span><br><span class="line">                                      @<span class="title">Query</span><span class="params">(<span class="string">"doctype"</span>)</span> String doctype,</span><br><span class="line">                                      @<span class="title">Query</span><span class="params">(<span class="string">"version"</span>)</span> String version,</span><br><span class="line">                                      @<span class="title">Query</span><span class="params">(<span class="string">"q"</span>)</span> String query)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果对<code>retrofit</code>的使用不了解的话可以看一下我的另一篇博客<a href="https://kevinhqf.github.io/2016/07/27/retrofit-basic/">Android学习笔记—开源工具Retrofit的基本使用</a>.然后我们来将网络请求进行封装,创建<code>HttpMethods.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * the network utils class</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpMethods</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String BASE_URL = <span class="string">"http://fanyi.youdao.com/"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY = <span class="string">"1372247841"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_FROM = <span class="string">"fingertrans"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_TIMEOUT = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Retrofit retrofit;</span><br><span class="line">    <span class="keyword">private</span> TranslateService translateService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">HttpMethods</span><span class="params">()</span></span>&#123;</span><br><span class="line">        OkHttpClient.Builder builder=<span class="keyword">new</span> OkHttpClient.Builder();</span><br><span class="line">        builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);</span><br><span class="line"></span><br><span class="line">        retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">                .client(builder.build())</span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</span><br><span class="line">                .baseUrl(BASE_URL)</span><br><span class="line">                .build();</span><br><span class="line">        translateService = retrofit.create(TranslateService.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * get the translation from the internet</span><br><span class="line">     * <span class="doctag">@param</span> subscriber the subscriber</span><br><span class="line">     * <span class="doctag">@param</span> query the word to translate</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">translate</span><span class="params">(Subscriber&lt;TransResult&gt; subscriber,String query)</span></span>&#123;</span><br><span class="line">        translateService.translate(KEY_FROM,KEY,<span class="string">"data"</span>,<span class="string">"json"</span>,<span class="string">"1.1"</span>,query)</span><br><span class="line">                .subscribeOn(Schedulers.io())</span><br><span class="line">                .unsubscribeOn(Schedulers.io())</span><br><span class="line">                .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                .subscribe(subscriber);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpMethods <span class="title">getInstance</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> HttpMethods instance = <span class="keyword">new</span> HttpMethods();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里采用了<code>Retrofit + RxJava</code>进行网络数据的请求,对于两者如何结合使用,我推荐大家看一下这篇文章<a href="http://gank.io/post/56e80c2c677659311bed9841" target="_blank" rel="external">RxJava 与 Retrofit 结合的最佳实践</a>.<br>接下来我们就需要实现我们的<code>Presenter</code>来完成数据请求和UI界面的刷新了.创建<code>PopPresenter.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * the pop presenter</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PopPresenter</span> <span class="keyword">implements</span> <span class="title">PopContract</span>.<span class="title">Presenter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PopContract.View mView;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PopPresenter</span><span class="params">(PopContract.View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mView = view;</span><br><span class="line"></span><br><span class="line">        mView.setPresenter(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">translate</span><span class="params">(String query)</span> </span>&#123;</span><br><span class="line">        Subscriber&lt;TransResult&gt; subscriber = <span class="keyword">new</span> Subscriber&lt;TransResult&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(TransResult transResult)</span> </span>&#123;</span><br><span class="line">                mView.showPopView(processResult(transResult));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        HttpMethods.getInstance().translate(subscriber, query);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     *  process the web data</span><br><span class="line">     * <span class="doctag">@param</span> result the raw data</span><br><span class="line">     * <span class="doctag">@return</span> the popView content data</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> TransInfo <span class="title">processResult</span><span class="params">(TransResult result)</span> </span>&#123;</span><br><span class="line">        String explain = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (result.getBasic() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            List&lt;String&gt; explains = result.getBasic().getExplains();</span><br><span class="line">            explain = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; explains.size(); ++i) &#123;</span><br><span class="line">                explain += explains.get(i);</span><br><span class="line">                <span class="keyword">if</span> (i + <span class="number">1</span> &lt; explains.size())</span><br><span class="line">                    explain += <span class="string">"\n"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TransInfo(result.getQuery(), result.getTranslation().get(<span class="number">0</span>), explain);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于我们已经获取了数据,所以我们可以在悬浮窗上展现出来,在<code>PopView.java</code>文件中的<code>showPopView()</code>方法可以修改为<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showPopView</span><span class="params">(TransInfo info)</span> </span>&#123;</span><br><span class="line">    removePoppedView();</span><br><span class="line">    <span class="keyword">if</span> (mPopView == <span class="keyword">null</span>) &#123;</span><br><span class="line">        mPopView = (LinearLayout) View.inflate(mContext, R.layout.pop_view, <span class="keyword">null</span>);</span><br><span class="line">        ButterKnife.bind(<span class="keyword">this</span>, mPopView);</span><br><span class="line">        mPopView.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">        tv_query.setText(info.getQuery());</span><br><span class="line">        <span class="keyword">if</span> (info.getExplains() == <span class="keyword">null</span>) &#123;</span><br><span class="line">            tv_explain.setVisibility(View.GONE);</span><br><span class="line">            tv_translation.setVisibility(View.VISIBLE);</span><br><span class="line">            tv_translation.setText(info.getTranslations());</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            tv_translation.setVisibility(View.GONE);</span><br><span class="line">            tv_explain.setVisibility(View.VISIBLE);</span><br><span class="line">            tv_explain.setText(info.getExplains());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mWindowManager.addView(mPopView, getPopViewParams());</span><br><span class="line">        isDismiss = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后我们可以测试一下能否正常运行并得到我们想要的结果,<code>MainActivity.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">ClipboardManager</span>.<span class="title">OnPrimaryClipChangedListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Clipboard clipboard;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        clipboard = Clipboard.getInstance();</span><br><span class="line">        clipboard.setPrimaryClipChangedListener(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPrimaryClipChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String text = clipboard.getText();</span><br><span class="line">        Log.e(<span class="string">"Text"</span>, <span class="string">"粘贴板的内容是:"</span> + text);</span><br><span class="line">        PopView view = <span class="keyword">new</span> PopView(FingerApp.get());</span><br><span class="line">        PopPresenter popPresenter = <span class="keyword">new</span> PopPresenter(view);</span><br><span class="line">        popPresenter.translate(text);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后别忘了添加网络权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>最后的效果是这样的<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/sample.gif" alt="效果图">  </p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>本次指尖翻译基本功能的系列教程已经完成了,大家可以利用这个功能全继续完善自己的应用,希望这个教程能对大家的学习有所帮助.</p>
+<p>本系列教程的完整代码我已经上传到我的<a href="https://github.com/kevinhqf/FTSample" target="_blank" rel="external">Github</a>,如果想对<strong><code>指尖翻译</code></strong>的完整项目有更多的了解可以到项目的<a href="https://github.com/kevinhqf/FingerTrans" target="_blank" rel="external">Github地址</a>.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans03/" data-id="cirln2crn0018bo86om4x0l6t" data_title="Android项目实战---指尖翻译系列0x03" data_summary="上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/08/fingertrans03/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-08T06:06:02.904Z" itemprop="dateModified">2016-08-08</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/08/fingertrans00/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android项目实战---指尖翻译系列0x00
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/05/fingertrans02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android项目实战---指尖翻译系列0x02</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">1.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/08/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/08/fingertrans03/">Android项目实战---指尖翻译系列0x03</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/05/fingertrans02/">Android项目实战---指尖翻译系列0x02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/05/fingertrans01/">Android项目实战---指尖翻译系列0x01</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/03/view00/">Android学习笔记---自定义View基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/08/fingertrans03/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
