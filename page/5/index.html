@@ -60,9 +60,9 @@
           <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
         
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS" target="_blank"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
@@ -73,6 +73,75 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-DesignPatterns_0A" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/06/24/DesignPatterns_0A/" class="article-date">
+  <time datetime="2016-06-24T05:05:03.321Z" itemprop="datePublished">2016-06-24</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/24/DesignPatterns_0A/">浅谈Java设计模式系列0x0A---代理模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://kevinhqf.github.io/2016/06/15/DesignPatterns_06/">浅谈Java设计模式系列0x06—适配器模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_07/">浅谈Java设计模式系列0x07—桥接模式</a><br><a href="https://kevinhqf.github.io/2016/06/18/DesignPatterns_08/">浅谈Java设计模式系列0x08—装饰器模式</a><br><a href="https://kevinhqf.github.io/2016/06/19/DesignPatterns_09/">浅谈Java设计模式系列0x09—外观模式</a>  </p>
+<p>上次我给大家介绍了外观模式,它提供了高层的统一接口,使得子系统的使用更加的容易;<br>本次我给大家介绍的同样也是一种结构型的设计模式—-代理模式;  </p>
+<h4 id="代理是什么鬼"><a href="#代理是什么鬼" class="headerlink" title="代理是什么鬼"></a>代理是什么鬼</h4><p>其实代理比较好理解,就像我们不想到实体店买东西,我们就通过上网,在网上商店购买商品;<br>我们下单后,网上的代购网站就会帮我们代购商品,购买商品的是代购网站,这个代购网站就是代理了;<br><strong>代理模式(Proxy Pattern)</strong> : 给某一个对象提供一个代理,并由代理对象控制原对象的引用;  </p>
+<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><ul>
+<li><strong>抽象主题角色(Subject)</strong>:它声明了<code>真实主题</code>和<code>代理主题</code>的共同接口，这样一来在任何使用真实主题的地方都可以使用代理主题，客户端通常需要针对抽象主题角色进行编程;</li>
+<li><strong>代理主题角色(Proxy)</strong>:用来代理和封装<code>真实主题</code>;</li>
+<li><strong>真实主题角色(RealSubject)</strong>:它定义了<code>代理角色</code>所代表的<code>真实对象</code>，在真实主题角色中实现了真实的业务操作，客户端可以通过代理主题角色间接调用真实主题角色中定义的操作;
+        
+          <p class="article-more-link">
+            <a href="/2016/06/24/DesignPatterns_0A/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/" data-id="cirqc6kc9000k9y86dsjqz71i" data_title="浅谈Java设计模式系列0x0A---代理模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/06/24/DesignPatterns_0A/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-06-24T05:05:03.321Z" itemprop="dateModified">2016-06-24</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
   
     <article id="post-DesignPatterns_09" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -115,9 +184,9 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/" data-id="cirqc2sh7000i5j868nvqv1kk" data_title="浅谈Java设计模式系列0x09---外观模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/" data-id="cirqc6kc0000g9y865jv7ie3o" data_title="浅谈Java设计模式系列0x09---外观模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/06/19/DesignPatterns_09/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -185,9 +254,9 @@ Updated:<time datetime="2016-06-19T06:24:59.211Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/" data-id="cirqc2sgv000e5j86ws3tl8zw" data_title="浅谈Java设计模式系列0x08---装饰器模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/" data-id="cirqc6kc4000i9y86gs8cw9ov" data_title="浅谈Java设计模式系列0x08---装饰器模式" data_summary="浅谈Java设计模式系列0x06—适配器模式浅谈Jav..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/06/18/DesignPatterns_08/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -254,9 +323,9 @@ Updated:<time datetime="2016-06-18T02:59:01.025Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/18/DesignPatterns_07/" data-id="cirqc2sgl000c5j868po6mzvl" data_title="浅谈Java设计模式系列0x07---桥接模式" data_summary="浅谈Java设计模式系列0x06—适配器模式本次我来继..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/18/DesignPatterns_07/" data-id="cirqc6kbr000e9y86mirslc2c" data_title="浅谈Java设计模式系列0x07---桥接模式" data_summary="浅谈Java设计模式系列0x06—适配器模式本次我来继..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/18/DesignPatterns_07/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/06/18/DesignPatterns_07/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -319,9 +388,9 @@ Updated:<time datetime="2016-06-18T01:45:07.121Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/" data-id="cirqc2sfu00095j86x111qxil" data_title="浅谈Java设计模式系列0x06---适配器模式" data_summary="前面我所介绍的都是创建型的设计模式,本篇开始我来给大家..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/" data-id="cirqc6kap00099y86me62ggm1" data_title="浅谈Java设计模式系列0x06---适配器模式" data_summary="前面我所介绍的都是创建型的设计模式,本篇开始我来给大家..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/06/15/DesignPatterns_06/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -343,94 +412,11 @@ Updated:<time datetime="2016-06-15T08:28:18.046Z" itemprop="dateModified">2016-0
 
 
   
-    <article id="post-DesignPatterns_05" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/14/DesignPatterns_05/" class="article-date">
-  <time datetime="2016-06-14T12:51:46.629Z" itemprop="datePublished">2016-06-14</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/14/DesignPatterns_05/">浅谈Java设计模式系列0x05---建造者模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_00/">浅谈Java设计模式系列0x00</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_01/">浅谈Java设计模式系列0x01—单例模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_02/">浅谈Java设计模式系列0x02—简单工厂模式</a><br><a href="https://kevinhqf.github.io/2016/06/11/DesignPatterns_03/">浅谈Java设计模式系列0x03—工厂方法模式</a><br><a href="https://kevinhqf.github.io/2016/06/13/DesignPatterns_04/">浅谈Java设计模式系列0x04—抽象工厂模式</a></p>
-<p>我们前面讲的设计模式都是创建型的模式,这次要讲的也是一种创建型的模式—–建造者模式;  </p>
-<h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><p>建造者模式是将一个复杂对象的构建与它的表示分离,使得同样的构建过程可以创建不同的表示;<br>建造者模式是一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户不需要知道内部的具体构建细节;  </p>
-<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><p><strong>抽象建造者(Builder)</strong>:  </p>
-<ul>
-<li>为创建一个Product对象的各个部件指定的抽象接口;  </li>
-</ul>
-<p><strong>具体建造者(ConcreteBuilder)</strong>:  </p>
-<ul>
-<li>实现Builder的接口以构造和装配该产品的各个部件;  </li>
-<li>定义并明确它所创建的表示;  </li>
-<li>提供一个检索产品的接口;  </li>
-</ul>
-<p><strong>指挥者(Director)</strong>:</p>
-<ul>
-<li>构造一个使用Builder接口的对象;</li>
-</ul>
-<p><strong>产品角色(Product)</strong>:</p>
-<ul>
-<li>表示被构造的复杂对象,ConcreteBuilder创建该产品的内部表示并定义它的装配过程;  </li>
-<li>包含定义组成部件的类,包括将这些部件装配成最终产品的接口
-        
-          <p class="article-more-link">
-            <a href="/2016/06/14/DesignPatterns_05/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/" data-id="cirqc2sfl00075j869eq5eeqy" data_title="浅谈Java设计模式系列0x05---建造者模式" data_summary="浅谈Java设计模式系列0x00浅谈Java设计模式系..." class="article-share-link">Compartir</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/14/DesignPatterns_05/#disqus_thread" class="article-comment-link">Comentarios</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-06-14</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Previo</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Siguiente &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -456,9 +442,9 @@ Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorías</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -469,9 +455,9 @@ Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archivos</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -479,9 +465,13 @@ Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Posts recientes</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/11/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+          </li>
         
           <li>
             <a href="/2016/08/09/realm-basic/">Realm for Android基本教程---一个简便的数据库</a>
@@ -497,10 +487,6 @@ Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/08/05/fingertrans02/">Android项目实战---指尖翻译系列0x02</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/05/fingertrans01/">Android项目实战---指尖翻译系列0x01</a>
           </li>
         
       </ul>
@@ -522,7 +508,7 @@ Updated:<time datetime="2016-06-14T12:51:46.629Z" itemprop="dateModified">2016-0
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Kevin HO<br>
-      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
     
     </div>
   </div>

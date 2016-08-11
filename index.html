@@ -60,9 +60,9 @@
           <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
         
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS" target="_blank"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
@@ -73,6 +73,83 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-effective-java00" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/11/effective-java00/" class="article-date">
+  <time datetime="2016-08-11T13:04:04.109Z" itemprop="datePublished">2016-08-11</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/11/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>最近在阅读学习一本关于Java的书籍 — <strong><em>Effective Java</em></strong>.这本书讲的是在如何高效的使用Java,让我们的代码更加的高质量和高效率.<br>这本书可以说是Java进阶的必备书籍.对于想在Java方面有所提高的同学,这本书我觉得是个不错的选择.通过本系列的学习笔记,我会把在我阅读学习时获得的感悟和知识记录下来.同时这个也是相当于我的读书笔记.</p>
+<h4 id="考虑使用静态工厂方法代替构造器"><a href="#考虑使用静态工厂方法代替构造器" class="headerlink" title="考虑使用静态工厂方法代替构造器"></a>考虑使用<code>静态工厂方法</code>代替<code>构造器</code></h4><p>首先书本的第一个主题是如何使用Java高效的创建和销毁对象.书本的第一条技巧就是<strong><code>考虑使用静态工厂方法代替构造器</code></strong>.<br>通常如果想获得一个类的实例,我们最直接的方法就是利用该类的共有构造器来实例化一个对象.还有一种办法就是在类中提供一个公有的<code>静态工厂方法</code>用于返回类的实例.下面是一个Java中Boolean类内置的一个例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b ? Boolean.TRUE : Boolean.FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是这里的<code>静态工厂方法</code>与设计模式中的工厂方法是不同的.<br>采用<code>静态工厂方法</code>来创建类的实例相对采用简单的构造器有下面的几个优势:  </p>
+<ol>
+<li><code>它们有特定的名称.</code>普通的构造器只能与类同名,但<code>静态工厂方法</code>可以有自己的名称,易于代码的阅读和使用.</li>
+<li><code>避免重复创建相同的实例.</code>当我们需要相同的对象是,可以使用预先创建好的实例,或使用缓存起来的实例.而每次调用构造器都会创建一个对象.</li>
+<li><strong><code>可以返回类的任何子类对象.</code></strong>这条优势我也不太明白,所以我先在此做个记号.后面若有所感悟会回来补充的.</li>
+</ol>
+<p><code>静态工厂方法</code>也有它的缺点:</p>
+<ol>
+<li>类必须含有公有或受保护的构造器,否则无法子类化.</li>
+<li>它与其他的静态方法没有区别.因此我们需要正确的对<code>静态工厂方法</code>进行命名.<br>下面是一些惯用的命名:<ul>
+<li><code>valueOf()</code> 类型转换</li>
+<li><code>getInstance()</code> 通过不同的参数返回不同的实例</li>
+<li><code>newInstance()</code> 与getInstance()类似,但保证每次返回的实例都是唯一的</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/11/effective-java00/" data-id="cirqc6ke500129y86tq1iiu21" data_title="Effective Java学习系列 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/11/effective-java00/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-11T13:04:04.109Z" itemprop="dateModified">2016-08-11</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
   
     <article id="post-realm-basic" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -116,9 +193,9 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/09/realm-basic/" data-id="cirqc2smc001o5j86ntcgikv2" data_title="Realm for Android基本教程---一个简便的数据库" data_summary="Realm是一款开源的数据库工具,它具有快速,易于使用..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/09/realm-basic/" data-id="cirqc6kg3001o9y86n4v1zx4d" data_title="Realm for Android基本教程---一个简便的数据库" data_summary="Realm是一款开源的数据库工具,它具有快速,易于使用..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/09/realm-basic/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/08/09/realm-basic/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -187,9 +264,9 @@ Updated:<time datetime="2016-08-09T07:24:32.649Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans00/" data-id="cirqc2sir000w5j86rba2bj3p" data_title="Android项目实战---指尖翻译系列0x00" data_summary="本系列是一个Android的开源项目的教程,这个开源的..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans00/" data-id="cirqc6kee00159y86sewvsuji" data_title="Android项目实战---指尖翻译系列0x00" data_summary="本系列是一个Android的开源项目的教程,这个开源的..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/08/fingertrans00/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/08/08/fingertrans00/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -262,9 +339,9 @@ Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans03/" data-id="cirqc2sjf00155j86fan1gm8v" data_title="Android项目实战---指尖翻译系列0x03" data_summary="上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans03/" data-id="cirqc6keq001c9y867z3iynmz" data_title="Android项目实战---指尖翻译系列0x03" data_summary="上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/08/fingertrans03/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/08/08/fingertrans03/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -326,9 +403,9 @@ Updated:<time datetime="2016-08-08T06:06:02.904Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/05/fingertrans02/" data-id="cirqc2sja00135j86fo7vk0cd" data_title="Android项目实战---指尖翻译系列0x02" data_summary="上次我们实现了对粘贴板的内容获取与复制行为的监听,这次..." class="article-share-link">Compartir</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/05/fingertrans02/" data-id="cirqc6kel001a9y86hghehmns" data_title="Android项目实战---指尖翻译系列0x02" data_summary="上次我们实现了对粘贴板的内容获取与复制行为的监听,这次..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/05/fingertrans02/#disqus_thread" class="article-comment-link">Comentarios</a>
+        <a href="http://kevinhqf.github.io/2016/08/05/fingertrans02/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -350,84 +427,11 @@ Updated:<time datetime="2016-08-05T09:47:38.435Z" itemprop="dateModified">2016-0
 
 
   
-    <article id="post-fingertrans01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/05/fingertrans01/" class="article-date">
-  <time datetime="2016-08-05T07:08:22.175Z" itemprop="datePublished">2016-08-05</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/05/fingertrans01/">Android项目实战---指尖翻译系列0x01</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>从这次开始,我就会带着大家一步一步的实现<code>指尖翻译</code>这个项目.首先要做到即时的翻译就需要获取到粘贴板的内容.因为我们的项目是通过复制内容然后从粘贴板中获取再进行翻译的.所以首先我们要先获取粘贴板的内容.</p>
-<h4 id="粘贴板API的使用"><a href="#粘贴板API的使用" class="headerlink" title="粘贴板API的使用"></a>粘贴板API的使用</h4><p>通过查看官网手册的<a href="https://developer.android.com/guide/topics/text/copy-paste.html">粘贴板的API</a>,我们可以通过<code>getSystemService(CLIPBOARD_SERVICE)</code>得到<code>ClipboardManager</code>对象,系统粘贴板中每次只会持有一个<code>ClipData</code>对象,而一个<code>ClipData</code>对象包含一个<code>ClipDescription</code>和一个或多个的<code>ClipData.Item</code>对象.其中的<code>ClipData.Item</code>对象包含的就是我们需要的数据.这些数据包含文本,URI或是<code>Intent data</code>.我们只需关注文本即可.<br>从粘贴板获取我们所需的文本基本上可以通过下面的步骤实现:</p>
-<ol>
-<li><p>获取全局的<code>ClipboardManager</code>对象</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>判断当前的粘贴板的数据格式是否符合要求</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 粘贴板是否有数据</span></span><br><span class="line"><span class="keyword">if</span> (!(clipboard.hasPrimaryClip())) &#123;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!(clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN))) &#123;</span><br><span class="line"><span class="comment">// 数据格式不符合要求</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">// 数据格式符合要求</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从粘贴板获取文本数据</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// 假设应用每次只处理一个item</span></span><br><span class="line">ClipData.Item item = clipboard.getPrimaryClip().getItemAt(<span class="number">0</span>);</span><br><span class="line">   <span class="comment">// 将数据转换为文本</span></span><br><span class="line">   String text = item.coerceToText(context).toString();</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/05/fingertrans01/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/05/fingertrans01/" data-id="cirqc2sj400115j86f4vobqpn" data_title="Android项目实战---指尖翻译系列0x01" data_summary="从这次开始,我就会带着大家一步一步的实现指尖翻译这个项..." class="article-share-link">Compartir</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/05/fingertrans01/#disqus_thread" class="article-comment-link">Comentarios</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-05T07:08:22.167Z" itemprop="dateModified">2016-08-05</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Siguiente &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -453,9 +457,9 @@ Updated:<time datetime="2016-08-05T07:08:22.167Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorías</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -466,9 +470,9 @@ Updated:<time datetime="2016-08-05T07:08:22.167Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archivos</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -476,9 +480,13 @@ Updated:<time datetime="2016-08-05T07:08:22.167Z" itemprop="dateModified">2016-0
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Posts recientes</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/11/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+          </li>
         
           <li>
             <a href="/2016/08/09/realm-basic/">Realm for Android基本教程---一个简便的数据库</a>
@@ -494,10 +502,6 @@ Updated:<time datetime="2016-08-05T07:08:22.167Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/08/05/fingertrans02/">Android项目实战---指尖翻译系列0x02</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/05/fingertrans01/">Android项目实战---指尖翻译系列0x01</a>
           </li>
         
       </ul>
@@ -519,7 +523,7 @@ Updated:<time datetime="2016-08-05T07:08:22.167Z" itemprop="dateModified">2016-0
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Kevin HO<br>
-      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
     
     </div>
   </div>

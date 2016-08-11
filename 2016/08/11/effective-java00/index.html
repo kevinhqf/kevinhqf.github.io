@@ -3,38 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android项目实战---指尖翻译系列0x00 | Kevin&#39;s GHB</title>
+  <title>Effective Java学习系列 --- 创建与销毁对象01 | Kevin&#39;s GHB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本系列是一个Android的开源项目的教程,这个开源的项目叫做指尖翻译,是一个即时的翻译应用.在后面我会将本开源项目的实现思路和实现步骤一一都告诉大家,希望这个系列能对Android的学习者有一定的帮助.
-涉及的技术知识点
-采用MVP架构实现
-使用 Retrofit + RxJava 进行网络服务的访问和数据的加载
-使用 ButterKnife 简化 View 的绑定
-采用了有道翻译的API
-实现">
+  <meta name="description" content="最近在阅读学习一本关于Java的书籍 — Effective Java.这本书讲的是在如何高效的使用Java,让我们的代码更加的高质量和高效率.这本书可以说是Java进阶的必备书籍.对于想在Java方面有所提高的同学,这本书我觉得是个不错的选择.通过本系列的学习笔记,我会把在我阅读学习时获得的感悟和知识记录下来.同时这个也是相当于我的读书笔记.
+考虑使用静态工厂方法代替构造器首先书本的第一个主题是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android项目实战---指尖翻译系列0x00">
-<meta property="og:url" content="http://kevinhqf.github.io/2016/08/08/fingertrans00/index.html">
+<meta property="og:title" content="Effective Java学习系列 --- 创建与销毁对象01">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/11/effective-java00/index.html">
 <meta property="og:site_name" content="Kevin's GHB">
-<meta property="og:description" content="本系列是一个Android的开源项目的教程,这个开源的项目叫做指尖翻译,是一个即时的翻译应用.在后面我会将本开源项目的实现思路和实现步骤一一都告诉大家,希望这个系列能对Android的学习者有一定的帮助.
-涉及的技术知识点
-采用MVP架构实现
-使用 Retrofit + RxJava 进行网络服务的访问和数据的加载
-使用 ButterKnife 简化 View 的绑定
-采用了有道翻译的API
-实现">
-<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/sample.gif">
-<meta property="og:updated_time" content="2016-08-08T06:13:28.764Z">
+<meta property="og:description" content="最近在阅读学习一本关于Java的书籍 — Effective Java.这本书讲的是在如何高效的使用Java,让我们的代码更加的高质量和高效率.这本书可以说是Java进阶的必备书籍.对于想在Java方面有所提高的同学,这本书我觉得是个不错的选择.通过本系列的学习笔记,我会把在我阅读学习时获得的感悟和知识记录下来.同时这个也是相当于我的读书笔记.
+考虑使用静态工厂方法代替构造器首先书本的第一个主题是">
+<meta property="og:updated_time" content="2016-08-11T13:04:04.109Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android项目实战---指尖翻译系列0x00">
-<meta name="twitter:description" content="本系列是一个Android的开源项目的教程,这个开源的项目叫做指尖翻译,是一个即时的翻译应用.在后面我会将本开源项目的实现思路和实现步骤一一都告诉大家,希望这个系列能对Android的学习者有一定的帮助.
-涉及的技术知识点
-采用MVP架构实现
-使用 Retrofit + RxJava 进行网络服务的访问和数据的加载
-使用 ButterKnife 简化 View 的绑定
-采用了有道翻译的API
-实现">
-<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/sample.gif">
+<meta name="twitter:title" content="Effective Java学习系列 --- 创建与销毁对象01">
+<meta name="twitter:description" content="最近在阅读学习一本关于Java的书籍 — Effective Java.这本书讲的是在如何高效的使用Java,让我们的代码更加的高质量和高效率.这本书可以说是Java进阶的必备书籍.对于想在Java方面有所提高的同学,这本书我觉得是个不错的选择.通过本系列的学习笔记,我会把在我阅读学习时获得的感悟和知识记录下来.同时这个也是相当于我的读书笔记.
+考虑使用静态工厂方法代替构造器首先书本的第一个主题是">
   
     <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
   
@@ -93,17 +76,17 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-fingertrans00" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-effective-java00" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/08/08/fingertrans00/" class="article-date">
-  <time datetime="2016-08-08T06:13:28.772Z" itemprop="datePublished">2016-08-08</time>
+<a href="/2016/08/11/effective-java00/" class="article-date">
+  <time datetime="2016-08-11T13:04:04.109Z" itemprop="datePublished">2016-08-11</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
+    <a class="article-category-link" href="/categories/java/">Java</a>
   </div>
 
   </div>
@@ -114,7 +97,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Android项目实战---指尖翻译系列0x00
+      Effective Java学习系列 --- 创建与销毁对象01
     </h1>
   
 
@@ -123,26 +106,32 @@
     <div class="article-entry" itemprop="articleBody">
       
 		
-        <p>本系列是一个Android的开源项目的教程,这个开源的项目叫做<a href="https://github.com/kevinhqf/FingerTrans" target="_blank" rel="external">指尖翻译</a>,是一个即时的翻译应用.<em>在后面我会将本开源项目的实现思路和实现步骤一一都告诉大家</em>,希望这个系列能对Android的学习者有一定的帮助.</p>
-<h4 id="涉及的技术知识点"><a href="#涉及的技术知识点" class="headerlink" title="涉及的技术知识点"></a>涉及的技术知识点</h4><ol>
-<li>采用MVP架构实现</li>
-<li>使用 Retrofit + RxJava 进行网络服务的访问和数据的加载</li>
-<li>使用 ButterKnife 简化 View 的绑定</li>
-<li>采用了有道翻译的API</li>
-<li>实现对系统粘贴板的监听</li>
+        <p>最近在阅读学习一本关于Java的书籍 — <strong><em>Effective Java</em></strong>.这本书讲的是在如何高效的使用Java,让我们的代码更加的高质量和高效率.<br>这本书可以说是Java进阶的必备书籍.对于想在Java方面有所提高的同学,这本书我觉得是个不错的选择.通过本系列的学习笔记,我会把在我阅读学习时获得的感悟和知识记录下来.同时这个也是相当于我的读书笔记.</p>
+<h4 id="考虑使用静态工厂方法代替构造器"><a href="#考虑使用静态工厂方法代替构造器" class="headerlink" title="考虑使用静态工厂方法代替构造器"></a>考虑使用<code>静态工厂方法</code>代替<code>构造器</code></h4><p>首先书本的第一个主题是如何使用Java高效的创建和销毁对象.书本的第一条技巧就是<strong><code>考虑使用静态工厂方法代替构造器</code></strong>.<br>通常如果想获得一个类的实例,我们最直接的方法就是利用该类的共有构造器来实例化一个对象.还有一种办法就是在类中提供一个公有的<code>静态工厂方法</code>用于返回类的实例.下面是一个Java中Boolean类内置的一个例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b ? Boolean.TRUE : Boolean.FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是这里的<code>静态工厂方法</code>与设计模式中的工厂方法是不同的.<br>采用<code>静态工厂方法</code>来创建类的实例相对采用简单的构造器有下面的几个优势:  </p>
+<ol>
+<li><code>它们有特定的名称.</code>普通的构造器只能与类同名,但<code>静态工厂方法</code>可以有自己的名称,易于代码的阅读和使用.</li>
+<li><code>避免重复创建相同的实例.</code>当我们需要相同的对象是,可以使用预先创建好的实例,或使用缓存起来的实例.而每次调用构造器都会创建一个对象.</li>
+<li><strong><code>可以返回类的任何子类对象.</code></strong>这条优势我也不太明白,所以我先在此做个记号.后面若有所感悟会回来补充的.</li>
 </ol>
-<p>上面的知识点和技术点,我都会在后面跟大家一一的介绍.<br>这个开源的项目其实是根据<a href="https://github.com/maoruibin" target="_blank" rel="external">maoruibin</a>作者的<a href="https://github.com/maoruibin/TranslateApp" target="_blank" rel="external">咕咚翻译</a>项目的想法进行我自己的重新开发,感谢<a href="https://github.com/maoruibin" target="_blank" rel="external">maoruibin</a>作者提供了这样的一个idea.</p>
-<h4 id="Sample演示"><a href="#Sample演示" class="headerlink" title="Sample演示"></a>Sample演示</h4><p><img src="http://o7x6n1hmo.bkt.clouddn.com/image/sample.gif" alt="演示"></p>
-<h4 id="应用下载"><a href="#应用下载" class="headerlink" title="应用下载"></a>应用下载</h4><p>大家可以在<a href="http://115.28.173.76/FingerTrans.apk" target="_blank" rel="external">这里</a>下载到apk文件,完整的代码已经开源到我的<a href="https://github.com/kevinhqf/FingerTrans" target="_blank" rel="external">Github</a>上,欢迎大家Star和Fork<br><strong>部分机型可能需要手动添加悬浮窗权限</strong></p>
-<h4 id="相关教程"><a href="#相关教程" class="headerlink" title="相关教程"></a>相关教程</h4><p><a href="https://kevinhqf.github.io/2016/08/05/fingertrans01/">Android项目实战—指尖翻译系列0x01</a><br><a href="https://kevinhqf.github.io/2016/08/05/fingertrans02/">Android项目实战—指尖翻译系列0x02</a><br><a href="https://kevinhqf.github.io/2016/08/08/fingertrans03/">Android项目实战—指尖翻译系列0x03</a>  </p>
+<p><code>静态工厂方法</code>也有它的缺点:</p>
+<ol>
+<li>类必须含有公有或受保护的构造器,否则无法子类化.</li>
+<li>它与其他的静态方法没有区别.因此我们需要正确的对<code>静态工厂方法</code>进行命名.<br>下面是一些惯用的命名:<ul>
+<li><code>valueOf()</code> 类型转换</li>
+<li><code>getInstance()</code> 通过不同的参数返回不同的实例</li>
+<li><code>newInstance()</code> 与getInstance()类似,但保证每次返回的实例都是唯一的</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans00/" data-id="cirqc6kee00159y86sewvsuji" data_title="Android项目实战---指尖翻译系列0x00" data_summary="本系列是一个Android的开源项目的教程,这个开源的..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/11/effective-java00/" data-id="cirqc6ke500129y86tq1iiu21" data_title="Effective Java学习系列 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/08/fingertrans00/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/08/11/effective-java00/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -150,7 +139,7 @@
       
 	  
 <span>
-Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-08-08</time>
+Updated:<time datetime="2016-08-11T13:04:04.109Z" itemprop="dateModified">2016-08-11</time>
 </span>
 
 
@@ -160,19 +149,10 @@ Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-0
     
 <nav id="article-nav">
   
-    <a href="/2016/08/09/realm-basic/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Realm for Android基本教程---一个简便的数据库
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/08/fingertrans03/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/09/realm-basic/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Android项目实战---指尖翻译系列0x03</div>
+      <div class="article-nav-title">Realm for Android基本教程---一个简便的数据库</div>
     </a>
   
 </nav>
@@ -195,7 +175,7 @@ Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-0
   <div id="toc" class="toc-aside">
   <h2 class="toc-title">Contents</h2>
     
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#涉及的技术知识点"><span class="toc-number">1.</span> <span class="toc-text">涉及的技术知识点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sample演示"><span class="toc-number">2.</span> <span class="toc-text">Sample演示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#应用下载"><span class="toc-number">3.</span> <span class="toc-text">应用下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相关教程"><span class="toc-number">4.</span> <span class="toc-text">相关教程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#考虑使用静态工厂方法代替构造器"><span class="toc-number">1.</span> <span class="toc-text">考虑使用静态工厂方法代替构造器</span></a></li></ol>
     
   </div>
 
@@ -303,7 +283,7 @@ Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-0
 <script>
   var disqus_shortname = 'kevinhqf';
   
-  var disqus_url = 'http://kevinhqf.github.io/2016/08/08/fingertrans00/';
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/11/effective-java00/';
   
   (function(){
     var dsq = document.createElement('script');
