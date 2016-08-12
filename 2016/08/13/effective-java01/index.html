@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Effective Java学习系列 --- 创建与销毁对象02 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用枚举类型强化Singleton属性Singleton指的是仅被实例化一次的类,即我们常说的单例.我们可以通过枚举类型来实现单例.1234public enum Elvis&amp;#123;	INSTANCE;    public void leaveTheBuilding()&amp;#123;......)&amp;#125;
+这种方法是最简单的方法,而且它提供了序列化的机制,绝对防止多次实例化,避免通过反射利用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Java学习系列 --- 创建与销毁对象02">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/13/effective-java01/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="使用枚举类型强化Singleton属性Singleton指的是仅被实例化一次的类,即我们常说的单例.我们可以通过枚举类型来实现单例.1234public enum Elvis&amp;#123;	INSTANCE;    public void leaveTheBuilding()&amp;#123;......)&amp;#125;
+这种方法是最简单的方法,而且它提供了序列化的机制,绝对防止多次实例化,避免通过反射利用">
+<meta property="og:updated_time" content="2016-08-12T16:10:59.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective Java学习系列 --- 创建与销毁对象02">
+<meta name="twitter:description" content="使用枚举类型强化Singleton属性Singleton指的是仅被实例化一次的类,即我们常说的单例.我们可以通过枚举类型来实现单例.1234public enum Elvis&amp;#123;	INSTANCE;    public void leaveTheBuilding()&amp;#123;......)&amp;#125;
+这种方法是最简单的方法,而且它提供了序列化的机制,绝对防止多次实例化,避免通过反射利用">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-effective-java01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/13/effective-java01/" class="article-date">
+  <time datetime="2016-08-12T16:10:59.785Z" itemprop="datePublished">2016-08-13</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Effective Java学习系列 --- 创建与销毁对象02
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <h4 id="使用枚举类型强化Singleton属性"><a href="#使用枚举类型强化Singleton属性" class="headerlink" title="使用枚举类型强化Singleton属性"></a>使用枚举类型强化Singleton属性</h4><p><code>Singleton</code>指的是仅被实例化一次的类,即我们常说的单例.我们可以通过枚举类型来实现单例.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Elvis&#123;</span><br><span class="line">	INSTANCE;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">leaveTheBuilding</span><span class="params">()</span></span>&#123;......)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种方法是最简单的方法,而且它提供了序列化的机制,绝对防止多次实例化,避免通过反射利用无参构造器获取实例,这种方法可能是目前实现单例的最佳方法.</p>
+<h4 id="通过私有构造器强化不可实例化"><a href="#通过私有构造器强化不可实例化" class="headerlink" title="通过私有构造器强化不可实例化"></a>通过私有构造器强化不可实例化</h4><p>有些类并不希望被实例化,例如Java内置的工具类,它们只提供一些静态的工具方法.实例化并无任何的意义,当这种类没有显示的构造器时,编译器会自动提供一个公有的无参构造器,这让就会有被实例化的危险了.为了保证不被实例化,可以提供一个<code>私有的构造器</code>,这让就可以避免外部实例化该类.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UtilityClass</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">UtilityClass</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">throw</span> <span class="keyword">new</span> AssertionError();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// other method</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码中在私有构造器中抛出的<code>AssertionError</code>可以避免在类的内部被实例化.这种方法的缺点就是无法子类化.<br><a id="more"></a></p>
+<h4 id="避免创建不必要的对象"><a href="#避免创建不必要的对象" class="headerlink" title="避免创建不必要的对象"></a>避免创建不必要的对象</h4><p>尽量的重用对象,而不是每次都创建新的对象.下面是一个反面例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="keyword">new</span> String(<span class="string">"stringette"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>这个语句每次执行都会创建一个新的String对象,而且作为参数的<code>&quot;stringette&quot;</code>本身就是一个String实例,若把该语句放到一个循环当中,那将会创建出大量相同的对象.我们应该使用下面的语句代替:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"stringette"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>这样只用了一个String实例,而且在同一台虚拟机运行,只要包含相同的字符串字面常量,对象都会被重用.对于同时提供<code>构造器</code>和<code>静态工厂方法</code>的不可变类,应该<strong>优先选择<code>静态工厂方法</code></strong>,避免创建不必要的对象.例如优先使用<code>Boolean.valueOf(String)</code>而不是使用<code>Boolean(String)</code>.  </p>
+<p><strong>重用那些已知不会被修改的可变对象.</strong>下面我们举一个例子,我们先看反面的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date birthDate;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBabyBoomer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	Calendar gmtCal = Calendar.getInstance(TimeZone.getTimeZone(<span class="string">"GMT"</span>));</span><br><span class="line">        gmtCal.set(<span class="number">1946</span>,Calendar.JANUARY,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        Date boomStart = gtmCal.getTime();</span><br><span class="line">        gtmCal.set(<span class="number">1965</span>,Calendar.JANUARY,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        Date boomEnd = gtmCal.getTime();</span><br><span class="line">        <span class="keyword">return</span> birthDate.compareTo(boomStart) &gt;=<span class="number">0</span> &amp;&amp; birthDate.compareTo(boomEnd) &lt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码中,<code>isBabyBoomer()</code>每次调用都会新建一个Calendar,一个TimeZone和两个Date实例,而这些实例的值都是确定的,不会被修改,这样的代码效率会大大的降低.下面我们用<code>静态初始化块</code>对代码进行优化.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date birthDate;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Date BOOM_START;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Date BOOM_END;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">    	Calendar gmtCal = Calendar.getInstance(TimeZone.getTimeZone(<span class="string">"GMT"</span>));</span><br><span class="line">        gmtCal.set(<span class="number">1946</span>,Calendar.JANUARY,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        BOOM_START = gtmCal.getTime();</span><br><span class="line">        gtmCal.set(<span class="number">1965</span>,Calendar.JANUARY,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        BOOM_END = gtmCal.getTime();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBabyBoomer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> birthDate.compareTo(BOOM_START) &gt;=<span class="number">0</span> &amp;&amp; </span><br><span class="line">        	   birthDate.compareTo(BOOM_END) &lt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>改进后的代码,只在初始化时创建Calendar,TimeZone,和Date实例一次,大大的提高了效率.</p>
+<p><strong>优先使用基本数据类型,而不是相对应的装箱基本类型</strong>.因为创建对象的代价远远比使用基本数据类型的代价大.<br>这里提倡我们应该尽可能的避免创建对象,但是对于小对象的构造器只做少量的工作,而且会提示程序的清晰和简洁.通过维护现有的对象池而避免创建对象并不是一种好的做法,除法对象池中的对象是重量级的,而且维护对象池会导致代码难以阅读,有时还会损害性能.所有我们要通过自己的衡量来决定是否要创建对象.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/13/effective-java01/" data-id="cirrybdal0012kh86yquovig7" data_title="Effective Java学习系列 --- 创建与销毁对象02" data_summary="使用枚举类型强化Singleton属性Singleto..." class="article-share-link">Compartir</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/13/effective-java01/#disqus_thread" class="article-comment-link">Comentarios</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-12T16:10:59.777Z" itemprop="dateModified">2016-08-13</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/12/effective-java00/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Viejo</strong>
+      <div class="article-nav-title">Effective Java学习系列 --- 创建与销毁对象01</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用枚举类型强化Singleton属性"><span class="toc-number">1.</span> <span class="toc-text">使用枚举类型强化Singleton属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过私有构造器强化不可实例化"><span class="toc-number">2.</span> <span class="toc-text">通过私有构造器强化不可实例化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#避免创建不必要的对象"><span class="toc-number">3.</span> <span class="toc-text">避免创建不必要的对象</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categorías</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archivos</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Posts recientes</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/13/effective-java01/">Effective Java学习系列 --- 创建与销毁对象02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/12/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/09/realm-basic/">Realm for Android基本教程---一个简便的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/08/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/08/fingertrans03/">Android项目实战---指尖翻译系列0x03</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/13/effective-java01/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
