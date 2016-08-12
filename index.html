@@ -77,8 +77,8 @@
     <article id="post-effective-java00" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/08/11/effective-java00/" class="article-date">
-  <time datetime="2016-08-11T13:04:04.109Z" itemprop="datePublished">2016-08-11</time>
+<a href="/2016/08/12/effective-java00/" class="article-date">
+  <time datetime="2016-08-12T14:38:57.209Z" itemprop="datePublished">2016-08-12</time>
 </a>
 
 
@@ -95,7 +95,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+      <a class="article-title" href="/2016/08/12/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
     </h1>
   
 
@@ -103,7 +103,6 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
         <p>最近在阅读学习一本关于Java的书籍 — <strong><em>Effective Java</em></strong>.这本书讲的是在如何高效的使用Java,让我们的代码更加的高质量和高效率.<br>这本书可以说是Java进阶的必备书籍.对于想在Java方面有所提高的同学,这本书我觉得是个不错的选择.通过本系列的学习笔记,我会把在我阅读学习时获得的感悟和知识记录下来.同时这个也是相当于我的读书笔记.</p>
 <h4 id="考虑使用静态工厂方法代替构造器"><a href="#考虑使用静态工厂方法代替构造器" class="headerlink" title="考虑使用静态工厂方法代替构造器"></a>考虑使用<code>静态工厂方法</code>代替<code>构造器</code></h4><p>首先书本的第一个主题是如何使用Java高效的创建和销毁对象.书本的第一条技巧就是<strong><code>考虑使用静态工厂方法代替构造器</code></strong>.<br>通常如果想获得一个类的实例,我们最直接的方法就是利用该类的共有构造器来实例化一个对象.还有一种办法就是在类中提供一个公有的<code>静态工厂方法</code>用于返回类的实例.下面是一个Java中Boolean类内置的一个例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b ? Boolean.TRUE : Boolean.FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>但是这里的<code>静态工厂方法</code>与设计模式中的工厂方法是不同的.<br>采用<code>静态工厂方法</code>来创建类的实例相对采用简单的构造器有下面的几个优势:  </p>
@@ -122,14 +121,18 @@
 </ul>
 </li>
 </ol>
-
+        
+          <p class="article-more-link">
+            <a href="/2016/08/12/effective-java00/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/11/effective-java00/" data-id="cirqc6ke500129y86tq1iiu21" data_title="Effective Java学习系列 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/12/effective-java00/" data-id="cirrv0izi000zcf86af4hwpjm" data_title="Effective Java学习系列 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/11/effective-java00/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/08/12/effective-java00/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -137,7 +140,7 @@
       
 	  
 <span>
-Updated:<time datetime="2016-08-11T13:04:04.109Z" itemprop="dateModified">2016-08-11</time>
+Updated:<time datetime="2016-08-12T14:38:57.197Z" itemprop="dateModified">2016-08-12</time>
 </span>
 
 
@@ -193,7 +196,7 @@ Updated:<time datetime="2016-08-11T13:04:04.109Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/09/realm-basic/" data-id="cirqc6kg3001o9y86n4v1zx4d" data_title="Realm for Android基本教程---一个简便的数据库" data_summary="Realm是一款开源的数据库工具,它具有快速,易于使用..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/09/realm-basic/" data-id="cirrv0j2w001pcf8628g0xnng" data_title="Realm for Android基本教程---一个简便的数据库" data_summary="Realm是一款开源的数据库工具,它具有快速,易于使用..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/09/realm-basic/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -264,7 +267,7 @@ Updated:<time datetime="2016-08-09T07:24:32.649Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans00/" data-id="cirqc6kee00159y86sewvsuji" data_title="Android项目实战---指尖翻译系列0x00" data_summary="本系列是一个Android的开源项目的教程,这个开源的..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans00/" data-id="cirrv0izs0013cf86d1o44hg2" data_title="Android项目实战---指尖翻译系列0x00" data_summary="本系列是一个Android的开源项目的教程,这个开源的..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/08/fingertrans00/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -339,7 +342,7 @@ Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans03/" data-id="cirqc6keq001c9y867z3iynmz" data_title="Android项目实战---指尖翻译系列0x03" data_summary="上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans03/" data-id="cirrv0j090019cf86jrnkfpzo" data_title="Android项目实战---指尖翻译系列0x03" data_summary="上次我们把悬浮窗的功能实现了,接下来我会带着大家把数据..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/08/fingertrans03/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -403,7 +406,7 @@ Updated:<time datetime="2016-08-08T06:06:02.904Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/05/fingertrans02/" data-id="cirqc6kel001a9y86hghehmns" data_title="Android项目实战---指尖翻译系列0x02" data_summary="上次我们实现了对粘贴板的内容获取与复制行为的监听,这次..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/05/fingertrans02/" data-id="cirrv0j020017cf86cdgpca59" data_title="Android项目实战---指尖翻译系列0x02" data_summary="上次我们实现了对粘贴板的内容获取与复制行为的监听,这次..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/05/fingertrans02/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -485,7 +488,7 @@ Updated:<time datetime="2016-08-05T09:47:38.435Z" itemprop="dateModified">2016-0
       <ul>
         
           <li>
-            <a href="/2016/08/11/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+            <a href="/2016/08/12/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
           </li>
         
           <li>
