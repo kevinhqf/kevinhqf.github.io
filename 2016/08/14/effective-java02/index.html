@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Effective Java学习系列 --- 创建与销毁对象03 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="消除过期的对象引用由于Java语言具有垃圾回收机制,可能很多人都不会再去关心内存管理的事情.但是有的情况下我们的代码中回无意的存在着内存泄漏的问题.下面的代码是一个例子:12345678910111213141516171819202122public class Stack&amp;#123;	private Object[] elements;    private int size = 0;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Java学习系列 --- 创建与销毁对象03">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/14/effective-java02/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="消除过期的对象引用由于Java语言具有垃圾回收机制,可能很多人都不会再去关心内存管理的事情.但是有的情况下我们的代码中回无意的存在着内存泄漏的问题.下面的代码是一个例子:12345678910111213141516171819202122public class Stack&amp;#123;	private Object[] elements;    private int size = 0;">
+<meta property="og:updated_time" content="2016-08-14T06:24:54.865Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective Java学习系列 --- 创建与销毁对象03">
+<meta name="twitter:description" content="消除过期的对象引用由于Java语言具有垃圾回收机制,可能很多人都不会再去关心内存管理的事情.但是有的情况下我们的代码中回无意的存在着内存泄漏的问题.下面的代码是一个例子:12345678910111213141516171819202122public class Stack&amp;#123;	private Object[] elements;    private int size = 0;">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-effective-java02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/14/effective-java02/" class="article-date">
+  <time datetime="2016-08-14T06:24:54.873Z" itemprop="datePublished">2016-08-14</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Effective Java学习系列 --- 创建与销毁对象03
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <h4 id="消除过期的对象引用"><a href="#消除过期的对象引用" class="headerlink" title="消除过期的对象引用"></a>消除过期的对象引用</h4><p>由于Java语言具有垃圾回收机制,可能很多人都不会再去关心内存管理的事情.但是有的情况下我们的代码中回无意的存在着<code>内存泄漏</code>的问题.下面的代码是一个例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stack</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Object[] elements;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEAFULT_INITIAL_CAPACITY = <span class="number">16</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stack</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	elements = <span class="keyword">new</span> Object[DEAFULT_INITIAL_CAPACITY];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Object e)</span></span>&#123;</span><br><span class="line">    	ensureCapacity();</span><br><span class="line">        elements[size++] = e;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">        	<span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">        <span class="keyword">return</span> elements[--size];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(elements.length == size)</span><br><span class="line">        	elements = Arrays.copyOf(elements,<span class="number">2</span>*size+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码看似没有任何问题,但当栈先增长后收缩时,从栈中弹出的对象不会被系统回收,即使它们不再被引用.因为栈的内部会维护这些对象的<code>过期引用</code>,即被弹出的对象虽然不在栈内,但栈的内部(<code>elements</code>中下标大于size的部分)仍然持有着他们的引用,只是用户不会访问这些对象而已.<br>当这些对象被无意识的保留起来时,垃圾回收机制不仅不会处理这些对象,而且也不会处理被这些对象所引用的其他所有对象.这样一来会对性能造成很大的影响.<br>处理这类问题其实也很简单,只要对象引用过期,就清空这些引用即可.对于上面的例子,我们可以在出栈方法进行下面的改进.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">    	<span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">    Object result = elements[--size];</span><br><span class="line">    elements[size] = <span class="keyword">null</span>; <span class="comment">// 清除过期引用</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么问题来了,我们是否对于每个对象的引用,都要关心其是否已经过期?这肯定是不需要的,而且这也不是我们希望的.<strong><code>只有当类是自己管理内存,我们才应该注意内存泄漏问题</code></strong>.<br>内存泄漏还有另外的两个常见的情景,就是<code>缓存</code>以及<code>监听器和其他回调</code>.由于内存泄漏很难被发现,所以我们从编码的经验中能获取最有效的解决方法.</p>
+<h4 id="避免使用finalizer"><a href="#避免使用finalizer" class="headerlink" title="避免使用finalizer"></a>避免使用finalizer</h4><p>finalize方法通常不可预测,一般情况下不推荐使用.因为finalize方法会延迟执行,而延迟的时间是任意的,这会让程序的运行变得不可预测.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="ciru8926g0016dl86yoqomit9" data_title="Effective Java学习系列 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/14/effective-java02/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-14T06:24:54.865Z" itemprop="dateModified">2016-08-14</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/13/effective-java01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Effective Java学习系列 --- 创建与销毁对象02</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#消除过期的对象引用"><span class="toc-number">1.</span> <span class="toc-text">消除过期的对象引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#避免使用finalizer"><span class="toc-number">2.</span> <span class="toc-text">避免使用finalizer</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/14/effective-java02/">Effective Java学习系列 --- 创建与销毁对象03</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/13/effective-java01/">Effective Java学习系列 --- 创建与销毁对象02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/12/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/09/realm-basic/">Realm for Android基本教程---一个简便的数据库</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/08/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/14/effective-java02/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
