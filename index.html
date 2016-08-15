@@ -74,11 +74,11 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-effective-java02" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-effective-java03" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/08/14/effective-java02/" class="article-date">
-  <time datetime="2016-08-14T06:24:54.873Z" itemprop="datePublished">2016-08-14</time>
+<a href="/2016/08/15/effective-java03/" class="article-date">
+  <time datetime="2016-08-15T08:46:37.842Z" itemprop="datePublished">2016-08-15</time>
 </a>
 
 
@@ -95,7 +95,91 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/effective-java02/">Effective Java学习系列 --- 创建与销毁对象03</a>
+      <a class="article-title" href="/2016/08/15/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法01</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="重写equals方法时遵守通用约定"><a href="#重写equals方法时遵守通用约定" class="headerlink" title="重写equals方法时遵守通用约定"></a>重写equals方法时遵守通用约定</h4><p>通常在下面的几种情况下都没有必要重写<code>equals()</code>方法:</p>
+<ul>
+<li>类的每个实例意义上都是唯一</li>
+<li>不关心类是否提供<strong>逻辑相等</strong>的测试功能</li>
+<li>父类已经重写了<code>equals()</code>方法,并且该方法对子类也适用</li>
+<li>类为私有时,<code>equals()</code>方法不会被调用</li>
+</ul>
+<p>当类需要拥有<strong>逻辑相等</strong>的概念且父类没有重写<code>equals()</code>方法时,我们需要进行<code>equals()</code>方法的重写.在重写时要遵循下面的规则:</p>
+<ul>
+<li><strong><code>自反性</code></strong>,即对象必须等于其自身.</li>
+<li><strong><code>对称性</code></strong>,对于两个对象的比较是否相等必须保持一致.</li>
+<li><strong><code>传递性</code></strong>,若x.equals(y)为true,y.equals(z)为true,那么x.equals(z)必须为true.</li>
+<li><strong><code>一致性</code></strong>,比较操作内所用的数据没有修改时,多次的调用结果必须一致.</li>
+</ul>
+<p>实现高质量<code>equals()</code>方法的技巧:</p>
+<ol>
+<li><strong>使用<code>==</code>操作符检查 “参数是否为这个对象的引用” </strong>.如果是,返回true.若比较操作代价较大,这种优化可提高性能.</li>
+<li><strong>使用<code>instanceof</code>操作符检查 “参数是否为正确的类型” </strong>.如果不是,返回false.这里 “正确的类型” 通常指的是<code>equals()</code>方法所在的类,有些情况下指的是所在类实现的接口类型.</li>
+<li><strong>把参数转换为正确的类型</strong>.上一条已确保能转换成功.</li>
+<li><strong>对于该类的每个关键域,检查参数中的域是否与对象对应的域匹配</strong>.若测试全部成功,返回true,否则返回false.</li>
+<li><strong>使用单元测试进行检验</strong></li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/15/effective-java03/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/15/effective-java03/" data-id="cirvsr2oq001cmi86j80qfbvk" data_title="Effective Java学习笔记 --- 对所有对象通用的方法01" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/15/effective-java03/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-15T08:46:37.818Z" itemprop="dateModified">2016-08-15</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-effective-java02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/14/effective-java02/" class="article-date">
+  <time datetime="2016-08-14T06:35:17.165Z" itemprop="datePublished">2016-08-14</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
     </h1>
   
 
@@ -113,7 +197,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="ciru8926g0016dl86yoqomit9" data_title="Effective Java学习系列 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="cirvsr2oe0017mi860tjw4h0y" data_title="Effective Java学习笔记 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/14/effective-java02/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -123,7 +207,7 @@
       
 	  
 <span>
-Updated:<time datetime="2016-08-14T06:24:54.865Z" itemprop="dateModified">2016-08-14</time>
+Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-08-14</time>
 </span>
 
 
@@ -140,8 +224,8 @@ Updated:<time datetime="2016-08-14T06:24:54.865Z" itemprop="dateModified">2016-0
     <article id="post-effective-java01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/08/13/effective-java01/" class="article-date">
-  <time datetime="2016-08-12T16:10:59.785Z" itemprop="datePublished">2016-08-13</time>
+<a href="/2016/08/14/effective-java01/" class="article-date">
+  <time datetime="2016-08-14T06:35:15.905Z" itemprop="datePublished">2016-08-14</time>
 </a>
 
 
@@ -158,7 +242,7 @@ Updated:<time datetime="2016-08-14T06:24:54.865Z" itemprop="dateModified">2016-0
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/13/effective-java01/">Effective Java学习系列 --- 创建与销毁对象02</a>
+      <a class="article-title" href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
     </h1>
   
 
@@ -172,16 +256,16 @@ Updated:<time datetime="2016-08-14T06:24:54.865Z" itemprop="dateModified">2016-0
 <p>上面的代码中在私有构造器中抛出的<code>AssertionError</code>可以避免在类的内部被实例化.这种方法的缺点就是无法子类化.<br>
         
           <p class="article-more-link">
-            <a href="/2016/08/13/effective-java01/#more">Read More</a>
+            <a href="/2016/08/14/effective-java01/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/13/effective-java01/" data-id="ciru892660012dl86zdeqnk8b" data_title="Effective Java学习系列 --- 创建与销毁对象02" data_summary="使用枚举类型强化Singleton属性Singleto..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java01/" data-id="cirvsr2o90015mi86u0h6jym4" data_title="Effective Java学习笔记 --- 创建与销毁对象02" data_summary="使用枚举类型强化Singleton属性Singleto..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/13/effective-java01/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/08/14/effective-java01/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -189,7 +273,7 @@ Updated:<time datetime="2016-08-14T06:24:54.865Z" itemprop="dateModified">2016-0
       
 	  
 <span>
-Updated:<time datetime="2016-08-12T16:10:59.777Z" itemprop="dateModified">2016-08-13</time>
+Updated:<time datetime="2016-08-14T06:35:15.897Z" itemprop="dateModified">2016-08-14</time>
 </span>
 
 
@@ -206,8 +290,8 @@ Updated:<time datetime="2016-08-12T16:10:59.777Z" itemprop="dateModified">2016-0
     <article id="post-effective-java00" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/08/12/effective-java00/" class="article-date">
-  <time datetime="2016-08-12T14:38:57.209Z" itemprop="datePublished">2016-08-12</time>
+<a href="/2016/08/14/effective-java00/" class="article-date">
+  <time datetime="2016-08-14T06:35:14.045Z" itemprop="datePublished">2016-08-14</time>
 </a>
 
 
@@ -224,7 +308,7 @@ Updated:<time datetime="2016-08-12T16:10:59.777Z" itemprop="dateModified">2016-0
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+      <a class="article-title" href="/2016/08/14/effective-java00/">Effective Java学习笔记 --- 创建与销毁对象01</a>
     </h1>
   
 
@@ -252,16 +336,16 @@ Updated:<time datetime="2016-08-12T16:10:59.777Z" itemprop="dateModified">2016-0
 </ol>
         
           <p class="article-more-link">
-            <a href="/2016/08/12/effective-java00/#more">Read More</a>
+            <a href="/2016/08/14/effective-java00/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/12/effective-java00/" data-id="ciru8925w0010dl86g71hem65" data_title="Effective Java学习系列 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java00/" data-id="cirvsr2o00012mi867mawzc6w" data_title="Effective Java学习笔记 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
       
-        <a href="http://kevinhqf.github.io/2016/08/12/effective-java00/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://kevinhqf.github.io/2016/08/14/effective-java00/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -269,7 +353,7 @@ Updated:<time datetime="2016-08-12T16:10:59.777Z" itemprop="dateModified">2016-0
       
 	  
 <span>
-Updated:<time datetime="2016-08-12T14:38:57.197Z" itemprop="dateModified">2016-08-12</time>
+Updated:<time datetime="2016-08-14T06:35:14.037Z" itemprop="dateModified">2016-08-14</time>
 </span>
 
 
@@ -325,7 +409,7 @@ Updated:<time datetime="2016-08-12T14:38:57.197Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/09/realm-basic/" data-id="ciru8928b001qdl863z9ubqm3" data_title="Realm for Android基本教程---一个简便的数据库" data_summary="Realm是一款开源的数据库工具,它具有快速,易于使用..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/09/realm-basic/" data-id="cirvsr2ql001wmi86kxemj4x7" data_title="Realm for Android基本教程---一个简便的数据库" data_summary="Realm是一款开源的数据库工具,它具有快速,易于使用..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/09/realm-basic/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -336,77 +420,6 @@ Updated:<time datetime="2016-08-12T14:38:57.197Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-08-09T07:24:32.649Z" itemprop="dateModified">2016-08-09</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-fingertrans00" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/08/fingertrans00/" class="article-date">
-  <time datetime="2016-08-08T06:13:28.772Z" itemprop="datePublished">2016-08-08</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/08/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-		
-        <p>本系列是一个Android的开源项目的教程,这个开源的项目叫做<a href="https://github.com/kevinhqf/FingerTrans" target="_blank" rel="external">指尖翻译</a>,是一个即时的翻译应用.<em>在后面我会将本开源项目的实现思路和实现步骤一一都告诉大家</em>,希望这个系列能对Android的学习者有一定的帮助.</p>
-<h4 id="涉及的技术知识点"><a href="#涉及的技术知识点" class="headerlink" title="涉及的技术知识点"></a>涉及的技术知识点</h4><ol>
-<li>采用MVP架构实现</li>
-<li>使用 Retrofit + RxJava 进行网络服务的访问和数据的加载</li>
-<li>使用 ButterKnife 简化 View 的绑定</li>
-<li>采用了有道翻译的API</li>
-<li>实现对系统粘贴板的监听</li>
-</ol>
-<p>上面的知识点和技术点,我都会在后面跟大家一一的介绍.<br>这个开源的项目其实是根据<a href="https://github.com/maoruibin" target="_blank" rel="external">maoruibin</a>作者的<a href="https://github.com/maoruibin/TranslateApp" target="_blank" rel="external">咕咚翻译</a>项目的想法进行我自己的重新开发,感谢<a href="https://github.com/maoruibin" target="_blank" rel="external">maoruibin</a>作者提供了这样的一个idea.</p>
-<h4 id="Sample演示"><a href="#Sample演示" class="headerlink" title="Sample演示"></a>Sample演示</h4><p><img src="http://o7x6n1hmo.bkt.clouddn.com/image/sample.gif" alt="演示"></p>
-<h4 id="应用下载"><a href="#应用下载" class="headerlink" title="应用下载"></a>应用下载</h4><p>大家可以在<a href="http://115.28.173.76/FingerTrans.apk" target="_blank" rel="external">这里</a>下载到apk文件,完整的代码已经开源到我的<a href="https://github.com/kevinhqf/FingerTrans" target="_blank" rel="external">Github</a>上,欢迎大家Star和Fork<br><strong>部分机型可能需要手动添加悬浮窗权限</strong></p>
-<h4 id="相关教程"><a href="#相关教程" class="headerlink" title="相关教程"></a>相关教程</h4><p><a href="https://kevinhqf.github.io/2016/08/05/fingertrans01/">Android项目实战—指尖翻译系列0x01</a><br><a href="https://kevinhqf.github.io/2016/08/05/fingertrans02/">Android项目实战—指尖翻译系列0x02</a><br><a href="https://kevinhqf.github.io/2016/08/08/fingertrans03/">Android项目实战—指尖翻译系列0x03</a>  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/08/fingertrans00/" data-id="ciru8926l0018dl86wclu4al8" data_title="Android项目实战---指尖翻译系列0x00" data_summary="本系列是一个Android的开源项目的教程,这个开源的..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/08/fingertrans00/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-08-08</time>
 </span>
 
 
@@ -452,7 +465,7 @@ Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -465,7 +478,7 @@ Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -478,23 +491,23 @@ Updated:<time datetime="2016-08-08T06:13:28.764Z" itemprop="dateModified">2016-0
       <ul>
         
           <li>
-            <a href="/2016/08/14/effective-java02/">Effective Java学习系列 --- 创建与销毁对象03</a>
+            <a href="/2016/08/15/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法01</a>
           </li>
         
           <li>
-            <a href="/2016/08/13/effective-java01/">Effective Java学习系列 --- 创建与销毁对象02</a>
+            <a href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
           </li>
         
           <li>
-            <a href="/2016/08/12/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+            <a href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/14/effective-java00/">Effective Java学习笔记 --- 创建与销毁对象01</a>
           </li>
         
           <li>
             <a href="/2016/08/09/realm-basic/">Realm for Android基本教程---一个简便的数据库</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/08/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
           </li>
         
       </ul>

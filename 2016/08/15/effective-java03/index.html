@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Effective Java学习笔记 --- 对所有对象通用的方法01 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="重写equals方法时遵守通用约定通常在下面的几种情况下都没有必要重写equals()方法:
+
+类的每个实例意义上都是唯一
+不关心类是否提供逻辑相等的测试功能
+父类已经重写了equals()方法,并且该方法对子类也适用
+类为私有时,equals()方法不会被调用
+
+当类需要拥有逻辑相等的概念且父类没有重写equals()方法时,我们需要进行equals()方法的重写.在重写时要遵循下面的规则:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Java学习笔记 --- 对所有对象通用的方法01">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/08/15/effective-java03/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="重写equals方法时遵守通用约定通常在下面的几种情况下都没有必要重写equals()方法:
+
+类的每个实例意义上都是唯一
+不关心类是否提供逻辑相等的测试功能
+父类已经重写了equals()方法,并且该方法对子类也适用
+类为私有时,equals()方法不会被调用
+
+当类需要拥有逻辑相等的概念且父类没有重写equals()方法时,我们需要进行equals()方法的重写.在重写时要遵循下面的规则:">
+<meta property="og:updated_time" content="2016-08-15T08:46:37.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective Java学习笔记 --- 对所有对象通用的方法01">
+<meta name="twitter:description" content="重写equals方法时遵守通用约定通常在下面的几种情况下都没有必要重写equals()方法:
+
+类的每个实例意义上都是唯一
+不关心类是否提供逻辑相等的测试功能
+父类已经重写了equals()方法,并且该方法对子类也适用
+类为私有时,equals()方法不会被调用
+
+当类需要拥有逻辑相等的概念且父类没有重写equals()方法时,我们需要进行equals()方法的重写.在重写时要遵循下面的规则:">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-effective-java03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/15/effective-java03/" class="article-date">
+  <time datetime="2016-08-15T08:46:37.842Z" itemprop="datePublished">2016-08-15</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Effective Java学习笔记 --- 对所有对象通用的方法01
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <h4 id="重写equals方法时遵守通用约定"><a href="#重写equals方法时遵守通用约定" class="headerlink" title="重写equals方法时遵守通用约定"></a>重写equals方法时遵守通用约定</h4><p>通常在下面的几种情况下都没有必要重写<code>equals()</code>方法:</p>
+<ul>
+<li>类的每个实例意义上都是唯一</li>
+<li>不关心类是否提供<strong>逻辑相等</strong>的测试功能</li>
+<li>父类已经重写了<code>equals()</code>方法,并且该方法对子类也适用</li>
+<li>类为私有时,<code>equals()</code>方法不会被调用</li>
+</ul>
+<p>当类需要拥有<strong>逻辑相等</strong>的概念且父类没有重写<code>equals()</code>方法时,我们需要进行<code>equals()</code>方法的重写.在重写时要遵循下面的规则:</p>
+<ul>
+<li><strong><code>自反性</code></strong>,即对象必须等于其自身.</li>
+<li><strong><code>对称性</code></strong>,对于两个对象的比较是否相等必须保持一致.</li>
+<li><strong><code>传递性</code></strong>,若x.equals(y)为true,y.equals(z)为true,那么x.equals(z)必须为true.</li>
+<li><strong><code>一致性</code></strong>,比较操作内所用的数据没有修改时,多次的调用结果必须一致.</li>
+</ul>
+<p>实现高质量<code>equals()</code>方法的技巧:</p>
+<ol>
+<li><strong>使用<code>==</code>操作符检查 “参数是否为这个对象的引用” </strong>.如果是,返回true.若比较操作代价较大,这种优化可提高性能.</li>
+<li><strong>使用<code>instanceof</code>操作符检查 “参数是否为正确的类型” </strong>.如果不是,返回false.这里 “正确的类型” 通常指的是<code>equals()</code>方法所在的类,有些情况下指的是所在类实现的接口类型.</li>
+<li><strong>把参数转换为正确的类型</strong>.上一条已确保能转换成功.</li>
+<li><strong>对于该类的每个关键域,检查参数中的域是否与对象对应的域匹配</strong>.若测试全部成功,返回true,否则返回false.</li>
+<li><strong>使用单元测试进行检验</strong></li>
+</ol>
+<a id="more"></a>
+<p>最后需要注意的几点:</p>
+<ul>
+<li>重写equals()时总要重写hashCode()</li>
+<li>不要企图让equals()方法过于智能</li>
+<li>不要将equals声明中的Object对象替换为其他的类型</li>
+</ul>
+<h4 id="重写equals时总要重写hashCode"><a href="#重写equals时总要重写hashCode" class="headerlink" title="重写equals时总要重写hashCode"></a>重写equals时总要重写hashCode</h4><p>在每个重写了<code>equals()</code>的类中,也必须重写<code>hashCode()</code>.如果不这样做的话,会导致该类无法在所有基于散列的集合中正常工作,像HashMap,HashSet和HashTable等.<br>下面是约定的内容:</p>
+<ul>
+<li>只要对象的<code>equals()</code>方法的比较操作中所用到的信息没有被修改,对于这个对象多次调用<code>hashCode()</code>必须返回同一个整数.</li>
+<li>如果两个对象根据<code>equals()</code>比较是相等的,调用任意一个对象的<code>hashCode()</code>必须产生同样得到整数结果.</li>
+<li>如果两个对象根据<code>equals()</code>比较是不想等的,调用任意一个对象的<code>hashCode()</code>则不一定要产生不同的整数结果.但给不相等的对象产生不同的整数结果会提高散列表的性能.</li>
+</ul>
+<p>下面来看看重写了<code>equals()</code>但没有重写<code>hashCode()</code>会有什么样的后果.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneNumber</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">short</span> areaCode;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">short</span> prefix;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">short</span> lineNumber;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PhoneNumber</span><span class="params">(<span class="keyword">int</span> areaCode, <span class="keyword">int</span> prefix, <span class="keyword">int</span> lineNumber)</span> </span>&#123;</span><br><span class="line">        rangeCheck(areaCode, <span class="number">999</span>, <span class="string">"area code"</span>);</span><br><span class="line">        rangeCheck(prefix, <span class="number">999</span>, <span class="string">"prefix"</span>);</span><br><span class="line">        rangeCheck(lineNumber, <span class="number">9999</span>, <span class="string">"line number"</span>);</span><br><span class="line">        <span class="keyword">this</span>.areaCode = (<span class="keyword">short</span>) areaCode;</span><br><span class="line">        <span class="keyword">this</span>.prefix = (<span class="keyword">short</span>) prefix;</span><br><span class="line">        <span class="keyword">this</span>.lineNumber = (<span class="keyword">short</span>) lineNumber;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rangeCheck</span><span class="params">(<span class="keyword">int</span> arg, <span class="keyword">int</span> max, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arg &lt; <span class="number">0</span> || arg &gt; max)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(name + <span class="string">": "</span> + arg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">this</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> PhoneNumber))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        PhoneNumber pn = (PhoneNumber) o;</span><br><span class="line">        <span class="keyword">return</span> pn.lineNumber == lineNumber &amp;&amp;</span><br><span class="line">                pn.prefix == prefix &amp;&amp;</span><br><span class="line">                pn.areaCode == areaCode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面是只重写了<code>equals()</code>的类,当我们尝试运行下面的代码时会得到我们不希望的结果.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;PhoneNumber,String&gt; m = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">m.put(<span class="keyword">new</span> PhoneNumber(<span class="number">707</span>,<span class="number">867</span>,<span class="number">5309</span>),<span class="string">"Jenny"</span>);</span><br><span class="line">String s = m.get(<span class="keyword">new</span> PhoneNumber(<span class="number">707</span>, <span class="number">867</span>, <span class="number">5309</span>));</span><br><span class="line">System.out.println(s); <span class="comment">// s打印的结果是null</span></span><br></pre></td></tr></table></figure></p>
+<p>我们所希望的结果是会得到”Jenny”这个字符串,但是结果却是null.上面的代码涉及到两个PhoneNumber的实例,第一个是插入到HashMap中,第二个实例与第一个是相等的,用于获取名字.由于PhoneNumber类并没有重写<code>hashCode()</code>导致两个相等的实例具有不相等的散列码.<code>put()</code>把电话号码放到一个<code>hash bucket</code>中,<code>get()</code>却在另一个<code>hash bucket</code>中查找这个电话号码.<br>解决上述问题的方法很简单,就是重写<code>hashCode()</code>方法.但<code>hashCode()</code>方法的实现也需要技巧,下面是实现<code>hashCode()</code>的一种简单的方法:</p>
+<ol>
+<li>把一个非零的常数值保存在一个名为<code>result</code>的int类型变量中.</li>
+<li>对于对象中每个关键域(即<code>equals()</code>比较时用到的域),完成下面步骤:<ul>
+<li>为该域计算int类型的散列码<code>c</code>:<ul>
+<li>boolean类型:计算<code>( f ? 1 : 0)</code></li>
+<li>byte,char,short,int类型,计算 <code>(int)f</code></li>
+<li>long类型,计算<code>(int)(f ^ (f &gt;&gt;&gt; 32))</code></li>
+<li>float类型,计算<code>Float.floatToBits(f)</code></li>
+<li>double类型,计算<code>Double.doubleToLongBits(f)</code>然后按long类型计算</li>
+<li>对象引用类型并<code>equals()</code>中递归调用<code>equals()</code>来比较,则递归调用<code>hashCode()</code>.若该域值为null,则返回0.</li>
+<li>数组类型,数组中的每个元素单独处理.</li>
+</ul>
+</li>
+<li>把上面的散列码<code>c</code>合并到<code>result</code>中: <code>result = 31 * result + c;</code></li>
+</ul>
+</li>
+<li>返回<code>result</code></li>
+<li>进行单元测试验证</li>
+</ol>
+<p>根据上面的方法我们重写PhoneNumber类的<code>hashCode()</code>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">17</span>;</span><br><span class="line">        result = <span class="number">31</span> * result + areaCode;</span><br><span class="line">        result = <span class="number">31</span> * result + prefix;</span><br><span class="line">        result = <span class="number">31</span> * result + lineNumber;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有了<code>hashCode()</code>的实现后,再次运行我们的测试代码就能得到正确的结果了.除了上面所提供的方法外,还有很多其他的散列方法.<br>如果一个类是不可变的,每次都请求散列码都进行运算是不合理的,可以把散列码缓存在对象内部.如果这种类型的大多数对象会被用在散列键,就应该创建实例时计算散列码.否则可以选择<code>lazily initialize</code>,当<code>hashCode()</code>被第一次调用才进行计算.下面是PhoneNumber的<code>lazily initialize</code>的实现:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> hashCode;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = hashCode;</span><br><span class="line">    <span class="keyword">if</span>(result == <span class="number">0</span>) &#123;</span><br><span class="line">        result = <span class="number">17</span>;</span><br><span class="line">        result = <span class="number">31</span> * result + areaCode;</span><br><span class="line">        result = <span class="number">31</span> * result + prefix;</span><br><span class="line">        result = <span class="number">31</span> * result + lineNumber;</span><br><span class="line">        hashCode = result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/08/15/effective-java03/" data-id="cirvsr2oq001cmi86j80qfbvk" data_title="Effective Java学习笔记 --- 对所有对象通用的方法01" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/08/15/effective-java03/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-08-15T08:46:37.818Z" itemprop="dateModified">2016-08-15</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/14/effective-java02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Effective Java学习笔记 --- 创建与销毁对象03</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#重写equals方法时遵守通用约定"><span class="toc-number">1.</span> <span class="toc-text">重写equals方法时遵守通用约定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重写equals时总要重写hashCode"><span class="toc-number">2.</span> <span class="toc-text">重写equals时总要重写hashCode</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/15/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法01</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/14/effective-java00/">Effective Java学习笔记 --- 创建与销毁对象01</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/09/realm-basic/">Realm for Android基本教程---一个简便的数据库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/08/15/effective-java03/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

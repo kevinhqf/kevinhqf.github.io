@@ -74,6 +74,79 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-glide-basic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/28/glide-basic/" class="article-date">
+  <time datetime="2016-07-28T11:58:21.721Z" itemprop="datePublished">2016-07-28</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/28/glide-basic/">Android学习笔记---开源工具Glide的基本使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p>Glide是一个Android的开源图像加载库,它可以有效快速的将图像加载到内存中而防止OOM.</p>
+<h4 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h4><p><strong> Gradle </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  compile &apos;com.github.bumptech.glide:glide:3.7.0&apos;</span><br><span class="line">  compile &apos;com.android.support:support-v4:19.1.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong> Maven </strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.bumptech.glide<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>glide<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.android<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>support-v4<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>r7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Glide的基本用法"><a href="#Glide的基本用法" class="headerlink" title="Glide的基本用法"></a>Glide的基本用法</h4><p>Glide的使用非常的简单,而且它是链式的调用,所以代码看起来非常的简洁:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Glide.with(myFragment)</span><br><span class="line">     .load(url)</span><br><span class="line">     .centerCrop()</span><br><span class="line">     .placeholder(R.drawable.loading_spinner)</span><br><span class="line">     .crossFade()</span><br><span class="line">     .into(myImageView);</span><br></pre></td></tr></table></figure></p>
+<p>其中各个函数中的参数如下:</p>
+<ul>
+<li><code>with()</code>中的参数是上下文</li>
+<li><code>load()</code>中的参数是加载图片的URL</li>
+<li><code>centerCrop()</code>表示将图片居中裁剪</li>
+<li><code>placeholder()</code>表示图片加载前的占位图</li>
+<li><code>crossFade()</code>表示图片加载时的动画</li>
+<li><code>into()</code>代表图片加载的目标  </li>
+</ul>
+<p>代码非常的简洁,如果想了解更多关于Glide的用法可以查看<a href="https://github.com/bumptech/glide/wiki" target="_blank" rel="external">Glide的官方文档</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/28/glide-basic/" data-id="cirvsr2pe001imi86z0pxxqcb" data_title="Android学习笔记---开源工具Glide的基本使用" data_summary="Glide是一个Android的开源图像加载库,它可以..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/28/glide-basic/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-28T11:58:21.713Z" itemprop="dateModified">2016-07-28</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-retrofit-basic" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -117,7 +190,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/27/retrofit-basic/" data-id="ciru8928f001sdl862qci5re8" data_title="Android学习笔记---开源工具Retrofit的基本使用" data_summary="Retrofit是一个简化Android网络请求的一个..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/27/retrofit-basic/" data-id="cirvsr2qb001umi866zd1ssdg" data_title="Android学习笔记---开源工具Retrofit的基本使用" data_summary="Retrofit是一个简化Android网络请求的一个..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/27/retrofit-basic/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -182,7 +255,7 @@ Updated:<time datetime="2016-07-27T08:46:40.187Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="ciru8925j000wdl86wlugj482" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="cirvsr2nh000tmi86cv8wun7a" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -283,7 +356,7 @@ Updated:<time datetime="2016-07-26T07:51:30.023Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="ciru8926d0014dl86mk4t9jsq" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cirvsr2nu0010mi862f5ukig1" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -352,7 +425,7 @@ Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="ciru8928o001udl868d1z5hh3" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="cirvsr2qr001ymi868vmcodxp" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/22/service/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -363,71 +436,6 @@ Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-07-22</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-activity" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/07/21/activity/" class="article-date">
-  <time datetime="2016-07-21T04:35:07.637Z" itemprop="datePublished">2016-07-21</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/21/activity/">Android学习笔记---Activity</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通常我们创建一个Android项目的时候,IDE工具通常都会帮我们生成一个默认的<code>MainActivity</code>和它的布局文件.它就是本次的主角–Activity.</p>
-<p><code>Activity</code>是Android的四大基本组件之一,基本的App开发根本离不开它.而要掌握<code>Activity</code>的基本用法,只要熟悉和理解<code>Activity</code>的生命周期就可以了.</p>
-<h4 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h4><p>先来张熟悉的图片:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/activity_lifecycle.png" alt="Activity的生命周期"><br>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/21/activity/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="ciru89248000mdl86wnsmqpfg" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/07/21/activity/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-07-21</time>
 </span>
 
 
@@ -473,7 +481,7 @@ Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -486,7 +494,7 @@ Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -499,23 +507,23 @@ Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-0
       <ul>
         
           <li>
-            <a href="/2016/08/14/effective-java02/">Effective Java学习系列 --- 创建与销毁对象03</a>
+            <a href="/2016/08/15/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法01</a>
           </li>
         
           <li>
-            <a href="/2016/08/13/effective-java01/">Effective Java学习系列 --- 创建与销毁对象02</a>
+            <a href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
           </li>
         
           <li>
-            <a href="/2016/08/12/effective-java00/">Effective Java学习系列 --- 创建与销毁对象01</a>
+            <a href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/14/effective-java00/">Effective Java学习笔记 --- 创建与销毁对象01</a>
           </li>
         
           <li>
             <a href="/2016/08/09/realm-basic/">Realm for Android基本教程---一个简便的数据库</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/08/fingertrans00/">Android项目实战---指尖翻译系列0x00</a>
           </li>
         
       </ul>
