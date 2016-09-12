@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Kevin&#39;s GHB</title>
+  <title>Android学习笔记---重新学习自定义View#01 | Kevin&#39;s GHB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kevin's GHB">
-<meta property="og:url" content="http://kevinhqf.github.io/index.html">
+  <meta name="description" content="最近发现自己对Android的学习只在表面,并没有深入的理解,我不喜欢这种感觉,而且没有自己的理解,学习到的内容也很难为我所用.
+所以从本次开始,我要写点自己理解的东西,但要对知识有自己的理解,那就必须深入了解它的原理.而我觉得Android的自定义View是一个很好的入口.
+
+学会如何自定义View,能够了解Android系统中View使如何创建和维护的.这有助于我们学习Android的Vie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记---重新学习自定义View#01">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/index.html">
 <meta property="og:site_name" content="Kevin's GHB">
-<meta property="og:description">
+<meta property="og:description" content="最近发现自己对Android的学习只在表面,并没有深入的理解,我不喜欢这种感觉,而且没有自己的理解,学习到的内容也很难为我所用.
+所以从本次开始,我要写点自己理解的东西,但要对知识有自己的理解,那就必须深入了解它的原理.而我觉得Android的自定义View是一个很好的入口.
+
+学会如何自定义View,能够了解Android系统中View使如何创建和维护的.这有助于我们学习Android的Vie">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/Selection_026.png">
+<meta property="og:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/Selection_027.png">
+<meta property="og:updated_time" content="2016-09-12T09:41:09.732Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kevin's GHB">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Android学习笔记---重新学习自定义View#01">
+<meta name="twitter:description" content="最近发现自己对Android的学习只在表面,并没有深入的理解,我不喜欢这种感觉,而且没有自己的理解,学习到的内容也很难为我所用.
+所以从本次开始,我要写点自己理解的东西,但要对知识有自己的理解,那就必须深入了解它的原理.而我觉得Android的自定义View是一个很好的入口.
+
+学会如何自定义View,能够了解Android系统中View使如何创建和维护的.这有助于我们学习Android的Vie">
+<meta name="twitter:image" content="http://o7x6n1hmo.bkt.clouddn.com/image/Selection_026.png">
   
     <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
   
@@ -72,9 +85,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-CustomView-create_view" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-CustomView-create_view" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
 <a href="/2016/09/12/CustomView-create_view/" class="article-date">
@@ -94,8 +105,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/12/CustomView-create_view/">Android学习笔记---重新学习自定义View#01</a>
+    <h1 class="article-title" itemprop="name">
+      Android学习笔记---重新学习自定义View#01
     </h1>
   
 
@@ -151,321 +162,39 @@ Updated:<time datetime="2016-09-12T09:41:09.732Z" itemprop="dateModified">2016-0
     </footer>
   </div>
   
-</article>
-
-
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-effective-java03" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/16/effective-java03/" class="article-date">
-  <time datetime="2016-08-16T06:51:08.319Z" itemprop="datePublished">2016-08-16</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/16/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法</a>
-    </h1>
+    <a href="/2016/08/16/effective-java03/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Effective Java学习笔记 --- 对所有对象通用的方法</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="重写equals方法时遵守通用约定"><a href="#重写equals方法时遵守通用约定" class="headerlink" title="重写equals方法时遵守通用约定"></a>重写equals方法时遵守通用约定</h4><p>通常在下面的几种情况下都没有必要重写<code>equals()</code>方法:</p>
-<ul>
-<li>类的每个实例意义上都是唯一</li>
-<li>不关心类是否提供<strong>逻辑相等</strong>的测试功能</li>
-<li>父类已经重写了<code>equals()</code>方法,并且该方法对子类也适用</li>
-<li>类为私有时,<code>equals()</code>方法不会被调用</li>
-</ul>
-<p>当类需要拥有<strong>逻辑相等</strong>的概念且父类没有重写<code>equals()</code>方法时,我们需要进行<code>equals()</code>方法的重写.在重写时要遵循下面的规则:</p>
-<ul>
-<li><strong><code>自反性</code></strong>,即对象必须等于其自身.</li>
-<li><strong><code>对称性</code></strong>,对于两个对象的比较是否相等必须保持一致.</li>
-<li><strong><code>传递性</code></strong>,若x.equals(y)为true,y.equals(z)为true,那么x.equals(z)必须为true.</li>
-<li><strong><code>一致性</code></strong>,比较操作内所用的数据没有修改时,多次的调用结果必须一致.</li>
-</ul>
-<p>实现高质量<code>equals()</code>方法的技巧:</p>
-<ol>
-<li><strong>使用<code>==</code>操作符检查 “参数是否为这个对象的引用” </strong>.如果是,返回true.若比较操作代价较大,这种优化可提高性能.</li>
-<li><strong>使用<code>instanceof</code>操作符检查 “参数是否为正确的类型” </strong>.如果不是,返回false.这里 “正确的类型” 通常指的是<code>equals()</code>方法所在的类,有些情况下指的是所在类实现的接口类型.</li>
-<li><strong>把参数转换为正确的类型</strong>.上一条已确保能转换成功.</li>
-<li><strong>对于该类的每个关键域,检查参数中的域是否与对象对应的域匹配</strong>.若测试全部成功,返回true,否则返回false.</li>
-<li><strong>使用单元测试进行检验</strong></li>
-</ol>
-<p>最后需要注意的几点:</p>
-<ul>
-<li>重写equals()时总要重写hashCode()</li>
-<li>不要企图让equals()方法过于智能</li>
-<li>不要将equals声明中的Object对象替换为其他的类型
-        
-          <p class="article-more-link">
-            <a href="/2016/08/16/effective-java03/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/16/effective-java03/" data-id="ciszv0vpf0019td86q664kues" data_title="Effective Java学习笔记 --- 对所有对象通用的方法" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/16/effective-java03/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-08-16</time>
-</span>
-
-
-    </footer>
-  </div>
   
 </article>
 
 
-
-
-
-  
-    <article id="post-effective-java02" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/14/effective-java02/" class="article-date">
-  <time datetime="2016-08-14T06:35:17.165Z" itemprop="datePublished">2016-08-14</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-		
-        <h4 id="消除过期的对象引用"><a href="#消除过期的对象引用" class="headerlink" title="消除过期的对象引用"></a>消除过期的对象引用</h4><p>由于Java语言具有垃圾回收机制,可能很多人都不会再去关心内存管理的事情.但是有的情况下我们的代码中回无意的存在着<code>内存泄漏</code>的问题.下面的代码是一个例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stack</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Object[] elements;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEAFULT_INITIAL_CAPACITY = <span class="number">16</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stack</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	elements = <span class="keyword">new</span> Object[DEAFULT_INITIAL_CAPACITY];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Object e)</span></span>&#123;</span><br><span class="line">    	ensureCapacity();</span><br><span class="line">        elements[size++] = e;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">        	<span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">        <span class="keyword">return</span> elements[--size];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(elements.length == size)</span><br><span class="line">        	elements = Arrays.copyOf(elements,<span class="number">2</span>*size+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面的代码看似没有任何问题,但当栈先增长后收缩时,从栈中弹出的对象不会被系统回收,即使它们不再被引用.因为栈的内部会维护这些对象的<code>过期引用</code>,即被弹出的对象虽然不在栈内,但栈的内部(<code>elements</code>中下标大于size的部分)仍然持有着他们的引用,只是用户不会访问这些对象而已.<br>当这些对象被无意识的保留起来时,垃圾回收机制不仅不会处理这些对象,而且也不会处理被这些对象所引用的其他所有对象.这样一来会对性能造成很大的影响.<br>处理这类问题其实也很简单,只要对象引用过期,就清空这些引用即可.对于上面的例子,我们可以在出栈方法进行下面的改进.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">    	<span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">    Object result = elements[--size];</span><br><span class="line">    elements[size] = <span class="keyword">null</span>; <span class="comment">// 清除过期引用</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>那么问题来了,我们是否对于每个对象的引用,都要关心其是否已经过期?这肯定是不需要的,而且这也不是我们希望的.<strong><code>只有当类是自己管理内存,我们才应该注意内存泄漏问题</code></strong>.<br>内存泄漏还有另外的两个常见的情景,就是<code>缓存</code>以及<code>监听器和其他回调</code>.由于内存泄漏很难被发现,所以我们从编码的经验中能获取最有效的解决方法.</p>
-<h4 id="避免使用finalizer"><a href="#避免使用finalizer" class="headerlink" title="避免使用finalizer"></a>避免使用finalizer</h4><p>finalize方法通常不可预测,一般情况下不推荐使用.因为finalize方法会延迟执行,而延迟的时间是任意的,这会让程序的运行变得不可预测.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="ciszv0vpa0017td86o20ly81i" data_title="Effective Java学习笔记 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/14/effective-java02/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-08-14</time>
-</span>
+</section>
 
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-effective-java01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/14/effective-java01/" class="article-date">
-  <time datetime="2016-08-14T06:35:15.905Z" itemprop="datePublished">2016-08-14</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="使用枚举类型强化Singleton属性"><a href="#使用枚举类型强化Singleton属性" class="headerlink" title="使用枚举类型强化Singleton属性"></a>使用枚举类型强化Singleton属性</h4><p><code>Singleton</code>指的是仅被实例化一次的类,即我们常说的单例.我们可以通过枚举类型来实现单例.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Elvis&#123;</span><br><span class="line">	INSTANCE;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">leaveTheBuilding</span><span class="params">()</span></span>&#123;......)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这种方法是最简单的方法,而且它提供了序列化的机制,绝对防止多次实例化,避免通过反射利用无参构造器获取实例,这种方法可能是目前实现单例的最佳方法.</p>
-<h4 id="通过私有构造器强化不可实例化"><a href="#通过私有构造器强化不可实例化" class="headerlink" title="通过私有构造器强化不可实例化"></a>通过私有构造器强化不可实例化</h4><p>有些类并不希望被实例化,例如Java内置的工具类,它们只提供一些静态的工具方法.实例化并无任何的意义,当这种类没有显示的构造器时,编译器会自动提供一个公有的无参构造器,这让就会有被实例化的危险了.为了保证不被实例化,可以提供一个<code>私有的构造器</code>,这让就可以避免外部实例化该类.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UtilityClass</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">UtilityClass</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">throw</span> <span class="keyword">new</span> AssertionError();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// other method</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面的代码中在私有构造器中抛出的<code>AssertionError</code>可以避免在类的内部被实例化.这种方法的缺点就是无法子类化.<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/14/effective-java01/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java01/" data-id="ciszv0vp50015td86uml977wr" data_title="Effective Java学习笔记 --- 创建与销毁对象02" data_summary="使用枚举类型强化Singleton属性Singleto..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/14/effective-java01/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-14T06:35:15.897Z" itemprop="dateModified">2016-08-14</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-effective-java00" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/14/effective-java00/" class="article-date">
-  <time datetime="2016-08-14T06:35:14.045Z" itemprop="datePublished">2016-08-14</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/effective-java00/">Effective Java学习笔记 --- 创建与销毁对象01</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在阅读学习一本关于Java的书籍 — <strong><em>Effective Java</em></strong>.这本书讲的是在如何高效的使用Java,让我们的代码更加的高质量和高效率.<br>这本书可以说是Java进阶的必备书籍.对于想在Java方面有所提高的同学,这本书我觉得是个不错的选择.通过本系列的学习笔记,我会把在我阅读学习时获得的感悟和知识记录下来.同时这个也是相当于我的读书笔记.</p>
-<h4 id="考虑使用静态工厂方法代替构造器"><a href="#考虑使用静态工厂方法代替构造器" class="headerlink" title="考虑使用静态工厂方法代替构造器"></a>考虑使用<code>静态工厂方法</code>代替<code>构造器</code></h4><p>首先书本的第一个主题是如何使用Java高效的创建和销毁对象.书本的第一条技巧就是<strong><code>考虑使用静态工厂方法代替构造器</code></strong>.<br>通常如果想获得一个类的实例,我们最直接的方法就是利用该类的共有构造器来实例化一个对象.还有一种办法就是在类中提供一个公有的<code>静态工厂方法</code>用于返回类的实例.下面是一个Java中Boolean类内置的一个例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b ? Boolean.TRUE : Boolean.FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>但是这里的<code>静态工厂方法</code>与设计模式中的工厂方法是不同的.<br>采用<code>静态工厂方法</code>来创建类的实例相对采用简单的构造器有下面的几个优势:  </p>
-<ol>
-<li><code>它们有特定的名称.</code>普通的构造器只能与类同名,但<code>静态工厂方法</code>可以有自己的名称,易于代码的阅读和使用.</li>
-<li><code>避免重复创建相同的实例.</code>当我们需要相同的对象是,可以使用预先创建好的实例,或使用缓存起来的实例.而每次调用构造器都会创建一个对象.</li>
-<li><strong><code>可以返回类的任何子类对象.</code></strong>这条优势我也不太明白,所以我先在此做个记号.后面若有所感悟会回来补充的.</li>
-</ol>
-<p><code>静态工厂方法</code>也有它的缺点:</p>
-<ol>
-<li>类必须含有公有或受保护的构造器,否则无法子类化.</li>
-<li>它与其他的静态方法没有区别.因此我们需要正确的对<code>静态工厂方法</code>进行命名.<br>下面是一些惯用的命名:<ul>
-<li><code>valueOf()</code> 类型转换</li>
-<li><code>getInstance()</code> 通过不同的参数返回不同的实例</li>
-<li><code>newInstance()</code> 与getInstance()类似,但保证每次返回的实例都是唯一的</li>
-</ul>
-</li>
-</ol>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/14/effective-java00/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java00/" data-id="ciszv0vp20013td86bc3uqkd2" data_title="Effective Java学习笔记 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/14/effective-java00/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-14T06:35:14.037Z" itemprop="dateModified">2016-08-14</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
           
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义View的构造函数"><span class="toc-number">1.</span> <span class="toc-text">自定义View的构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
+    
+  </div>
+
 <aside id="sidebar">
 
   
@@ -570,11 +299,13 @@ Updated:<time datetime="2016-08-14T06:35:14.037Z" itemprop="dateModified">2016-0
 <script>
   var disqus_shortname = 'kevinhqf';
   
+  var disqus_url = 'http://kevinhqf.github.io/2016/09/12/CustomView-create_view/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//go.disqus.com/count.js';
+    dsq.src = '//go.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
@@ -599,6 +330,11 @@ Updated:<time datetime="2016-08-14T06:35:14.037Z" itemprop="dateModified">2016-0
 	<script src="/js/gotop.js"></script>
 	-->
 
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
 
 </div>
 <script src="/js/toc_aside_toggle.js"></script>
