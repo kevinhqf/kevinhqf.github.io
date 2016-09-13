@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android学习笔记---重新学习自定义View#02 | Kevin&#39;s GHB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上次我们研究了View的构造函数,自定义View最重要的步骤就是完成我们View的绘制.我们本篇就来好好的研究一下它.我们都知道重写onDraw()方法便可对View进行各种绘制操作,但是在绘制之前我们还需要对View的布局进行处理,因为我们的自定义View可能需要在多种不同的布局环境下展现,如果不对其进行布局的处理,可能会使View的绘制得不到想要的结果.
+onSizeChanged()处理布局">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记---重新学习自定义View#02">
+<meta property="og:url" content="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/index.html">
+<meta property="og:site_name" content="Kevin's GHB">
+<meta property="og:description" content="上次我们研究了View的构造函数,自定义View最重要的步骤就是完成我们View的绘制.我们本篇就来好好的研究一下它.我们都知道重写onDraw()方法便可对View进行各种绘制操作,但是在绘制之前我们还需要对View的布局进行处理,因为我们的自定义View可能需要在多种不同的布局环境下展现,如果不对其进行布局的处理,可能会使View的绘制得不到想要的结果.
+onSizeChanged()处理布局">
+<meta property="og:updated_time" content="2016-09-13T17:22:51.370Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android学习笔记---重新学习自定义View#02">
+<meta name="twitter:description" content="上次我们研究了View的构造函数,自定义View最重要的步骤就是完成我们View的绘制.我们本篇就来好好的研究一下它.我们都知道重写onDraw()方法便可对View进行各种绘制操作,但是在绘制之前我们还需要对View的布局进行处理,因为我们的自定义View可能需要在多种不同的布局环境下展现,如果不对其进行布局的处理,可能会使View的绘制得不到想要的结果.
+onSizeChanged()处理布局">
+  
+    <link rel="alternate" href="/atom.xml" title="Kevin&#39;s GHB" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kevin&#39;s GHB</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Use your way to change your life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/kevinhqf" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kevinhqf.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-CustomView-custom_drawing" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/09/14/CustomView-custom_drawing/" class="article-date">
+  <time datetime="2016-09-13T17:22:51.374Z" itemprop="datePublished">2016-09-14</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android学习笔记---重新学习自定义View#02
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+        <p><a href="http://www.jianshu.com/p/39f0640a063e" target="_blank" rel="external">上次</a>我们研究了View的构造函数,自定义View最重要的步骤就是完成我们<code>View</code>的绘制.我们本篇就来好好的研究一下它.<br>我们都知道重写<code>onDraw()</code>方法便可对<code>View</code>进行各种绘制操作,但是在绘制之前我们还需要对<code>View</code>的布局进行处理,因为我们的自定义<code>View</code>可能需要在多种不同的布局环境下展现,如果不对其进行布局的处理,可能会使<code>View</code>的绘制得不到想要的结果.</p>
+<h3 id="onSizeChanged"><a href="#onSizeChanged" class="headerlink" title="onSizeChanged()"></a>onSizeChanged()</h3><p>处理布局无非就是要知道<code>View</code>在屏幕展现时的大小和位置,在绘制前计算得到这些值以及其它与<code>View</code>的大小相关的值,我们便能将<code>View</code>正确的绘制到屏幕上.<br>而最简单的方法就是重写<code>onSizeChanged()</code>函数,这个函数会在View第一次分配大小时,以及当<code>View</code>的大小发生变化时被调用.因为当<code>View</code>的大小发生改变时才会对其布局造成影响,所以我们只需在<code>onSizeChanged()</code>函数中重新计算<code>View</code>的大小,位置,以及其他与<code>View</code>大小相关的值即可.这样我们可以避免在每次进行绘制时都在<code>onDraw()</code>函数中进行计算,可以提高效率.<br>下面是一段示例代码,使用的还是上次的相关代码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">float</span> mWidth, mHeight;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span><br><span class="line">    * 在View大小发生变化是会被调用.可以在此函数进行View的大小,位置以及其他相关值的计算</span><br><span class="line">    *</span><br><span class="line">    * <span class="doctag">@param</span> w    当前View的宽度</span><br><span class="line">    * <span class="doctag">@param</span> h    当前View的高度</span><br><span class="line">    * <span class="doctag">@param</span> oldw View改变前的宽度</span><br><span class="line">    * <span class="doctag">@param</span> oldh View改变前的高度</span><br><span class="line">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">float</span> xpad = (<span class="keyword">float</span>)(getPaddingLeft()+getPaddingRight());</span><br><span class="line">       <span class="keyword">float</span> ypad = (<span class="keyword">float</span>)(getPaddingTop()+getPaddingBottom());</span><br><span class="line"></span><br><span class="line">       mWidth = w-xpad;</span><br><span class="line">       mHeight = h-ypad;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>上面代码中我们定义了<code>mWidth,mHeight</code>两个成员属性, 我们的自定义View是绘制一个矩形.所以在<code>onSizeChanged()</code>中需要计算矩形展现的大小.这里需要将<code>padding</code>的值计算在内,因为<code>padding</code>是需要View在布局时处理的.</p>
+<h3 id="onMeasure"><a href="#onMeasure" class="headerlink" title="onMeasure()"></a>onMeasure()</h3><p>上面的<code>onSizeChanged()</code>函数可以简单进行布局的处理,如果想要对View的布局参数进行细致的处理,这就需要重写<code>onMeasure()</code>函数.<code>onMeasure()</code>函数是由<code>measure(int widthMeasureSpec, int heightMeasureSpec)</code>函数所调用的,<code>measure()</code>用于获取一个<code>View</code>应该在布局中的大小,其中两个参数<code>int widthMeasureSpec, int heightMeasureSpec</code>由父布局提供,表示<code>View</code>的宽高的限制.但是具体实际的测量工作是在<code>onMeasure()</code>中完成的.</p>
+<p>所以<code>void onMeasure (int widthMeasureSpec,int heightMeasureSpec)</code>需要对View和它的内容进行测量,为View的内容提供准确有效的测量.先来研究一下传进来的两个参数<code>int widthMeasureSpec,int heightMeasureSpec</code>.这两个参数是表示当前View在布局时测量的宽高的限制,它们是经过<code>View.MeasureSpec</code>编码处理的32位<code>int</code>值.它表示布局宽度或高度,并包含着<code>size</code>和<code>mode</code>两个信息.高两位表示<code>mode</code>,其余的30位表示<code>size</code>,它是通过位运算将它们结合在一起的.这两个参数是由<code>View</code>的父控件传递过来的.我们在xml布局文件或在代码中为<code>View</code>设置的宽高具体值或宽高的填充模式就对应着这两个参数的<code>mode</code>的3种形式:</p>
+<ul>
+<li><strong>UNSPECIFIED</strong><br>  表明<code>parent</code>没有对<code>child</code>强加任何限制,<code>child</code>可以是它想要的任何尺寸</li>
+<li><strong>EXACTLY</strong><br>  <code>parent</code>给<code>child</code>一个具体的值,<code>child</code>需要设置为该大小<br>   对应具体的宽高值或<code>match_parent</code></li>
+<li><strong>AT_MOST</strong><br>  <code>child</code>可以是任意的大小,但不能超过限制的值<br>  对应<code>wrap_content</code></li>
+</ul>
+<p>这些<code>mode</code>都表示View在测量时的限制.清楚了两个参数的意义就可以对View进行测量了.但需要注意的是,<code>View</code>的宽高尺寸,只有在测量之后(<code>measure()</code>被调用后)才能得到.下面是<code>onMeasure()</code>的代码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">    * 对View的内容进行测量</span><br><span class="line">    *</span><br><span class="line">    * <span class="doctag">@param</span> widthMeasureSpec  parent对View宽度的限制信息</span><br><span class="line">    * <span class="doctag">@param</span> heightMeasureSpec parent对View高度的限制信息</span><br><span class="line">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">float</span> xpad = (<span class="keyword">float</span>) (getPaddingLeft() + getPaddingRight());</span><br><span class="line">       <span class="keyword">float</span> ypad = (<span class="keyword">float</span>) (getPaddingTop() + getPaddingBottom());</span><br><span class="line">       mWidth = MeasureSpec.getSize(widthMeasureSpec) - xpad;</span><br><span class="line">       mHeight = MeasureSpec.getSize(heightMeasureSpec) - ypad;</span><br><span class="line">       <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>之前已经提到过了,我们需要对View的<code>padding</code>进行处理,这是View的职责.当重写<code>onMeasure()</code>方法时必须调用<code>void setMeasuredDimension(int measuredWidth, int measuredHeight)</code>这个函数来存储经过测量的宽高,否则会触发<code>IllegalStateException</code>类型的异常,调用父类的<code>onMeasure()</code>函数也是一种方法,因为<code>super.onMeasure()</code>函数中调用了<code>setMeasuredDimension()</code>,上面的代码我就直接调用了父类的<code>onMeasure()</code>方法.  </p>
+<p>我们可以进入<code>super.onMeasure()</code>当中去查看一下源代码,它的实现如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">      setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),</span><br><span class="line">              getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>果然如我们所说的,它调用了<code>setMeasuredDimension()</code>,代码中还有调用了另外三个函数<code>getDefaultSize(),getSuggestedMinimumWidth(),getSuggestedMinimumHeight()</code>.<br>我们先跳到<code>getDefaultSize()</code>,看一下这函数是干什么的.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">    * Utility to return a default size. Uses the supplied size if the</span><br><span class="line">    * MeasureSpec imposed no constraints. Will get larger if allowed</span><br><span class="line">    * by the MeasureSpec.</span><br><span class="line">    *</span><br><span class="line">    * <span class="doctag">@param</span> size Default size for this view</span><br><span class="line">    * <span class="doctag">@param</span> measureSpec Constraints imposed by the parent</span><br><span class="line">    * <span class="doctag">@return</span> The size this view should be.</span><br><span class="line">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getDefaultSize</span><span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> result = size;</span><br><span class="line">       <span class="keyword">int</span> specMode = MeasureSpec.getMode(measureSpec);</span><br><span class="line">       <span class="keyword">int</span> specSize = MeasureSpec.getSize(measureSpec);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">switch</span> (specMode) &#123;</span><br><span class="line">       <span class="keyword">case</span> MeasureSpec.UNSPECIFIED: </span><br><span class="line">           result = size;</span><br><span class="line">           <span class="keyword">break</span>;</span><br><span class="line">       <span class="keyword">case</span> MeasureSpec.AT_MOST:</span><br><span class="line">       <span class="keyword">case</span> MeasureSpec.EXACTLY:</span><br><span class="line">           result = specSize;</span><br><span class="line">           <span class="keyword">break</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>从注释中可以看出,这个函数是根据传进的参数获取<code>View</code>的布局大小,具体过程就是根据测量模式的不同,返回不同的大小.<code>getSuggestedMinimumHeight()和getSuggestedMinimumWidth()</code>两个函数就是获取<code>View</code>的最小建议值,这就可以保证<code>View</code>的测量值是最少是建议的值(<code>View</code>的最小值或(<code>View</code>的最小值和背景最小值中的较大值)),下面就是具体的源码.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">getSuggestedMinimumHeight</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (mBackground == <span class="keyword">null</span>) ? mMinHeight : max(mMinHeight, mBackground.getMinimumHeight());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="onDraw"><a href="#onDraw" class="headerlink" title="onDraw()"></a>onDraw()</h3><p>测量完毕后,我们就可以进行<code>View</code>的绘制了.我们通过<code>Canvas</code>和<code>Paint</code>进行绘制,<code>Canvas</code>决定绘制什么,而<code>Paint</code>决定怎么绘制.由于<code>Canvas</code>是<code>onDraw(Canvas canvas)</code>传入的参数,但<code>Paint</code>却需要我们自己创建和初始化,如果选择在<code>onDraw()</code>里执行这项工作,则在每次的<code>View</code>绘制时都会进行.所以为了提高效率,我们可以将<code>Paint</code>的创建和初始化放在<code>View</code>的构造函数中执行.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">super</span>(context, attrs);</span><br><span class="line">       init();</span><br><span class="line">   &#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       mPaint = <span class="keyword">new</span> Paint();</span><br><span class="line">       mPaint.setColor(Color.BLUE);</span><br><span class="line">       mPaint.setStrokeWidth(<span class="number">5</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">super</span>.onDraw(canvas);</span><br><span class="line">       canvas.drawRect(getPaddingLeft(), getPaddingTop(), getPaddingLeft() + mWidth, getPaddingTop() + mHeight, mPaint);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里我们只简单的绘制一个矩形,因为我们研究的是自定义<code>View</code>的创建过程,关于<code>Canvas</code>的相关使用,我们后面再做研究.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/" data-id="cit1qz6fa0002po86wdhwav2x" data_title="Android学习笔记---重新学习自定义View#02" data_summary="上次我们研究了View的构造函数,自定义View最重要..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-09-13T17:22:51.370Z" itemprop="dateModified">2016-09-14</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/12/CustomView-create_view/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android学习笔记---重新学习自定义View#01</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#onSizeChanged"><span class="toc-number">1.</span> <span class="toc-text">onSizeChanged()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#onMeasure"><span class="toc-number">2.</span> <span class="toc-text">onMeasure()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#onDraw"><span class="toc-number">3.</span> <span class="toc-text">onDraw()</span></a></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/avatar.jpg" /></li>
+    
+    
+    <li>Hi,I'm Kevin.</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/14/CustomView-custom_drawing/">Android学习笔记---重新学习自定义View#02</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/12/CustomView-create_view/">Android学习笔记---重新学习自定义View#01</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/16/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Kevin HO<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'kevinhqf';
+  
+  var disqus_url = 'http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>
