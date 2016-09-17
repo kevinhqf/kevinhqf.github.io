@@ -74,6 +74,74 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ViewDetails_01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/09/17/ViewDetails_01/" class="article-date">
+  <time datetime="2016-09-17T13:05:54.228Z" itemprop="datePublished">2016-09-17</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/17/ViewDetails_01/">Android学习笔记---深入理解View#01</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.jianshu.com/p/39f0640a063e">上次</a>的两篇文章,我们讨论了创建自定义View的基本流程.对<code>View</code>有了基本的了解后,有好奇心的同学可能会对<code>View</code>的基本原理充满好奇(其实我也非常好奇<code>View</code>在Android系统下是怎样实现的),所以我就本着好奇心看了很多关于<code>View</code>的实现原理和<code>View</code>的基本工作流程的文章,也看了一些源码,对<code>View</code>有了更加深入的理解.在这我就跟大家分享一下我对<code>View</code>的理解,希望能对大家的学习有所帮助.若有什么错误的地方还希望大家帮我指出.</p>
+<h4 id="从setContentView开始"><a href="#从setContentView开始" class="headerlink" title="从setContentView开始"></a>从<em><code>setContentView</code></em>开始</h4><p>写过Android应用的都知道,我们最开始接触<code>View</code>是在布局文件<code>activity_main.xml</code>中.在我们的<code>MainActivity</code>中<code>onCreate()</code>方法中,通过<code>setContentView(R.layout.activity_main)</code>设置我们的Activity布局.View的所有工作都是从这里开始的,为了一探究竟,我们就进到<code>setContentView()</code>中去,看看它究竟是怎样实现的.下面就是Activity的<code>setContentView</code>的代码.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">   * Set the activity content from a layout resource.  The resource will be</span><br><span class="line">   * inflated, adding all top-level views to the activity.</span><br><span class="line">   *</span><br><span class="line">   * <span class="doctag">@param</span> layoutResID Resource ID to be inflated.</span><br><span class="line">   *</span><br><span class="line">   * <span class="doctag">@see</span> #setContentView(android.view.View)</span><br><span class="line">   * <span class="doctag">@see</span> #setContentView(android.view.View, android.view.ViewGroup.LayoutParams)</span><br><span class="line">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(@LayoutRes <span class="keyword">int</span> layoutResID)</span> </span>&#123;</span><br><span class="line">      getWindow().setContentView(layoutResID);</span><br><span class="line">      initWindowDecorActionBar();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意:我们这里的代码是<code>Activity</code>的代码,而不是<code>AppCompatActivity</code>的代码.<code>AppCompatActivity</code>是Android为使用兼容库的应用所提供的一个Activity基类,这里为了研究方便,减少其他无关代码的干扰,我们使用<code>Activity</code>类进行讨论.</p>
+</blockquote>
+<p>我们可以看到这里最终调用的是<code>getWindow().setContentView(layoutID)</code>进行布局设置.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Window 类下的setContentView()</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(View view)</span></span>;</span><br></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/09/17/ViewDetails_01/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/09/17/ViewDetails_01/" data-id="cit77jq2s000s9d86olpi5j1b" data_title="Android学习笔记---深入理解View#01" data_summary="上次的两篇文章,我们讨论了创建自定义View的基本流程..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/09/17/ViewDetails_01/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-09-17T13:05:54.224Z" itemprop="dateModified">2016-09-17</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-CustomView-custom_drawing" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -114,7 +182,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/" data-id="cit1qz6fa0002po86wdhwav2x" data_title="Android学习笔记---重新学习自定义View#02" data_summary="上次我们研究了View的构造函数,自定义View最重要..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/" data-id="cit77jpz100059d8629f0ueo2" data_title="Android学习笔记---重新学习自定义View#02" data_summary="上次我们研究了View的构造函数,自定义View最重要..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -183,7 +251,7 @@ Updated:<time datetime="2016-09-13T17:22:51.370Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/" data-id="cit1qz6ei0001po86ivpm8sbz" data_title="Android学习笔记---重新学习自定义View#01" data_summary="
+	  <a data-url="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/" data-id="cit77jpyg00029d86on8j3z6k" data_title="Android学习笔记---重新学习自定义View#01" data_summary="
 最近发现自己对Android的学习只在表面,并没有深..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/#disqus_thread" class="article-comment-link">Comments</a>
@@ -273,7 +341,7 @@ Updated:<time datetime="2016-09-12T09:47:51.040Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/16/effective-java03/" data-id="cit1qz6lp001cpo86l6g177ys" data_title="Effective Java学习笔记 --- 对所有对象通用的方法" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/16/effective-java03/" data-id="cit77jq4v001d9d86v2xprir3" data_title="Effective Java学习笔记 --- 对所有对象通用的方法" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/16/effective-java03/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -336,7 +404,7 @@ Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="cit1qz6lj001apo864bgfrbgu" data_title="Effective Java学习笔记 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="cit77jq4i001b9d86ij2522l1" data_title="Effective Java学习笔记 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/14/effective-java02/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -347,72 +415,6 @@ Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-08-14</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-effective-java01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/14/effective-java01/" class="article-date">
-  <time datetime="2016-08-14T06:35:15.905Z" itemprop="datePublished">2016-08-14</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="使用枚举类型强化Singleton属性"><a href="#使用枚举类型强化Singleton属性" class="headerlink" title="使用枚举类型强化Singleton属性"></a>使用枚举类型强化Singleton属性</h4><p><code>Singleton</code>指的是仅被实例化一次的类,即我们常说的单例.我们可以通过枚举类型来实现单例.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Elvis&#123;</span><br><span class="line">	INSTANCE;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">leaveTheBuilding</span><span class="params">()</span></span>&#123;......)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这种方法是最简单的方法,而且它提供了序列化的机制,绝对防止多次实例化,避免通过反射利用无参构造器获取实例,这种方法可能是目前实现单例的最佳方法.</p>
-<h4 id="通过私有构造器强化不可实例化"><a href="#通过私有构造器强化不可实例化" class="headerlink" title="通过私有构造器强化不可实例化"></a>通过私有构造器强化不可实例化</h4><p>有些类并不希望被实例化,例如Java内置的工具类,它们只提供一些静态的工具方法.实例化并无任何的意义,当这种类没有显示的构造器时,编译器会自动提供一个公有的无参构造器,这让就会有被实例化的危险了.为了保证不被实例化,可以提供一个<code>私有的构造器</code>,这让就可以避免外部实例化该类.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UtilityClass</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">UtilityClass</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">throw</span> <span class="keyword">new</span> AssertionError();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// other method</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面的代码中在私有构造器中抛出的<code>AssertionError</code>可以避免在类的内部被实例化.这种方法的缺点就是无法子类化.<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/14/effective-java01/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java01/" data-id="cit1qz6l50016po86diy8medr" data_title="Effective Java学习笔记 --- 创建与销毁对象02" data_summary="使用枚举类型强化Singleton属性Singleto..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/14/effective-java01/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-14T06:35:15.897Z" itemprop="dateModified">2016-08-14</time>
 </span>
 
 
@@ -458,7 +460,7 @@ Updated:<time datetime="2016-08-14T06:35:15.897Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -471,7 +473,7 @@ Updated:<time datetime="2016-08-14T06:35:15.897Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -482,6 +484,10 @@ Updated:<time datetime="2016-08-14T06:35:15.897Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/17/ViewDetails_01/">Android学习笔记---深入理解View#01</a>
+          </li>
         
           <li>
             <a href="/2016/09/14/CustomView-custom_drawing/">Android学习笔记---重新学习自定义View#02</a>
@@ -497,10 +503,6 @@ Updated:<time datetime="2016-08-14T06:35:15.897Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
           </li>
         
       </ul>

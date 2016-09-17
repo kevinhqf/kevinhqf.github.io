@@ -74,6 +74,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-broadcast-receiver" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/26/broadcast-receiver/" class="article-date">
+  <time datetime="2016-07-26T07:51:30.071Z" itemprop="datePublished">2016-07-26</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/26/broadcast-receiver/">Android学习笔记---Broadcast Receiver</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Broadcast Receiver</code>同样也是Android的四大组件之一,我们将它称为广播接受器.</p>
+<h4 id="Broadcast-Receiver基础知识"><a href="#Broadcast-Receiver基础知识" class="headerlink" title="Broadcast Receiver基础知识"></a>Broadcast Receiver基础知识</h4><p>Android系统会随时随地的发送各种各样的广播信息,如开机完成,网络状态改变,有短信到达等.这些广播都可以被开发者所捕获,我们可以通过<code>Broadcast Receiver</code>去获取我们感兴趣的广播.</p>
+<h4 id="Broadcast-Receiver的创建"><a href="#Broadcast-Receiver的创建" class="headerlink" title="Broadcast Receiver的创建"></a>Broadcast Receiver的创建</h4><p>要创建自己的<code>Broadcast Receiver</code>对象,需要继承系统的<code>BroadcastReceiver</code>类并实现其<code>onReceive()</code>方法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ACTION = <span class="string">"android.intent.action.MyBroadcastReceiver"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        Log.i(<span class="string">"bail"</span>, <span class="string">"MyBroadcastReceiver接收到数据："</span> + intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/26/broadcast-receiver/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="cit77jq3b000z9d86rwnhv53l" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-26T07:51:30.023Z" itemprop="dateModified">2016-07-26</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-content-provider" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -151,7 +216,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cit1qz6kl0012po867wrst6zq" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="cit77jq4100179d86plvl75ks" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -220,7 +285,7 @@ Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="cit1qz6p20020po86zb0oeor7" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="cit77jq7000239d86uf6nadwc" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/22/service/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -285,7 +350,7 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="cit1qz6la0018po86x82q3dby" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/21/activity/" data-id="cit77jq3g00119d86v3ntk6o3" data_title="Android学习笔记---Activity" data_summary="通常我们创建一个Android项目的时候,IDE工具通..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/21/activity/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -350,7 +415,7 @@ Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="cit1qz6ju000vpo861iqcdnry" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/20/annotation/" data-id="cit77jq35000w9d86zzsv1x6j" data_title="Java学习笔记---Annotation" data_summary="下面的代码片段相信有过Android开发经验的朋友都会..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/20/annotation/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -361,76 +426,6 @@ Updated:<time datetime="2016-07-21T04:35:07.629Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-07-20T06:38:48.818Z" itemprop="dateModified">2016-07-20</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-DesignPatterns_0B" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/06/25/DesignPatterns_0B/" class="article-date">
-  <time datetime="2016-06-25T07:34:10.428Z" itemprop="datePublished">2016-06-25</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/25/DesignPatterns_0B/">浅谈Java设计模式系列0x0B---观察者模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前我给大家介绍了<code>对象创建型</code>和<code>结构型</code>的设计模,式接下来我会为大家介绍行为型的设计模式;<br>给大家介绍的第一个的行为型设计模式就是<code>观察者模式</code>;  </p>
-<h4 id="观察者是什么鬼"><a href="#观察者是什么鬼" class="headerlink" title="观察者是什么鬼"></a>观察者是什么鬼</h4><p>其实就像在生活中,当你想买一样商品的时候,因为价格太贵,所有你并没有马上入手.但你却会关注它的价格变化,当商品的价格下降的时候,你就会收到通知,并且决定入手;<br>上面的例子就是一个观察者模式的例子,你就是观察者,商品就是观察目标,当商品的状态发生变化时,观察者会得到通知并做出相应的动作;  </p>
-<h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><ul>
-<li><strong>目标(Subject)</strong>：被观察的对象,定义了一个观察者的集合,提供增加和删除观察者对象的方法,同时定义了通知方法;</li>
-<li><strong>具体目标(ConcreteSubject)</strong>：目标类的子类,实现目标类中定义的抽象业务逻辑方法;</li>
-<li><strong>观察者(Observer)</strong>：对观察目标的改变做出反应,声明更新数据的接口方法;</li>
-<li><strong>具体观察者(ConcreteObserver)</strong>：维护一个指向具体目标对象的引用,实现观察者接口的更新数据方法,可以调用具体目标类的 attach() 方法将自己添加到目标类的集合中或通过 detach() 方法将自己从目标类的集合中删除;</li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/25/DesignPatterns_0B/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/" data-id="cit1qz6it000lpo86pyqzd0qq" data_title="浅谈Java设计模式系列0x0B---观察者模式" data_summary="之前我给大家介绍了对象创建型和结构型的设计模,式接下来..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/06/25/DesignPatterns_0B/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-06-25</time>
 </span>
 
 
@@ -476,7 +471,7 @@ Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -489,7 +484,7 @@ Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -500,6 +495,10 @@ Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/17/ViewDetails_01/">Android学习笔记---深入理解View#01</a>
+          </li>
         
           <li>
             <a href="/2016/09/14/CustomView-custom_drawing/">Android学习笔记---重新学习自定义View#02</a>
@@ -515,10 +514,6 @@ Updated:<time datetime="2016-06-25T07:34:10.428Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/14/effective-java01/">Effective Java学习笔记 --- 创建与销毁对象02</a>
           </li>
         
       </ul>
