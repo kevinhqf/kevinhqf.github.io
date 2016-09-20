@@ -74,6 +74,76 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ViewDetails_02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/09/20/ViewDetails_02/" class="article-date">
+  <time datetime="2016-09-20T02:53:43.625Z" itemprop="datePublished">2016-09-20</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/20/ViewDetails_02/">Android学习笔记---深入理解View#02</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.jianshu.com/p/c05463402a49">上篇文章</a>中我们了解到了<code>setContentView()</code>背后所发生的事情.先用上一篇文章最后总结的图片来回顾一下<code>setContentView()</code>的流程.<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/setContentView.png" alt=""><br>但是后来我发现,我们只是知道了<code>mDecor</code>是怎样与<code>mContentParent</code>联系在一起并将我们的<code>activity_main.xml</code>布局添加到其中.<strong>而并不知道<code>mDecor</code>是如何添加到<code>PhoneWindow</code>和<code>Activity</code>上的.</strong>所以本篇我们就来探究一下这个问题.</p>
+<h3 id="寻找我们的-mDecor"><a href="#寻找我们的-mDecor" class="headerlink" title="寻找我们的 mDecor"></a>寻找我们的 <em>mDecor</em></h3><p>既然我们在<code>PhoneWindow</code>里没有发现<code>mDecor</code>是如何添加到window上的.那么我就需要到别的地方去寻找<code>mDecor</code>的线索,那我们要该从哪入手呢?还记得上一篇我们从Activity的<code>setContentView()</code>出发时,最终调用的是<code>mWindow(PhoneWindow)</code>的<code>setContentView()</code>函数,而<code>mDecor</code>是<code>PhoneWindow</code>的成员变量,<code>mWindow</code>是<code>Activity</code>的成员变量,那么我们可以在<code>Activity</code>的代码中寻找一下我们的线索<code>mDecor</code>.<br>果然通过在<code>Activity</code>代码中进行<code>mDecor</code>的关键字搜索,我们找到了线索.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">View mDecor = <span class="keyword">null</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">makeVisible</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!mWindowAdded) &#123;</span><br><span class="line">            ViewManager wm = getWindowManager();</span><br><span class="line">            wm.addView(mDecor, getWindow().getAttributes());</span><br><span class="line">            mWindowAdded = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        mDecor.setVisibility(View.VISIBLE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从上面的代码可以看到<code>Activity</code>通过<code>WindowManager</code>的<code>addView()</code>方法将<code>mDecor</code>添加到<code>Window</code>上.但我们发现这里的<code>mDecor</code>与<code>PhoneWindow</code>中的<code>mDecor</code>好像并不相同.而且在代码中(<code>Activity</code>代码中的<code>mDecor</code>)与(<code>PhoneWindow</code>的<code>mDecor</code>)并没有明显的联系在一起.难道线索就这么断了?我决定使用绝招(搜索引擎),果然我找到了另一个切入点.<br>经过一番Internet后,我知道了View的布局绘制是发生在Activity的创建过程,而Activity的创建是由一个名为<code>ActivityThread</code>的类进行控制的.下面我们来验证一下,看看能否找到线索.<br>首先我们找到<code>ActivityThread</code>的源码,这里有两种方法:</p>
+<ol>
+<li>直接在Internet上阅读<a href="https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/app/ActivityThread.java">在线的源码</a></li>
+<li>在Android Studio中新建一个简单的工程,在<code>MainActivity</code>的<code>onCreate()</code>函数中下一个断点,然后运行调试.我们可以在调试工具的调用栈中找到<code>ActivityThread</code>.<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/debug.png" alt=""></li>
+</ol>
+<p>找到了<code>ActivityThread</code>的源码后,对<code>makeVisible</code>关键字进行搜索,果然找到了调用的地方,在<code>handleResumeActivity()</code>中出现了<code>makeVisible()</code>的调用,既然出现了相关的调用,那我们就看一下<code>handleResumeActivity()</code>的代码吧.<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/09/20/ViewDetails_02/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/09/20/ViewDetails_02/" data-id="citaw0n96000wa1869gw9iybd" data_title="Android学习笔记---深入理解View#02" data_summary="上篇文章中我们了解到了setContentView()..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/09/20/ViewDetails_02/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-09-20T02:53:43.625Z" itemprop="dateModified">2016-09-20</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-ViewDetails_01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -118,7 +188,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/17/ViewDetails_01/" data-id="cit7dk4gd000qo88672ud9gra" data_title="Android学习笔记---深入理解View#01" data_summary="上次的两篇文章,我们讨论了创建自定义View的基本流程..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/09/17/ViewDetails_01/" data-id="citaw0n8h000oa186ovlyvkh5" data_title="Android学习笔记---深入理解View#01" data_summary="上次的两篇文章,我们讨论了创建自定义View的基本流程..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/17/ViewDetails_01/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -182,7 +252,7 @@ Updated:<time datetime="2016-09-17T15:52:35.112Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/" data-id="cit7dk4dq0002o886jska6880" data_title="Android学习笔记---重新学习自定义View#02" data_summary="上次我们研究了View的构造函数,自定义View最重要..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/" data-id="citaw0n630003a1863pqrpqnm" data_title="Android学习笔记---重新学习自定义View#02" data_summary="上次我们研究了View的构造函数,自定义View最重要..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -251,7 +321,7 @@ Updated:<time datetime="2016-09-13T17:22:51.370Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/" data-id="cit7dk4da0001o886jvtxpg7p" data_title="Android学习笔记---重新学习自定义View#01" data_summary="
+	  <a data-url="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/" data-id="citaw0n5i0001a186ktqyojzh" data_title="Android学习笔记---重新学习自定义View#01" data_summary="
 最近发现自己对Android的学习只在表面,并没有深..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/#disqus_thread" class="article-comment-link">Comments</a>
@@ -341,7 +411,7 @@ Updated:<time datetime="2016-09-12T09:47:51.040Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/16/effective-java03/" data-id="cit7dk4ij001eo886i4upiq1y" data_title="Effective Java学习笔记 --- 对所有对象通用的方法" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/16/effective-java03/" data-id="citaw0nba001ha186moosumu1" data_title="Effective Java学习笔记 --- 对所有对象通用的方法" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/16/effective-java03/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -352,69 +422,6 @@ Updated:<time datetime="2016-09-12T09:47:51.040Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-08-16</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-effective-java02" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/14/effective-java02/" class="article-date">
-  <time datetime="2016-08-14T06:35:17.165Z" itemprop="datePublished">2016-08-14</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-		
-        <h4 id="消除过期的对象引用"><a href="#消除过期的对象引用" class="headerlink" title="消除过期的对象引用"></a>消除过期的对象引用</h4><p>由于Java语言具有垃圾回收机制,可能很多人都不会再去关心内存管理的事情.但是有的情况下我们的代码中回无意的存在着<code>内存泄漏</code>的问题.下面的代码是一个例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stack</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Object[] elements;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEAFULT_INITIAL_CAPACITY = <span class="number">16</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stack</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	elements = <span class="keyword">new</span> Object[DEAFULT_INITIAL_CAPACITY];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Object e)</span></span>&#123;</span><br><span class="line">    	ensureCapacity();</span><br><span class="line">        elements[size++] = e;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">        	<span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">        <span class="keyword">return</span> elements[--size];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(elements.length == size)</span><br><span class="line">        	elements = Arrays.copyOf(elements,<span class="number">2</span>*size+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面的代码看似没有任何问题,但当栈先增长后收缩时,从栈中弹出的对象不会被系统回收,即使它们不再被引用.因为栈的内部会维护这些对象的<code>过期引用</code>,即被弹出的对象虽然不在栈内,但栈的内部(<code>elements</code>中下标大于size的部分)仍然持有着他们的引用,只是用户不会访问这些对象而已.<br>当这些对象被无意识的保留起来时,垃圾回收机制不仅不会处理这些对象,而且也不会处理被这些对象所引用的其他所有对象.这样一来会对性能造成很大的影响.<br>处理这类问题其实也很简单,只要对象引用过期,就清空这些引用即可.对于上面的例子,我们可以在出栈方法进行下面的改进.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">    	<span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">    Object result = elements[--size];</span><br><span class="line">    elements[size] = <span class="keyword">null</span>; <span class="comment">// 清除过期引用</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>那么问题来了,我们是否对于每个对象的引用,都要关心其是否已经过期?这肯定是不需要的,而且这也不是我们希望的.<strong><code>只有当类是自己管理内存,我们才应该注意内存泄漏问题</code></strong>.<br>内存泄漏还有另外的两个常见的情景,就是<code>缓存</code>以及<code>监听器和其他回调</code>.由于内存泄漏很难被发现,所以我们从编码的经验中能获取最有效的解决方法.</p>
-<h4 id="避免使用finalizer"><a href="#避免使用finalizer" class="headerlink" title="避免使用finalizer"></a>避免使用finalizer</h4><p>finalize方法通常不可预测,一般情况下不推荐使用.因为finalize方法会延迟执行,而延迟的时间是任意的,这会让程序的运行变得不可预测.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="cit7dk4ib001co886ed8tp7ni" data_title="Effective Java学习笔记 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/14/effective-java02/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-08-14</time>
 </span>
 
 
@@ -460,7 +467,7 @@ Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -473,7 +480,7 @@ Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -484,6 +491,10 @@ Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/20/ViewDetails_02/">Android学习笔记---深入理解View#02</a>
+          </li>
         
           <li>
             <a href="/2016/09/17/ViewDetails_01/">Android学习笔记---深入理解View#01</a>
@@ -499,10 +510,6 @@ Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/08/16/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/14/effective-java02/">Effective Java学习笔记 --- 创建与销毁对象03</a>
           </li>
         
       </ul>
