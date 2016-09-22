@@ -74,6 +74,76 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ViewDetails_03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/09/22/ViewDetails_03/" class="article-date">
+  <time datetime="2016-09-22T12:36:21.630Z" itemprop="datePublished">2016-09-22</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/22/ViewDetails_03/">Android学习笔记---深入理解View#03</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.jianshu.com/p/f958c9232b07">上一篇</a>的结尾中,我们发现了View的绘制发生在<code>ViewRootImpl</code>的<code>performTraversals()</code>中.而且在其中先后调用了<code>performMeasure(),performLayout(),performDraw()</code>.<br>如此一来,我们又有了新的猎物了.就像美食一样,好吃的东西一定要仔细地品尝.在上主菜之前,我们先来点开胃菜.我们先来了解一下Android是怎样绘制View的.(<a href="https://developer.android.com/guide/topics/ui/how-android-draws.html">官方的文档How Android Draws Views</a>)</p>
+<h3 id="开胃菜-关于View绘制时需要知道的常识"><a href="#开胃菜-关于View绘制时需要知道的常识" class="headerlink" title="开胃菜(关于View绘制时需要知道的常识)"></a>开胃菜(关于View绘制时需要知道的常识)</h3><p>当<code>Activity</code>接受焦点时,就会被要求绘制其布局.虽然<code>Android Framework</code>会处理这个过程,但<code>Activity</code>必须提供整个布局层级的根节点,因为需要知道从哪开始绘制.  </p>
+<p><code>Activity</code>的整个布局被转换成了一棵树,绘制整个布局就相当于了遍历整颗树并把每个节点的View绘制出来.相应地,<code>ViewGroup</code>负责要求它的每一个<code>child</code>进行绘制,而<code>View</code>则负责绘制自己.由于树的遍历是有序的,所以父View绘制之前会先绘制其子View,而兄弟节点会按照在树中出现的顺序进行绘制.<br>绘制布局需要进行两个<code>传递过程(pass process)</code>:分别是<code>测量时的传递(measure pass)</code>和<code>布局时的传递(layout pass)</code>.这里所说的传递指的是在<code>view tree</code>的各个节点之间的传递.</p>
+<ol>
+<li><code>measure pass</code>在<code>measure(int,int)</code>中实现,而且它是一个<strong>从上到下</strong>的传递.在<code>view tree</code>中每个View节点都将它的尺寸规格向下传递给它的孩子,在整个传递过程结束时,每个节点都应该拥有了自己的测量值(尺寸大小).</li>
+<li><code>layout pass</code>在<code>layout(int,int,int,int)</code>中发生,它同样也是一个<strong>从上到下</strong>的传递.在传递过程中每个<code>parent</code>都需要根据在<code>measure pass</code>时得到的测量值在布局中放置它的所有<code>children</code>.</li>
+</ol>
+<p>下面贴上一张普通的<code>view tree</code>的图.<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/viewtree.png" alt=""><br>
+        
+          <p class="article-more-link">
+            <a href="/2016/09/22/ViewDetails_03/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/09/22/ViewDetails_03/" data-id="citec0q8900111x86lpkq4wjj" data_title="Android学习笔记---深入理解View#03" data_summary="上一篇的结尾中,我们发现了View的绘制发生在View..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/09/22/ViewDetails_03/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-09-22T12:36:21.626Z" itemprop="dateModified">2016-09-22</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-ViewDetails_02" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -120,7 +190,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/20/ViewDetails_02/" data-id="citaw0n96000wa1869gw9iybd" data_title="Android学习笔记---深入理解View#02" data_summary="上篇文章中我们了解到了setContentView()..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/09/20/ViewDetails_02/" data-id="citec0q7x000w1x867vfryxve" data_title="Android学习笔记---深入理解View#02" data_summary="上篇文章中我们了解到了setContentView()..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/20/ViewDetails_02/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -188,7 +258,7 @@ Updated:<time datetime="2016-09-20T02:53:43.625Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/17/ViewDetails_01/" data-id="citaw0n8h000oa186ovlyvkh5" data_title="Android学习笔记---深入理解View#01" data_summary="上次的两篇文章,我们讨论了创建自定义View的基本流程..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/09/17/ViewDetails_01/" data-id="citec0q7z000y1x865fu6j5ve" data_title="Android学习笔记---深入理解View#01" data_summary="上次的两篇文章,我们讨论了创建自定义View的基本流程..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/17/ViewDetails_01/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -252,7 +322,7 @@ Updated:<time datetime="2016-09-17T15:52:35.112Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/" data-id="citaw0n630003a1863pqrpqnm" data_title="Android学习笔记---重新学习自定义View#02" data_summary="上次我们研究了View的构造函数,自定义View最重要..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/" data-id="citec0q3h00021x86vytwn9e2" data_title="Android学习笔记---重新学习自定义View#02" data_summary="上次我们研究了View的构造函数,自定义View最重要..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/14/CustomView-custom_drawing/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -321,7 +391,7 @@ Updated:<time datetime="2016-09-13T17:22:51.370Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/" data-id="citaw0n5i0001a186ktqyojzh" data_title="Android学习笔记---重新学习自定义View#01" data_summary="
+	  <a data-url="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/" data-id="citec0q2m00001x86u6vpo5ys" data_title="Android学习笔记---重新学习自定义View#01" data_summary="
 最近发现自己对Android的学习只在表面,并没有深..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/#disqus_thread" class="article-comment-link">Comments</a>
@@ -333,95 +403,6 @@ Updated:<time datetime="2016-09-13T17:22:51.370Z" itemprop="dateModified">2016-0
 	  
 <span>
 Updated:<time datetime="2016-09-12T09:47:51.040Z" itemprop="dateModified">2016-09-12</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-effective-java03" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/16/effective-java03/" class="article-date">
-  <time datetime="2016-08-16T06:51:08.319Z" itemprop="datePublished">2016-08-16</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/16/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="重写equals方法时遵守通用约定"><a href="#重写equals方法时遵守通用约定" class="headerlink" title="重写equals方法时遵守通用约定"></a>重写equals方法时遵守通用约定</h4><p>通常在下面的几种情况下都没有必要重写<code>equals()</code>方法:</p>
-<ul>
-<li>类的每个实例意义上都是唯一</li>
-<li>不关心类是否提供<strong>逻辑相等</strong>的测试功能</li>
-<li>父类已经重写了<code>equals()</code>方法,并且该方法对子类也适用</li>
-<li>类为私有时,<code>equals()</code>方法不会被调用</li>
-</ul>
-<p>当类需要拥有<strong>逻辑相等</strong>的概念且父类没有重写<code>equals()</code>方法时,我们需要进行<code>equals()</code>方法的重写.在重写时要遵循下面的规则:</p>
-<ul>
-<li><strong><code>自反性</code></strong>,即对象必须等于其自身.</li>
-<li><strong><code>对称性</code></strong>,对于两个对象的比较是否相等必须保持一致.</li>
-<li><strong><code>传递性</code></strong>,若x.equals(y)为true,y.equals(z)为true,那么x.equals(z)必须为true.</li>
-<li><strong><code>一致性</code></strong>,比较操作内所用的数据没有修改时,多次的调用结果必须一致.</li>
-</ul>
-<p>实现高质量<code>equals()</code>方法的技巧:</p>
-<ol>
-<li><strong>使用<code>==</code>操作符检查 “参数是否为这个对象的引用” </strong>.如果是,返回true.若比较操作代价较大,这种优化可提高性能.</li>
-<li><strong>使用<code>instanceof</code>操作符检查 “参数是否为正确的类型” </strong>.如果不是,返回false.这里 “正确的类型” 通常指的是<code>equals()</code>方法所在的类,有些情况下指的是所在类实现的接口类型.</li>
-<li><strong>把参数转换为正确的类型</strong>.上一条已确保能转换成功.</li>
-<li><strong>对于该类的每个关键域,检查参数中的域是否与对象对应的域匹配</strong>.若测试全部成功,返回true,否则返回false.</li>
-<li><strong>使用单元测试进行检验</strong></li>
-</ol>
-<p>最后需要注意的几点:</p>
-<ul>
-<li>重写equals()时总要重写hashCode()</li>
-<li>不要企图让equals()方法过于智能</li>
-<li>不要将equals声明中的Object对象替换为其他的类型
-        
-          <p class="article-more-link">
-            <a href="/2016/08/16/effective-java03/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/16/effective-java03/" data-id="citaw0nba001ha186moosumu1" data_title="Effective Java学习笔记 --- 对所有对象通用的方法" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/16/effective-java03/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-08-16</time>
 </span>
 
 
@@ -467,7 +448,7 @@ Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -480,7 +461,7 @@ Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -491,6 +472,10 @@ Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/22/ViewDetails_03/">Android学习笔记---深入理解View#03</a>
+          </li>
         
           <li>
             <a href="/2016/09/20/ViewDetails_02/">Android学习笔记---深入理解View#02</a>
@@ -506,10 +491,6 @@ Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/09/12/CustomView-create_view/">Android学习笔记---重新学习自定义View#01</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/16/effective-java03/">Effective Java学习笔记 --- 对所有对象通用的方法</a>
           </li>
         
       </ul>
