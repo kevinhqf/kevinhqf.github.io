@@ -74,6 +74,76 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CustomView-create_view" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/09/12/CustomView-create_view/" class="article-date">
+  <time datetime="2016-09-12T09:47:51.788Z" itemprop="datePublished">2016-09-12</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/12/CustomView-create_view/">Android学习笔记---重新学习自定义View#01</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近发现自己对Android的学习只在表面,并没有深入的理解,我不喜欢这种感觉,而且没有自己的理解,学习到的内容也很难为我所用.</p>
+<p>所以从本次开始,我要写点自己理解的东西,但要对知识有自己的理解,那就必须深入了解它的原理.而我觉得Android的自定义View是一个很好的入口.</p>
+</blockquote>
+<p>学会如何自定义View,能够了解Android系统中View使如何创建和维护的.这有助于我们学习Android的View的基本机制,也能解决我们日常开发的需求.</p>
+<p>接下来我们一起来对自定义View中的各个部分做详细的研究,现在我们先从View的构造函数入手.</p>
+<h4 id="自定义View的构造函数"><a href="#自定义View的构造函数" class="headerlink" title="自定义View的构造函数"></a>自定义View的构造函数</h4><p>自定义View最基础的方式就是创建一个继承于<code>View</code>或其子类的类,并且最少重写父类的一个构造函数.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 在代码中使用new关键字创建View时会调用</span><br><span class="line">     * <span class="doctag">@param</span> context</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 在layout文件声明View时会调用,只有实现了这个构造函数才能在布局文件中声明此自定义View</span><br><span class="line">     * <span class="doctag">@param</span> context</span><br><span class="line">     * <span class="doctag">@param</span> attrs 存有View在xml布局文件中的自定义的属性</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 与第二个构造函数不同的地方在于,此构造函数可以指定View的默认样式</span><br><span class="line">     * <span class="doctag">@param</span> context</span><br><span class="line">     * <span class="doctag">@param</span> attrs</span><br><span class="line">     * <span class="doctag">@param</span> defStyleAttr 是当前theme中包含的指向View的样式资源的属性(0代表此参数无效)</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/09/12/CustomView-create_view/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/" data-id="citk6m9460001j886053hsdnd" data_title="Android学习笔记---重新学习自定义View#01" data_summary="
+最近发现自己对Android的学习只在表面,并没有深..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/09/12/CustomView-create_view/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-09-12T09:47:51.040Z" itemprop="dateModified">2016-09-12</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-effective-java03" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -139,7 +209,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/16/effective-java03/" data-id="citec0qaf001j1x86kh085bk9" data_title="Effective Java学习笔记 --- 对所有对象通用的方法" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/16/effective-java03/" data-id="citk6m9cc001lj886ih3x7l36" data_title="Effective Java学习笔记 --- 对所有对象通用的方法" data_summary="重写equals方法时遵守通用约定通常在下面的几种情况..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/16/effective-java03/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -202,7 +272,7 @@ Updated:<time datetime="2016-08-16T06:51:08.307Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="citec0qa9001h1x86hu767c81" data_title="Effective Java学习笔记 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java02/" data-id="citk6m9c7001jj8866tv9rgtp" data_title="Effective Java学习笔记 --- 创建与销毁对象03" data_summary="消除过期的对象引用由于Java语言具有垃圾回收机制,可..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/14/effective-java02/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -268,7 +338,7 @@ Updated:<time datetime="2016-08-14T06:35:17.161Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java01/" data-id="citec0q9z001f1x86ogllx3t9" data_title="Effective Java学习笔记 --- 创建与销毁对象02" data_summary="使用枚举类型强化Singleton属性Singleto..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java01/" data-id="citk6m9c3001hj886o3a4hv65" data_title="Effective Java学习笔记 --- 创建与销毁对象02" data_summary="使用枚举类型强化Singleton属性Singleto..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/14/effective-java01/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -348,7 +418,7 @@ Updated:<time datetime="2016-08-14T06:35:15.897Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java00/" data-id="citec0q96001b1x862s7w0j5l" data_title="Effective Java学习笔记 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/08/14/effective-java00/" data-id="citk6m9bz001fj886hx7z9ehg" data_title="Effective Java学习笔记 --- 创建与销毁对象01" data_summary="最近在阅读学习一本关于Java的书籍 — Effect..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/08/14/effective-java00/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -372,77 +442,11 @@ Updated:<time datetime="2016-08-14T06:35:14.037Z" itemprop="dateModified">2016-0
 
 
   
-    <article id="post-realm-basic" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/09/realm-basic/" class="article-date">
-  <time datetime="2016-08-09T07:24:32.661Z" itemprop="datePublished">2016-08-09</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/09/realm-basic/">Realm for Android基本教程---一个简便的数据库</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://realm.io/">Realm</a>是一款开源的数据库工具,它具有快速,易于使用和支持多平台的特点.它完全可以取代我们Android中的SQLite数据库,它比SQLite使用起来更加的方便快捷.</p>
-<h4 id="添加到项目"><a href="#添加到项目" class="headerlink" title="添加到项目"></a>添加到项目</h4><p>想在Android的项目当中使用<code>Realm</code>,只需在依赖文件<code>app/build.gradle</code>下的<code>dependencies</code>节点添加依赖即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;io.realm:realm-android:0.84.1&apos;</span><br></pre></td></tr></table></figure></p>
-<h4 id="创建Realm对象"><a href="#创建Realm对象" class="headerlink" title="创建Realm对象"></a>创建Realm对象</h4><p>一个<code>Realm</code>对象就相当于一个SQLite数据库,一旦创建了一个<code>Realm</code>对象在Android的文件系统中就会存在一个与之对应的文件.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Realm myRealm = Realm.getInstance(context);</span><br></pre></td></tr></table></figure></p>
-<p>通过<code>Realm.getInstance()</code>方法可以得到一个<code>Realm</code>对象,同时也会在Android文件系统中创建一个名为<code>default.realm</code>的Realm文件.<br>我们还可以通过<code>RealmConfiguration.Builder</code>对象来创建自己命名的<code>Realm</code>对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Realm myOtherRealm = Realm.getInstance(<span class="keyword">new</span> RealmConfiguration.Builder(context)</span><br><span class="line">                        .name(<span class="string">"myOtherRealm.realm"</span>)</span><br><span class="line">                        .build());</span><br></pre></td></tr></table></figure></p>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/09/realm-basic/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/08/09/realm-basic/" data-id="citec0qca00231x86iojvjwqd" data_title="Realm for Android基本教程---一个简便的数据库" data_summary="Realm是一款开源的数据库工具,它具有快速,易于使用..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/08/09/realm-basic/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-08-09T07:24:32.649Z" itemprop="dateModified">2016-08-09</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -470,7 +474,7 @@ Updated:<time datetime="2016-08-09T07:24:32.649Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -483,7 +487,7 @@ Updated:<time datetime="2016-08-09T07:24:32.649Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -494,6 +498,10 @@ Updated:<time datetime="2016-08-09T07:24:32.649Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/26/ViewDetails_04/">Android学习笔记---深入理解View#04</a>
+          </li>
         
           <li>
             <a href="/2016/09/22/ViewDetails_03/">Android学习笔记---深入理解View#03</a>
@@ -509,10 +517,6 @@ Updated:<time datetime="2016-08-09T07:24:32.649Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/09/14/CustomView-custom_drawing/">Android学习笔记---重新学习自定义View#02</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/12/CustomView-create_view/">Android学习笔记---重新学习自定义View#01</a>
           </li>
         
       </ul>

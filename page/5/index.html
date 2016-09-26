@@ -74,6 +74,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-mvp01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/30/mvp01/" class="article-date">
+  <time datetime="2016-07-30T07:41:54.842Z" itemprop="datePublished">2016-07-30</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/30/mvp01/">Android学习笔记---MVP架构系列0x01</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上次我们对<code>MVP</code>架构有了基本的了解,并且对我们的例子做了开发前的准备,这次我们就把项目的基本结构目录搭建起来.</p>
+<h4 id="基本项目结构"><a href="#基本项目结构" class="headerlink" title="基本项目结构"></a>基本项目结构</h4><p>项目是功能模块来进行包管理的,项目中只有一个简单的电影加载模块所以比较简单.下图是目前基本的项目的目录结构:<br><img src="http://o7x6n1hmo.bkt.clouddn.com/image/basic_dir.png" alt="基本目录结构"><br>首先我们有两个抽象的接口,作为所有<code>View</code>和<code>Presenter</code>的基类:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> *  View模块抽象接口</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseView</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 将对应的Presenter注入到View当中</span><br><span class="line">     * <span class="doctag">@param</span> presenter 注入的Presenter</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setPresenter</span><span class="params">(T presenter)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> *  View模块抽象接口</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseView</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 将对应的Presenter注入到View当中</span><br><span class="line">     * <span class="doctag">@param</span> presenter 注入的Presenter</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setPresenter</span><span class="params">(T presenter)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/30/mvp01/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://kevinhqf.github.io/2016/07/30/mvp01/" data-id="citk6m9dj001zj886oiger9he" data_title="Android学习笔记---MVP架构系列0x01" data_summary="上次我们对MVP架构有了基本的了解,并且对我们的例子做..." class="article-share-link">Share</a>
+      
+        <a href="http://kevinhqf.github.io/2016/07/30/mvp01/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+	  
+      
+	  
+<span>
+Updated:<time datetime="2016-07-30T07:41:54.838Z" itemprop="dateModified">2016-07-30</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-glide-basic" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -123,7 +188,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/28/glide-basic/" data-id="citec0qb9001r1x86el8s3owx" data_title="Android学习笔记---开源工具Glide的基本使用" data_summary="Glide是一个Android的开源图像加载库,它可以..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/28/glide-basic/" data-id="citk6m9d8001vj886wjkbyp53" data_title="Android学习笔记---开源工具Glide的基本使用" data_summary="Glide是一个Android的开源图像加载库,它可以..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/28/glide-basic/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -190,7 +255,7 @@ Updated:<time datetime="2016-07-28T11:58:21.713Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/27/retrofit-basic/" data-id="citec0qci00271x86g9bm5bji" data_title="Android学习笔记---开源工具Retrofit的基本使用" data_summary="Retrofit是一个简化Android网络请求的一个..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/27/retrofit-basic/" data-id="citk6m9dz0027j886bzhxx329" data_title="Android学习笔记---开源工具Retrofit的基本使用" data_summary="Retrofit是一个简化Android网络请求的一个..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/27/retrofit-basic/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -255,7 +320,7 @@ Updated:<time datetime="2016-07-27T08:46:40.187Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="citec0q8k00151x86mzu85xzt" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/" data-id="citk6m9ax0017j886qgwmxaq8" data_title="Android学习笔记---Broadcast Receiver" data_summary="Broadcast Receiver同样也是Andro..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/26/broadcast-receiver/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -356,7 +421,7 @@ Updated:<time datetime="2016-07-26T07:51:30.023Z" itemprop="dateModified">2016-0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="citec0q9n001d1x86997qka74" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
+	  <a data-url="http://kevinhqf.github.io/2016/07/25/content-provider/" data-id="citk6m9bm001dj886ivljme9m" data_title="Android学习笔记---Content Providers" data_summary="Content Provider是Android四大组..." class="article-share-link">Share</a>
       
         <a href="http://kevinhqf.github.io/2016/07/25/content-provider/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -380,80 +445,11 @@ Updated:<time datetime="2016-07-25T09:08:25.328Z" itemprop="dateModified">2016-0
 
 
   
-    <article id="post-service" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/07/22/service/" class="article-date">
-  <time datetime="2016-07-22T07:05:41.621Z" itemprop="datePublished">2016-07-22</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/22/service/">Android学习笔记---Service</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Service</code>是Android四大组件之一,它适合于执行长时间的任务,例如长时间的网络任务,播放音乐,文件I/O等.</p>
-<h4 id="Service的一些基本知识"><a href="#Service的一些基本知识" class="headerlink" title="Service的一些基本知识"></a>Service的一些基本知识</h4><p>若要创建一个Service必须继承于系统提供的<code>Service</code>类,并复写<code>Service</code>的一些回调方法.下列是一些重要的回调方法:</p>
-<ol>
-<li><strong>onStartCommand()</strong><br> 此方法会在<code>Service</code>被其他组件通过<code>startService()</code>方法启动时调用.一旦此方法此方法执行后,<code>Service</code>便可在后台无限期的运行.如果实现了此方法,当<code>Service</code>的任务完成时,应该通过<code>stopSelf()</code>或<code>stopService()</code>方法停止<code>Service</code>.</li>
-<li><strong>onBind()</strong><br> 当其他组件通过<code>bindService()</code>绑定<code>Service</code>时会调用此方法.此方法是必须要实现的,必须提供一个对外的接口(<code>IBinder</code>)让用户与<code>Service</code>进行交互,但如果不想对<code>Service</code>进行绑定可以在此方法返回<code>null</code>.</li>
-<li><strong>onCreate()</strong><br> 当<code>Service</code>第一次创建时会调用此方法.可以在此方法执行一次性的设置工作,当<code>Service</code>已经运行,此方法不会再被调用.</li>
-<li><p><strong>onDestroy()</strong><br> 当<code>Service</code>不再使用并被销毁时会调用此方法.应该在此方法进行资源的回收.</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/22/service/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://kevinhqf.github.io/2016/07/22/service/" data-id="citec0qce00251x86ouyku9kv" data_title="Android学习笔记---Service" data_summary="Service是Android四大组件之一,它适合于执..." class="article-share-link">Share</a>
-      
-        <a href="http://kevinhqf.github.io/2016/07/22/service/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-	  
-      
-	  
-<span>
-Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-07-22</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -481,7 +477,7 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">Android</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">Java</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">Markdown</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -494,7 +490,7 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -505,6 +501,10 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/26/ViewDetails_04/">Android学习笔记---深入理解View#04</a>
+          </li>
         
           <li>
             <a href="/2016/09/22/ViewDetails_03/">Android学习笔记---深入理解View#03</a>
@@ -520,10 +520,6 @@ Updated:<time datetime="2016-07-22T07:05:41.609Z" itemprop="dateModified">2016-0
         
           <li>
             <a href="/2016/09/14/CustomView-custom_drawing/">Android学习笔记---重新学习自定义View#02</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/12/CustomView-create_view/">Android学习笔记---重新学习自定义View#01</a>
           </li>
         
       </ul>
